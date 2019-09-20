@@ -11,7 +11,10 @@ public class PlayerControl : MonoBehaviour
     public float speedMod = 1;
     public bool canMove;
     public bool canInteract;
+    public Object interactableObject;
     public Vector2 moveVector;
+
+    public List<Object> inventory = new List<Object>();
 
 
     private void Start()
@@ -33,7 +36,7 @@ public class PlayerControl : MonoBehaviour
 
         if (player.GetButtonDown("Interact") && canInteract)
         {
-
+            Action(interactableObject);
         }
     }
 
@@ -46,6 +49,32 @@ public class PlayerControl : MonoBehaviour
         else
         {
             rb.velocity -= rb.velocity * 0.25f;
+        }
+    }
+
+    protected void Action(Object newObject)
+    {
+        if (newObject != null) newObject.ActiveEvent();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Object newObject = collision.GetComponent<Object>();
+        if (newObject != null)
+        {
+            interactableObject = newObject;
+            newObject.playerControl = this;
+            canInteract = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Object newObject = collision.GetComponent<Object>();
+        if (newObject == interactableObject)
+        {
+            interactableObject = null;
+            newObject.playerControl = null;
+            canInteract = false;
         }
     }
 }
