@@ -7,6 +7,17 @@ using UnityEngine.Events;
 public class Obj : MonoBehaviour
 {
     [HideInInspector] public Voleur voleur;
+    //public Sprite SpriteImgCanvas;
+    //public string StringAction;
+    public Material Highlight;
+    public Material Default;
+    public Canvas canvas;
+
+    private void Start()
+    {
+        if (canvas == null) canvas = new Canvas();
+    }
+
     public virtual void ActiveEvent()
     {
         Debug.Log("Event");

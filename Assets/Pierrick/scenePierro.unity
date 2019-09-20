@@ -540,6 +540,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voleur: {fileID: 0}
+  SpriteImgCanvas: {fileID: 0}
+  StringAction: 
   open: 0
 --- !u!61 &1265962482
 BoxCollider2D:
@@ -1010,6 +1012,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voleur: {fileID: 0}
+  SpriteImgCanvas: {fileID: 0}
+  StringAction: 
 --- !u!95 &2133660230
 Animator:
   serializedVersion: 3
