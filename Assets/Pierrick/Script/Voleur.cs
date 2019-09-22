@@ -40,6 +40,8 @@ public class Voleur : MonoBehaviour
         {
             objCanInteract = o;
             o.voleur = this;
+            o.GetComponent<SpriteRenderer>().material = o.Highlight;
+            o.canvas.gameObject?.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -49,6 +51,8 @@ public class Voleur : MonoBehaviour
         {
             objCanInteract = null;
             o.voleur = null;
+            o.GetComponent<SpriteRenderer>().material = o.Default;
+            o.canvas.gameObject?.SetActive(false);
         }
     }
 }

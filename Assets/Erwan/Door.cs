@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(Animator))]
-public class Porte :Obj
+public class Door : Object
 {
     public bool open = false;
     Animator anim;
@@ -23,13 +22,11 @@ public class Porte :Obj
     void Open()
     {
         Debug.Log("open");
-        //anim.SetBool("open", true);
-        transform.localEulerAngles = new Vector3(0, 0, transform.localEulerAngles.z + 90);
+        anim.SetBool("open", true);
     }
     void Close()
     {
         Debug.Log("close");
-        //anim.SetBool("open", false);
-        transform.localEulerAngles = new Vector3(0, 0, transform.localEulerAngles.z - 90);
+        anim.SetBool("open", false);
     }
 }
