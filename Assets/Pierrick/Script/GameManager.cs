@@ -6,20 +6,29 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public List<Transform> pointDeSpawn= new List<Transform>();
+    public List<Transform> SpawnPoint= new List<Transform>();
     float chrono = 0.4f;
     public Text chronoText;
+
+    public CanvasManager canvas;
+    public ScoreManager scoreManager;
+    public GameObject[] objectiveList;
+
+    public GameObject objective;
+    public Sprite objectiveSprite;
+
     private void Awake()
     {
         Instance = this;
         //InitialPlayerPrefTabScore();
         debugTab();
-        TableauScoreFin();
+        EndScoreTable();
     }
 
     void Start()
     {
-        
+        objective = objectiveList[Random.Range(0, objectiveList.Length)];
+        objectiveSprite = objective.GetComponent<Sprite>();
     }
 
 
@@ -27,6 +36,16 @@ public class GameManager : MonoBehaviour
     {
         //AddChrono();
     }
+
+    public void CheckObjective(GameObject newObject)
+    {
+        if (newObject == objective)
+            canvas.SwitchPanel(true);
+        else
+            canvas.SwitchPanel(false);
+    }
+
+
 
     void AddChrono()
     {
@@ -50,26 +69,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void TableauScoreFin()
+    void EndScoreTable()
     {
-        float chornoFin = chrono;
-        int placeClassement = 0;
+        float endChorno = chrono;
+        int place = 0;
         for (int i = 1; i < 6; i++)
         {
-            if(chornoFin < PlayerPrefs.GetFloat("MaxScore" + i.ToString()))
+            if(endChorno < PlayerPrefs.GetFloat("MaxScore" + i.ToString()))
             {
-                placeClassement = i;
+                place = i;
                 break;
             }       
         }
-        if (placeClassement != 0)
+        if (place != 0)
         {
-            for (int i = 5; i >= placeClassement; i--)
+            for (int i = 5; i >= place; i--)
             {
                 int j = i - 1;
                 PlayerPrefs.SetFloat("MaxScore" + i.ToString(), PlayerPrefs.GetFloat("MaxScore" + j.ToString()));
             }
-            PlayerPrefs.SetFloat("MaxScore" + placeClassement.ToString(), chornoFin);
+            PlayerPrefs.SetFloat("MaxScore" + place.ToString(), endChorno);
         }
         for (int i = 1; i < 6; i++)
         {
