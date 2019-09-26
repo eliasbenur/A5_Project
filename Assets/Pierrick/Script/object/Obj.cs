@@ -6,7 +6,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
 public class Obj : MonoBehaviour
 {
-    [HideInInspector] public Voleur voleur;
+    [HideInInspector] public PlayerControl playerControl;
     //public Sprite SpriteImgCanvas;
     //public string StringAction;
     [HideInInspector]public SpriteRenderer ToHightlight;

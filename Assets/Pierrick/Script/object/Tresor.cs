@@ -9,9 +9,9 @@ public class Tresor : Obj
     public override void ActiveEvent()
     {
         base.ActiveEvent();
-        voleur.objCanInteract = null;
-        voleur.inventaire.Add(this);
+        playerControl.interactableObject = null;
+        playerControl.inventory.Add(this);
         gameObject.SetActive(false);
-        transform.SetParent(voleur.transform);
+        transform.SetParent(playerControl.transform);
     }
 }

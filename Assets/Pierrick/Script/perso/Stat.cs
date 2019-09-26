@@ -9,7 +9,14 @@ public class Stat : ScriptableObject
 {
     public float speed = 5;
     public float force = 5;
+    public Power power = Power.None;
 
+    public Stat (int Speed, int Force, Power Pow)
+    {
+        speed = Speed;
+        force = Force;
+        power = Pow;
+    }
 
 #if UNITY_EDITOR
 

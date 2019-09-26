@@ -39,7 +39,7 @@ public class Voleur : MonoBehaviour
         if (o != null)
         {
             objCanInteract = o;
-            o.voleur = this;
+           // o.voleur = this;
             o.ToHightlight.material = o.Highlight;
             o.canvas.gameObject?.SetActive(true);
         }
@@ -50,7 +50,7 @@ public class Voleur : MonoBehaviour
         if (o == objCanInteract)
         {
             objCanInteract = null;
-            o.voleur = null;
+            o.playerControl = null;
             o.ToHightlight.material = o.Default;
             o.canvas.gameObject?.SetActive(false);
         }

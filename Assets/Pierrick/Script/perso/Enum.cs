@@ -18,3 +18,9 @@ public enum EtatMusee
     None,
     Alert1
 }
+public enum Power
+{
+    None,
+    AllKey
+
+}

@@ -7,11 +7,11 @@ public class MetalDetector : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Voleur voleur = collision.gameObject.GetComponent<Voleur>();
+        PlayerControl voleur = collision.gameObject.GetComponent<PlayerControl>();
         if (voleur!= null)
         {
             bool metal = false;
-            foreach(Tresor tre in voleur.inventaire)
+            foreach(Tresor tre in voleur.inventory)
             {
                 if (tre.materialObj == MaterialObj.Metal) metal = true;
             }

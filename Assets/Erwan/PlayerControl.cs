@@ -3,23 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 
+[RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class PlayerControl : MonoBehaviour
 {
     Player player;
-    public Rigidbody2D rb;
-
-    public float speedMod = 1;
+    Rigidbody2D rb;
+    public Stat stat;
+    //public float speedMod = 1;
     public bool canMove;
     public bool canInteract;
-    public Object interactableObject;
+    public Obj interactableObject;
     public Vector2 moveVector;
 
-    public List<Object> inventory = new List<Object>();
+    public List<Tresor> inventory = new List<Tresor>();
 
 
     private void Start()
     {
         player = ReInput.players.GetPlayer(0);
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        if (stat == null)
+        {
+            stat = new Stat(0, 0, Power.None);
+        }
     }
 
     private void Update()
@@ -44,7 +51,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (moveVector != Vector2.zero)
         {
-            rb.velocity = new Vector2(moveVector.x * speedMod, moveVector.y * speedMod);
+            rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
         }
         else
         {
@@ -52,15 +59,18 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    protected void Action(Object newObject)
+    protected void Action(Obj newObject)
     {
         if (newObject != null) newObject.ActiveEvent();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Object newObject = collision.GetComponent<Object>();
+        
+        Obj newObject = collision.gameObject.GetComponent<Obj>();
+        Debug.Log(collision.name);
         if (newObject != null)
         {
+            Debug.Log("triggerOn");
             interactableObject = newObject;
             newObject.playerControl = this;
             canInteract = true;
@@ -69,9 +79,11 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Object newObject = collision.GetComponent<Object>();
-        if (newObject == interactableObject)
+        
+        Obj newObject = collision.GetComponent<Obj>();
+        if (newObject!= null&&newObject == interactableObject)
         {
+            Debug.Log("triggerOff");
             interactableObject = null;
             newObject.playerControl = null;
             canInteract = false;
