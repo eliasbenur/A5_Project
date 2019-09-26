@@ -6,3 +6,15 @@ public enum EnumObj
 {
 
 }
+
+public enum MaterialObj
+{
+    None,
+    Metal
+}
+
+public enum EtatMusee
+{
+    None,
+    Alert1
+}

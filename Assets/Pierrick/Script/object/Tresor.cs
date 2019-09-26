@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tresor : Obj
 {
+    public MaterialObj materialObj;
+    public float poid = 0;
     public override void ActiveEvent()
     {
         base.ActiveEvent();

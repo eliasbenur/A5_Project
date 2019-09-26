@@ -8,7 +8,7 @@ public class Voleur : MonoBehaviour
     public float vitesse = 1;
     [HideInInspector]
     public Obj objCanInteract;
-    public List<Obj> inventaire = new List<Obj>();
+    public List<Tresor> inventaire = new List<Tresor>();
 
 
     protected virtual void Start()
@@ -40,7 +40,7 @@ public class Voleur : MonoBehaviour
         {
             objCanInteract = o;
             o.voleur = this;
-            o.GetComponent<SpriteRenderer>().material = o.Highlight;
+            o.ToHightlight.material = o.Highlight;
             o.canvas.gameObject?.SetActive(true);
         }
     }
@@ -51,7 +51,7 @@ public class Voleur : MonoBehaviour
         {
             objCanInteract = null;
             o.voleur = null;
-            o.GetComponent<SpriteRenderer>().material = o.Default;
+            o.ToHightlight.material = o.Default;
             o.canvas.gameObject?.SetActive(false);
         }
     }

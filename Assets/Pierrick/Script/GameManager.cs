@@ -87,6 +87,16 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("MaxScore4", 00.5f);
         PlayerPrefs.SetFloat("MaxScore5", 00.6f);
     }
+    public void DetectorMetal()
+    {
+        // a remplir!!!! bisous elias
+        Debug.Log("att Metal");
+    }
+    public void DetectorCamera()
+    {
+        Debug.Log("att Camera");
+        // a remplir
+    }
 }
 /*
  chrono fin 

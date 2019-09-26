@@ -8,8 +8,9 @@ public class Porte :Obj
     public bool open = false;
     Animator anim;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         anim = GetComponent<Animator>();
     }
     public override void ActiveEvent()
@@ -31,5 +32,10 @@ public class Porte :Obj
         Debug.Log("close");
         //anim.SetBool("open", false);
         transform.localEulerAngles = new Vector3(0, 0, transform.localEulerAngles.z - 90);
+    }
+
+    protected override void InitialisationToHighlight()
+    {
+        ToHightlight = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 }
