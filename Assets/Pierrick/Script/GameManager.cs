@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject objective;
     public Sprite objectiveSprite;
+    public bool done;
 
     private void Awake()
     {
@@ -40,12 +42,21 @@ public class GameManager : MonoBehaviour
     public void CheckObjective(GameObject newObject)
     {
         if (newObject == objective)
+        {
             canvas.SwitchPanel(true);
+            done = true;
+        }
         else
+        {
             canvas.SwitchPanel(false);
+            done = false;
+        }
     }
 
-
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     void AddChrono()
     {

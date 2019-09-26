@@ -63,8 +63,13 @@ public class PlayerControl : MonoBehaviour
     {
         if (newObject != null) newObject.ActiveEvent();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "EndZone" && GameManager.Instance.done)
+        {
+            GameManager.Instance.Restart();
+        }
         
         Obj newObject = collision.gameObject.GetComponent<Obj>();
         Debug.Log(collision.name);
