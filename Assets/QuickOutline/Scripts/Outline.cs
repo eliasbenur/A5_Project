@@ -66,6 +66,7 @@ public class Outline : MonoBehaviour {
 
   [SerializeField, Tooltip("Precompute enabled: Per-vertex calculations are performed in the editor and serialized with the object. "
   + "Precompute disabled: Per-vertex calculations are performed at runtime in Awake(). This may cause a pause for large meshes.")]
+  #pragma warning disable 0649
   private bool precomputeOutline;
 
   [SerializeField, HideInInspector]
