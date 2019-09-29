@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
+using UnityEngine.AI;
 
 public class GuardIAController : MonoBehaviour
 {
@@ -9,6 +11,16 @@ public class GuardIAController : MonoBehaviour
 
     public int minPositionsPatrolling, maxPositionsPatrolling;
 
+    //IA
+    public Vector2 target;
+
+    public float speed = 3;
+    public float targetDistanceDetection = 0.2f;
+
+    bool movingToPoint = false;
+
+    NavMeshAgent agent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,12 +28,55 @@ public class GuardIAController : MonoBehaviour
         {
             gameObject.GetComponent<PlayMakerFSM>();
         }
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        movingToPoint = playerMakerSFM.FsmVariables.FindFsmBool("movingToPoint").Value;
+        if (movingToPoint)
+        {
+            //Movement
+            IsPointReached();
+        }
+    }
+
+    public void SetUpPathToPoint()
+    {
+        if (pointsToPatroll.Count <= 0)
+        {
+            playerMakerSFM.SendEvent("SearchAction");
+        }
+        else
+        {
+            agent.SetDestination(pointsToPatroll[0]);
+            agent.isStopped = false;
+        }
         
+    }
+
+    public void IsPointReached()
+    {
+        if (pointsToPatroll.Count == 0)
+        {
+            agent.isStopped = true;
+            playerMakerSFM.SendEvent("PointReached");
+            return;
+        }
+
+        float distance = Vector2.Distance(transform.position, pointsToPatroll[0]);
+
+        if (distance < targetDistanceDetection)
+        {
+            pointsToPatroll.RemoveAt(0);
+            agent.isStopped = true;
+            playerMakerSFM.SendEvent("PointReached");
+            return;
+        }
     }
 
     /*Returns the points that is going to patroll in a RandomZone*/
@@ -35,7 +90,6 @@ public class GuardIAController : MonoBehaviour
             Vector2 newPoint = Outils.RandomPointInBounds(ObjectRefs.Instance.GetPatrollZoneList()[randomZone].GetComponent<BoxCollider2D>().bounds);
             pointsToPatroll.Add(newPoint);
         }
-        Debug.Log("Test");
-        playerMakerSFM.FsmVariables.FindFsmVector2("PointToPatroll").Value = pointsToPatroll[0];
+        playerMakerSFM.SendEvent("PatrollZoneSetUp");
     }
 }
