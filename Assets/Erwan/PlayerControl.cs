@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class PlayerControl : MonoBehaviour
@@ -17,6 +18,8 @@ public class PlayerControl : MonoBehaviour
 
     public List<Tresor> inventory = new List<Tresor>();
 
+    NavMeshAgent agent;
+
 
     private void Start()
     {
@@ -27,6 +30,10 @@ public class PlayerControl : MonoBehaviour
         {
             stat = new Stat(0, 0, Power.None);
         }
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     private void Update()
@@ -51,11 +58,14 @@ public class PlayerControl : MonoBehaviour
     {
         if (moveVector != Vector2.zero)
         {
-            rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
+            //agent.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
+            //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
+            transform.position += (Vector3)moveVector * stat.speed * Time.deltaTime;
         }
         else
         {
-            rb.velocity -= rb.velocity * 0.25f;
+            //agent.velocity -= agent.velocity * 0.25f;
+            //rb.velocity -= rb.velocity * 0.25f;
         }
     }
 

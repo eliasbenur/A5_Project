@@ -99,7 +99,7 @@ public class RVOAgent : MonoBehaviour
                 else
                 {
                     updatePathtime_tmp = updatePathtime;
-                    if (agentSeeker.IsDone()) StartCoroutine(UpdatePathTarget());
+                    //if (agentSeeker.IsDone()) StartCoroutine(UpdatePathTarget());
                 }
             }
         }

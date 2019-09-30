@@ -4,7 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using UnityEngine.AI;
 
-public class GuardIAController : MonoBehaviour
+public class GuardIAControllerv1 : MonoBehaviour
 {
     public PlayMakerFSM playerMakerSFM;
     public List<Vector2> pointsToPatroll = new List<Vector2>();
@@ -19,7 +19,7 @@ public class GuardIAController : MonoBehaviour
 
     bool movingToPoint = false;
 
-    NavMeshAgent agent;
+    RVOAgent agent;
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +29,7 @@ public class GuardIAController : MonoBehaviour
             gameObject.GetComponent<PlayMakerFSM>();
         }
 
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        agent = GetComponent<RVOAgent>();
     }
 
     // Update is called once per frame
@@ -53,17 +51,18 @@ public class GuardIAController : MonoBehaviour
         }
         else
         {
-            agent.SetDestination(pointsToPatroll[0]);
-            agent.isStopped = false;
+            agent.setTarget(pointsToPatroll[0]);
+            agent.canMove = true;
         }
-        
+
     }
 
     public void IsPointReached()
     {
         if (pointsToPatroll.Count == 0)
         {
-            agent.isStopped = true;
+            agent.canMove = false;
+            Debug.Log("LOL");
             playerMakerSFM.SendEvent("PointReached");
             return;
         }
@@ -72,14 +71,11 @@ public class GuardIAController : MonoBehaviour
 
         if (distance < targetDistanceDetection)
         {
+            Debug.Log("XD");
             pointsToPatroll.RemoveAt(0);
-            agent.isStopped = true;
+            agent.canMove = false;
             playerMakerSFM.SendEvent("PointReached");
             return;
-        }
-        else
-        {
-            agent.SetDestination(pointsToPatroll[0]);
         }
     }
 
