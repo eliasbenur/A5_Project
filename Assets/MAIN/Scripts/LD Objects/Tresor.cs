@@ -7,13 +7,18 @@ public class Tresor : Obj
     public MaterialObj materialObj;
     public float poid = 0;
     public GameObject imageInInventory = null;
+    public EnumObjPlayer canTake= EnumObjPlayer.All;
     public override void ActiveEvent()
     {
         base.ActiveEvent();
-        playerControl.interactableObject = null;
-        playerControl.inventory.Add(this);
-        imageInInventory = GameManager2.Instance.AddObjInInvetory(SpriteImgCanvas);
-        gameObject.SetActive(false);
-        transform.SetParent(playerControl.transform);
+        if (playerControl.inventory.Count == 0&&
+            (canTake==EnumObjPlayer.All||canTake.ToString()== "Player"+playerControl.intPlayer))
+        {
+            playerControl.interactableObject = null;
+            playerControl.inventory.Add(this);
+            imageInInventory = GameManager2.Instance.AddObjInInvetory(SpriteImgCanvas);
+            gameObject.SetActive(false);
+            transform.SetParent(playerControl.transform);
+        }
     }
 }

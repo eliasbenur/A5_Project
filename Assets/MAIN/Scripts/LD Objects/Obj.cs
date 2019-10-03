@@ -25,7 +25,7 @@ public class Obj : MonoBehaviour
 
     public virtual void ActiveEvent()
     {
-        Debug.Log("Event");
+       // Debug.Log("Event");
     }
 
     protected virtual void InitialisationToHighlight()

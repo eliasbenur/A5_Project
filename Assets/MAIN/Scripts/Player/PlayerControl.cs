@@ -8,6 +8,8 @@ using UnityEngine.AI;
 public class PlayerControl : MonoBehaviour
 {
     Player player;
+    [Range(1, 4)]
+    public int intPlayer = 1;
     Rigidbody2D rb;
     public Stat stat;
     //public float speedMod = 1;
