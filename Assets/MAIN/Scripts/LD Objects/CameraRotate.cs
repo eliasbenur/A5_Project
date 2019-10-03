@@ -9,10 +9,9 @@ public class CameraRotate : MonoBehaviour
 {
     public float Speed = 5;
     public float angleRotation = 180;
-    public float rayDetection = 1;
-    int multiplicateur = -1;
+    int multiplicateur = 1;
     float rotationInitial = 0;
-    
+
 
     void Start()
     {
@@ -29,15 +28,16 @@ public class CameraRotate : MonoBehaviour
     {
         float angle = transform.eulerAngles.z - rotationInitial;
         if (angle > 180) angle = angle - 360;
-        if (angle > rotationInitial+ angleRotation / 2) multiplicateur = -1;
-        if (angle < rotationInitial - angleRotation / 2) multiplicateur = 1;
+        if (angle < -180) angle = angle + 360;
+        if (angle > angleRotation / 2) multiplicateur = -1;
+        if (angle < -angleRotation / 2) multiplicateur = 1;
         transform.eulerAngles += Vector3.forward * multiplicateur * Speed * Time.deltaTime;
-        Debug.Log("att" + (angle));
-        Debug.Log(rotationInitial - angleRotation / 2);
+        //Debug.Log("att " + (angle + 360));
+        //Debug.Log(angleRotation / 2);
     }
 
 #if UNITY_EDITOR
-    
-    
+
+
 #endif
 }
