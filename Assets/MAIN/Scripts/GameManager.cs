@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         for (int i = 1; i < 6; i++)
         {
 
-            Debug.Log(PlayerPrefs.GetFloat("MaxScore" + i.ToString()));
+           // Debug.Log(PlayerPrefs.GetFloat("MaxScore" + i.ToString()));
         }
 
 

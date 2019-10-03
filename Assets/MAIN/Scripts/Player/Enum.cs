@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnumObj
+public enum EnumObjPlayer
 {
-
+    All,
+    Player1,
+    Player2,
+    Player3,
+    Player4
 }
 
 public enum MaterialObj
