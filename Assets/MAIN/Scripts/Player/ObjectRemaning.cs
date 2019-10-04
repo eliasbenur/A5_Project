@@ -5,17 +5,19 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class ObjectRemaning : MonoBehaviour
+public class ObjectRemaning : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<stringAndBool> obj = new List<stringAndBool>();
 
-    // Update is called once per frame
-    void Update()
+#if UNITY_EDITOR
+
+    [MenuItem("Assets/Create/ObjectRemaning")]
+    public static void CreateStat()
     {
-        
+        string path = EditorUtility.SaveFilePanelInProject("Save ObjectRemaning", "New ObjectRemaning", "Asset", "Save ObjectRemaning", "Assets");
+        if (path == "")
+            return;
+        AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<ObjectRemaning>(), path);
     }
+#endif
 }
