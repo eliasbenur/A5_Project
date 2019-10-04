@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   force: 5
-  dashSpeed: 10
-  timeDash: 0.5
+  dashSpeed: 20
+  timeDash: 0.2
   power: 0
