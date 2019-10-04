@@ -16,7 +16,7 @@ public class Tresor : Obj
         {
             playerControl.interactableObject = null;
             playerControl.inventory.Add(this);
-            imageInInventory = GameManager2.Instance.AddObjInInvetory(SpriteImgCanvas);
+            //imageInInventory = GameManager2.Instance.AddObjInInvetory(SpriteImgCanvas);
             GameManager.Instance.CheckObjective(gameObject);
             gameObject.SetActive(false);
             transform.SetParent(playerControl.transform);

@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 542361536}
   m_Layer: 0
   m_Name: EndZone
-  m_TagString: Untagged
+  m_TagString: EndZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 694687024}
   m_Layer: 0
   m_Name: EndZone (2)
-  m_TagString: Untagged
+  m_TagString: EndZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -609,6 +609,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705456518}
   m_CullTransparentMesh: 0
+--- !u!1 &761872458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7794615959770058852, guid: 42bb3633388285341a09a3c89489fcdc,
+    type: 3}
+  m_PrefabInstance: {fileID: 943112394}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &807953614
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,6 +946,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7794615959770058855, guid: 42bb3633388285341a09a3c89489fcdc,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 807953617}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42bb3633388285341a09a3c89489fcdc, type: 3}
 --- !u!1 &1132557842
@@ -1102,12 +1113,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8a4f088d866e914c8988a693190642f, type: 3}
---- !u!1 &1208994846 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8564365391529563766, guid: b8a4f088d866e914c8988a693190642f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1208994845}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1277482824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,7 +1126,7 @@ GameObject:
   - component: {fileID: 1277482827}
   m_Layer: 0
   m_Name: EndZone (3)
-  m_TagString: Untagged
+  m_TagString: EndZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1585,7 +1590,7 @@ GameObject:
   - component: {fileID: 1295732851}
   m_Layer: 0
   m_Name: EndZone (1)
-  m_TagString: Untagged
+  m_TagString: EndZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1799,7 +1804,7 @@ MonoBehaviour:
   canvas: {fileID: 807953619}
   scoreManager: {fileID: 1787096218}
   objectiveList:
-  - {fileID: 1208994846}
+  - {fileID: 761872458}
   objective: {fileID: 0}
   objectiveSprite: {fileID: 0}
   done: 0
@@ -1889,5 +1894,11 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2007479144542628851, guid: e19739de1e57b4848a0905ff72364828,
+        type: 3}
+      propertyPath: stat
+      value: 
+      objectReference: {fileID: 11400000, guid: d2d8e6fc06303f44780209cad97f736d,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e19739de1e57b4848a0905ff72364828, type: 3}
