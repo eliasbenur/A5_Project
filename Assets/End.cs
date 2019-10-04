@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 public class End : MonoBehaviour
 {
 
-    public GameManager gameManager;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +20,7 @@ public class End : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (gameManager.done)
+        if (GameManager.Instance.done)
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
