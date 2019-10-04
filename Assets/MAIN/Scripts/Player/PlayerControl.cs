@@ -15,6 +15,8 @@ public class PlayerControl : MonoBehaviour
     //public float speedMod = 1;
     public bool canMove;
     public bool canInteract;
+    bool canDash = true;
+    public AnimationCurve dashCurve;
     public Obj interactableObject;
     public Vector2 moveVector;
 
@@ -53,6 +55,11 @@ public class PlayerControl : MonoBehaviour
             moveVector.Normalize();
         }
 
+        if(player.GetButtonDown("Dash")&& canDash)
+        {
+            StartCoroutine(Dash(moveVector));
+        }
+
         if (player.GetButtonDown("Interact") && canInteract)
         {
             Action(interactableObject);
@@ -61,16 +68,19 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (moveVector != Vector2.zero)
+        if (canDash)
         {
-            //agent.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
-            //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
-            transform.position += (Vector3)moveVector * stat.speed * Time.deltaTime;
-        }
-        else
-        {
-            //agent.velocity -= agent.velocity * 0.25f;
-            //rb.velocity -= rb.velocity * 0.25f;
+            if (moveVector != Vector2.zero)
+            {
+                //agent.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
+                //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
+                transform.position += (Vector3)moveVector * stat.speed * Time.deltaTime;
+            }
+            else
+            {
+                //agent.velocity -= agent.velocity * 0.25f;
+                //rb.velocity -= rb.velocity * 0.25f;
+            }
         }
     }
 
@@ -108,5 +118,20 @@ public class PlayerControl : MonoBehaviour
             newObject.playerControl = null;
             canInteract = false;
         }
+    }
+
+    IEnumerator Dash(Vector2 vDash)
+    {
+        canDash = false;
+        float curveTime = 0f;
+        float curveAmount = dashCurve.Evaluate(curveTime/stat.timeDash);
+        while(curveTime < stat.timeDash)
+        {
+            curveTime += Time.deltaTime;
+            curveAmount = dashCurve.Evaluate(curveTime / stat.timeDash);
+            transform.position += (Vector3)vDash * stat.dashSpeed* curveAmount * Time.deltaTime;
+            yield return null;
+        }
+        canDash = true;
     }
 }

@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: TestObjectRemaning
   m_EditorClassIdentifier: 
   obj:
+  - name: tresor (2)
+    stolen: 0
+  - name: tresor (1)
+    stolen: 0
   - name: tresor
     stolen: 0
-  - name: KeyqERqe:kldrejom kgfxdftuo<z sf
+  - name: Key
     stolen: 0

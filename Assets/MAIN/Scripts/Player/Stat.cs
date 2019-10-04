@@ -9,6 +9,8 @@ public class Stat : ScriptableObject
 {
     public float speed = 5;
     public float force = 5;
+    public float dashSpeed = 10;
+    public float timeDash;
     public Power power = Power.None;
 
     public Stat (int Speed, int Force, Power Pow)
