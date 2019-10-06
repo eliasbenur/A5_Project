@@ -7,12 +7,14 @@ using UnityEngine.AI;
 public class GuardIAController : MonoBehaviour
 {
     public PlayMakerFSM playerMakerSFM;
+    FOV_v3 fow;
     public List<Vector2> pointsToPatroll = new List<Vector2>();
 
     public int minPositionsPatrolling, maxPositionsPatrolling;
 
     //IA
     public Vector2 target;
+    public Vector2 target_tmp;
 
     public float speed = 3;
     public float targetDistanceDetection = 0.2f;
@@ -20,6 +22,14 @@ public class GuardIAController : MonoBehaviour
     bool movingToPoint = false;
 
     NavMeshAgent agent;
+
+    public bool chasingPlayer = false;
+
+    public float chasingDistance;
+    public float chasingSpeedFactor;
+
+    public SpriteRenderer playerSpottedSprite;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,16 +42,78 @@ public class GuardIAController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        fow = GetComponent<FOV_v3>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        movingToPoint = playerMakerSFM.FsmVariables.FindFsmBool("movingToPoint").Value;
-        if (movingToPoint)
+        if (!chasingPlayer)
         {
-            //Movement
-            IsPointReached();
+            movingToPoint = playerMakerSFM.FsmVariables.FindFsmBool("movingToPoint").Value;
+            if (movingToPoint)
+            {
+                //Movement
+                IsPointReached();
+            }
+        }
+        else
+        {
+            if (fow.visiblePlayer.Count == 0)
+            {
+                if (Vector2.Distance(agent.destination, transform.position) < chasingDistance)
+                {
+                    chasingPlayer = false;
+                    speed = speed / chasingSpeedFactor;
+                    playerMakerSFM.SendEvent("SearchAction");
+
+                    //Sprite Spotted
+                    playerSpottedSprite.enabled = false;
+                }
+            }
+            else
+            {
+                agent.SetDestination(fow.visiblePlayer[0].transform.position);
+
+                if (Vector2.Distance(fow.visiblePlayer[0].transform.position, transform.position) < chasingDistance)
+                {
+                    Debug.Log("PlayerChased!");
+                }
+            }
+        }
+        CheckPlayer();
+    }
+
+    public void PlayerNoiseDetected(Vector3 target_)
+    {
+        agent.SetDestination(target_);
+        playerMakerSFM.SendEvent("ChasingPlayer");
+        speed = speed * chasingSpeedFactor;
+        chasingPlayer = true;
+        agent.isStopped = false;
+
+        //Sprite Spotted
+        playerSpottedSprite.enabled = true;
+    }
+
+    
+
+    public void CheckPlayer()
+    {
+        if (fow.visiblePlayer.Count > 0)
+        {
+            if (!chasingPlayer)
+            {
+                playerMakerSFM.SendEvent("ChasingPlayer");
+                speed = speed * chasingSpeedFactor;
+                chasingPlayer = true;
+                agent.isStopped = false;
+
+                //Sprite Spotted
+                playerSpottedSprite.enabled = true;
+            }
         }
     }
 
@@ -72,8 +144,8 @@ public class GuardIAController : MonoBehaviour
 
         if (distance < targetDistanceDetection)
         {
-            pointsToPatroll.RemoveAt(0);
             agent.isStopped = true;
+            pointsToPatroll.RemoveAt(0);
             playerMakerSFM.SendEvent("PointReached");
             return;
         }

@@ -12,23 +12,46 @@ public class FieldofView : MonoBehaviour
     [Range (0,360)]
     public float angle;
 
-    PolygonCollider2D colygoncoll;
+    PolygonCollider2D polygoncoll;
     NavMeshAgent agent;
 
     Vector2 direction_tmp;
+
+    public List<GameObject> objectsinView;
+    public LayerMask layerMask;
     void Start()
     {
-        colygoncoll = GetComponent<PolygonCollider2D>();
+        polygoncoll = GetComponent<PolygonCollider2D>();
         agent = GetComponent<NavMeshAgent>();
         UpdateFOVPoints();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GetComponent<NavMeshAgent>().velocity.normalized);
         UpdateFOVPoints();
+        CheckObjects();
+    }
+
+    void CheckObjects()
+    {
+        objectsinView.Clear();
+
+        Collider2D[] tmp = new Collider2D[10];
+        ContactFilter2D contactFilter = new ContactFilter2D();
+        contactFilter.SetLayerMask(layerMask);
+        Physics2D.OverlapCollider(polygoncoll, contactFilter, tmp);
+        for (int x = 0; x < tmp.Length; x++)
+        {
+            if (tmp[x] != null)
+            {
+                objectsinView.Add(tmp[x].gameObject);
+            }
+            else
+            {
+                x = tmp.Length;
+            }
+        }
     }
 
     void UpdateFOVPoints()
@@ -43,16 +66,14 @@ public class FieldofView : MonoBehaviour
             direction = agent.velocity.normalized;
             direction_tmp = direction;
         }
-        //Vector2 direction = Vector2.up;
         Vector2[] points = new Vector2[6];
         points[0] = Vector2.zero;
-        Debug.Log(direction);
         points[1] = Vector2Extension.Rotate(direction, (angle) / 2) * range;
         points[2] = Vector2Extension.Rotate(direction, (angle) / 4) * range;
         points[3] = direction * range;
         points[4] = Vector2Extension.Rotate(direction, (-angle) / 4) * range;
         points[5] = Vector2Extension.Rotate(direction, (-angle) / 2) * range;
-        colygoncoll.SetPath(0, points);
+        polygoncoll.SetPath(0, points);
 
     }
 }
