@@ -41,7 +41,9 @@ public class GameManager : MonoBehaviour
 
     public void CheckObjective(GameObject newObject)
     {
-        if (newObject == objective)
+        
+        //if (newObject == objective)
+        if(Outils.GameObjectExistInArray(objectiveList, newObject))
         {
             canvas.SwitchPanel(true);
             done = true;

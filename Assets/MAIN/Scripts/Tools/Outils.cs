@@ -10,4 +10,16 @@ public static class Outils
             Random.Range(bounds.min.x, bounds.max.x),
             Random.Range(bounds.min.y, bounds.max.y));
     }
+
+    public static bool GameObjectExistInArray(GameObject[] list_objs, GameObject gameobj)
+    {
+        foreach (GameObject list_obj in list_objs)
+        {
+            if (list_obj.Equals(gameobj))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

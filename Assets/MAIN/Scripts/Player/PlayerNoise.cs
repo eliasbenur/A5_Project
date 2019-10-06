@@ -13,6 +13,14 @@ public class PlayerNoise : MonoBehaviour
 
     public LayerMask toNotify;
 
+    public GameObject particleSystemPrefab;
+    public ParticleSystem particleSystem;
+
+    public float delayNoiseWave;
+    public float delayNoiseWave_tmp;
+
+    PlayerControl player;
+
     
 
     // Start is called before the first frame update
@@ -25,13 +33,30 @@ public class PlayerNoise : MonoBehaviour
         }
         circlecoll.isTrigger = true;
         circlecoll.radius = noiseRadius;
+
+        GameObject go_tmp = Instantiate(particleSystemPrefab, transform.position, Quaternion.identity);
+        go_tmp.transform.parent = transform;
+        particleSystem = go_tmp.GetComponent<ParticleSystem>();
+
+        delayNoiseWave_tmp = delayNoiseWave;
+
+        player = transform.parent.GetComponent<PlayerControl>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         circlecoll.radius = noiseRadius;
-        NoiseUpdate();
+        if (delayNoiseWave_tmp > 0)
+        {
+            delayNoiseWave_tmp -= Time.fixedDeltaTime * (player.moveVector.sqrMagnitude/1);
+        }
+        else
+        {
+            delayNoiseWave_tmp = delayNoiseWave;
+            particleSystem.Play();
+            NoiseUpdate();
+        }
     }
 
     void NoiseUpdate()
@@ -42,11 +67,17 @@ public class PlayerNoise : MonoBehaviour
             {
                 if (CalculatePathLength(transform.position, guardList[x]) < noiseRadius)
                 {
-                    guardList[x].GetComponent<GuardIAController>().PlayerNoiseDetected(transform.position);
+                    StartCoroutine(AlertGuard(guardList[x]));
                 }
             }
 
         }
+    }
+
+    IEnumerator AlertGuard(GameObject guard)
+    {
+        yield return new WaitForSeconds(1);
+        guard.GetComponent<GuardIAController>().PlayerNoiseDetected(transform.position);
     }
 
     float CalculatePathLength(Vector3 targetPosition, GameObject originalObject)

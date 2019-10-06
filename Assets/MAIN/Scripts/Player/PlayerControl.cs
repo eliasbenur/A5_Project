@@ -49,6 +49,10 @@ public class PlayerControl : MonoBehaviour
         {
             moveVector.x = player.GetAxis("Horizontal");
             moveVector.y = player.GetAxis("Vertical");
+            if (moveVector.sqrMagnitude > 1)
+            {
+                moveVector.Normalize();
+            }
         }
         else
         {
@@ -97,10 +101,8 @@ public class PlayerControl : MonoBehaviour
         }
         
         Obj newObject = collision.gameObject.GetComponent<Obj>();
-        Debug.Log(collision.name);
         if (newObject != null)
         {
-            Debug.Log("triggerOn");
             interactableObject = newObject;
             newObject.playerControl = this;
             canInteract = true;
@@ -113,7 +115,6 @@ public class PlayerControl : MonoBehaviour
         Obj newObject = collision.GetComponent<Obj>();
         if (newObject!= null&&newObject == interactableObject)
         {
-            Debug.Log("triggerOff");
             interactableObject = null;
             newObject.playerControl = null;
             canInteract = false;
