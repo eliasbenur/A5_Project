@@ -80,6 +80,7 @@ public class GuardIAController : MonoBehaviour
                 if (Vector2.Distance(fow.visiblePlayer[0].transform.position, transform.position) < chasingDistance)
                 {
                     Debug.Log("PlayerChased!");
+                    ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
                 }
             }
         }

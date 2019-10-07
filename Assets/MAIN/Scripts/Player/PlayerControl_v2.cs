@@ -5,7 +5,7 @@ using Rewired;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
-public class PlayerControl : MonoBehaviour
+public class PlayerControl_v2 : MonoBehaviour
 {
     Player player;
     [Range(1, 4)]
@@ -118,7 +118,7 @@ public class PlayerControl : MonoBehaviour
         {
             Debug.Log("triggerOn");
             interactableObject = newObject;
-            newObject.playerControl = this;
+            //newObject.playerControl = this;
             canInteract = true;
         }
     }

@@ -33,7 +33,7 @@ public class End : MonoBehaviour
             //If Objective Completed
             if (GameManager.Instance.done)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();
             }
         }
     }
