@@ -11,7 +11,12 @@ public class Stat : ScriptableObject
     public float force = 5;
     public float dashSpeed = 10;
     public float timeDash;
+    public float BruitRadius = 1;
     public Power power = Power.None;
+    [System.NonSerialized]
+    public int nbKey =3;
+    [System.NonSerialized]
+    public int nbAntiCam = 3;
 
     public Stat (int Speed, int Force, Power Pow)
     {
@@ -30,5 +35,35 @@ public class Stat : ScriptableObject
             return;
         AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<Stat>(), path);
     }
+
+    [CustomEditor(typeof(Stat))]
+    public class StatEditor : Editor
+    {
+        private Stat stat { get { return (target as Stat); } }
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            EditorGUI.BeginChangeCheck();
+            Power power = stat.power;
+            EditorGUILayout.Space();
+            switch (stat.power)
+            {
+                case Power.None:
+                    break;
+                case Power.AllKey:
+                    stat.nbKey = EditorGUILayout.IntField("Key:", stat.nbKey);
+                    break;
+                case Power.CameraOff:
+                    stat.nbAntiCam = EditorGUILayout.IntField("AntiCam:", stat.nbKey);
+                    break;
+            }
+            
+            
+            if (EditorGUI.EndChangeCheck())
+                EditorUtility.SetDirty(stat);
+        }
+    }
 #endif
+
 }

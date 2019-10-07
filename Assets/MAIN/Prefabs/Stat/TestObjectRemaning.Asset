@@ -15,9 +15,29 @@ MonoBehaviour:
   obj:
   - name: tresor (2)
     stolen: 0
-  - name: tresor (1)
+    sprite: {fileID: -7298772899026931923, guid: dc8168360f87afe478dcb6a9b3f4eb19,
+      type: 3}
+  - name: tresor (3)
     stolen: 0
+    sprite: {fileID: -7298772899026931923, guid: dc8168360f87afe478dcb6a9b3f4eb19,
+      type: 3}
+  - name: Key
+    stolen: 1
+    sprite: {fileID: -8080047861906697565, guid: dc8168360f87afe478dcb6a9b3f4eb19,
+      type: 3}
+  - name: tresor (5)
+    stolen: 0
+    sprite: {fileID: -7298772899026931923, guid: dc8168360f87afe478dcb6a9b3f4eb19,
+      type: 3}
   - name: tresor
     stolen: 0
-  - name: Key
+    sprite: {fileID: 3892179443664033985, guid: dc8168360f87afe478dcb6a9b3f4eb19,
+      type: 3}
+  - name: tresor (1)
     stolen: 0
+    sprite: {fileID: 7114698217210890277, guid: dc8168360f87afe478dcb6a9b3f4eb19,
+      type: 3}
+  - name: tresor (4)
+    stolen: 0
+    sprite: {fileID: -7298772899026931923, guid: dc8168360f87afe478dcb6a9b3f4eb19,
+      type: 3}

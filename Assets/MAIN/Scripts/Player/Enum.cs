@@ -25,6 +25,7 @@ public enum EtatMusee
 public enum Power
 {
     None,
-    AllKey
+    AllKey,
+    CameraOff
 
 }

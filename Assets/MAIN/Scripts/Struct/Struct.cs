@@ -7,7 +7,7 @@ public struct stringAndBool
 {
     public string name;
     public bool stolen;
-    [System.NonSerialized]
+    //[System.NonSerialized]
     public Sprite sprite;
     public stringAndBool(string _name, bool _stolen, Sprite sp)
     {
