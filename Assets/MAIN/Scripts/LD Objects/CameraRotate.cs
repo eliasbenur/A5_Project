@@ -11,6 +11,7 @@ public class CameraRotate : MonoBehaviour
     public float angleRotation = 180;
     int multiplicateur = 1;
     float rotationInitial = 0;
+    public LayerMask playerMask;
 
 
     void Start()
@@ -34,6 +35,14 @@ public class CameraRotate : MonoBehaviour
         transform.eulerAngles += Vector3.forward * multiplicateur * Speed * Time.deltaTime;
         //Debug.Log("att " + (angle + 360));
         //Debug.Log(angleRotation / 2);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & playerMask) != 0)
+        {
+            ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
+        }
     }
 
 #if UNITY_EDITOR

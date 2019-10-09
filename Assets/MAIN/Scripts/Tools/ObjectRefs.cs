@@ -11,6 +11,7 @@ public class ObjectRefs : MonoBehaviour
     public GameObject patrollZones;
     private List<GameObject> patrollZones_List;
     public GameObject menuCanvas;
+    public GameObject NavMesh;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class ObjectRefs : MonoBehaviour
         // Cache references to all desired variables
         if (patrollZones == null) { patrollZones = GameObject.Find("PatrollPoints"); }
         if (menuCanvas == null) { menuCanvas = GameObject.Find("MenuCanvas"); }
+        if (NavMesh == null) { NavMesh = GameObject.Find("NavMesh"); }
     }
     // Start is called before the first frame update
     void Start()

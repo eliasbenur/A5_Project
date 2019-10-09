@@ -628,6 +628,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: BackButton
       objectReference: {fileID: 0}
+    - target: {fileID: 3589344870582206278, guid: d14124769285b23448dd0deb40bb2b77,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.3915094
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589344870582206278, guid: d14124769285b23448dd0deb40bb2b77,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589344870582206278, guid: d14124769285b23448dd0deb40bb2b77,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.5875998
+      objectReference: {fileID: 0}
     - target: {fileID: 3589344871575968418, guid: d14124769285b23448dd0deb40bb2b77,
         type: 3}
       propertyPath: m_Name
@@ -663,6 +678,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3589344871032818465, guid: d14124769285b23448dd0deb40bb2b77,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3589344870961265159, guid: d14124769285b23448dd0deb40bb2b77,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -693,6 +713,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3589344870961265159, guid: d14124769285b23448dd0deb40bb2b77,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3589344870599118968, guid: d14124769285b23448dd0deb40bb2b77,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -723,6 +748,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3589344870599118968, guid: d14124769285b23448dd0deb40bb2b77,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3589344870837267609, guid: d14124769285b23448dd0deb40bb2b77,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -752,6 +782,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589344870837267609, guid: d14124769285b23448dd0deb40bb2b77,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589344870564123150, guid: d14124769285b23448dd0deb40bb2b77,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d14124769285b23448dd0deb40bb2b77, type: 3}

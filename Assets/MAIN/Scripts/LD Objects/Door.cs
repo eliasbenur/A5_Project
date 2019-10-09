@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Door : Obj
 {
@@ -45,6 +46,12 @@ public class Door : Obj
             OpenDoor();   
     }
 
+    IEnumerator DelayBake()
+    {
+        yield return new WaitForSeconds(1);
+        ObjectRefs.Instance.NavMesh.GetComponent<NavMeshSurface2d>().BuildNavMesh();
+    }
+
     void OpenDoor()
     {
         open = !open;
@@ -56,6 +63,7 @@ public class Door : Obj
     {
         Debug.Log("open");
         anim.SetBool("open", true);
+        StartCoroutine(DelayBake());
     }
     void Close()
     {

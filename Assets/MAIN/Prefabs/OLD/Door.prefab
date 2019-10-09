@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8564365391437107876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.32, y: 0, z: 0}
+  m_LocalPosition: {x: 0.739, y: 0, z: 0}
   m_LocalScale: {x: 9.413, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8564365391529563765}
@@ -119,8 +119,9 @@ GameObject:
   - component: {fileID: 8564365391529563764}
   - component: {fileID: 8564365391529563762}
   - component: {fileID: 5013031781333284084}
+  - component: {fileID: 8117053259437353479}
   m_Layer: 0
-  m_Name: porte
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 8564365391529563766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4125, y: 1.9375, z: 1}
   m_Children:
   - {fileID: 8564365391437107877}
   m_Father: {fileID: 0}
@@ -154,7 +155,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.331023, y: 0}
+  m_Offset: {x: 0.739, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -198,3 +199,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bca78def5df3c6418fa353eae10b28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerControl: {fileID: 0}
+  SpriteImgCanvas: {fileID: 0}
+  ToHightlight: {fileID: 0}
+  Highlight: {fileID: 0}
+  Default: {fileID: 0}
+  canvas: {fileID: 0}
+  closeKey: 0
+--- !u!208 &8117053259437353479
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8564365391529563766}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

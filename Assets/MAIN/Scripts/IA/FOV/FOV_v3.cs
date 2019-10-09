@@ -38,18 +38,28 @@ public class FOV_v3 : MonoBehaviour
 
     void LateUpdate()
     {//draw field of view
-
-        //Direction Set up
         Vector2 direction;
-        if ((Vector2)agent.velocity.normalized == Vector2.zero)
+        //Direction Set up
+        if (agent == null)
         {
-            direction = direction_tmp;
+            direction = (Vector2)(Quaternion.Euler(0, 0, transform.eulerAngles.z) * Vector2.down);
+            Debug.Log(transform.eulerAngles.z);
+            direction_tmp = direction;
         }
         else
         {
-            direction = agent.velocity.normalized;
-            direction_tmp = direction;
+            if ((Vector2)agent.velocity.normalized == Vector2.zero)
+            {
+                direction = direction_tmp;
+            }
+            else
+            {
+                direction = agent.velocity.normalized;
+                direction_tmp = direction;
+            }
         }
+        
+
 
         int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
         float stepAngleSize = viewAngle / stepCount;

@@ -121,13 +121,11 @@ public class GameManager : MonoBehaviour
     }
     public void DetectorMetal()
     {
-        // a remplir!!!! bisous elias
-        Debug.Log("att Metal");
+        ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
     }
     public void DetectorCamera()
     {
-        Debug.Log("att Camera");
-        // a remplir
+        ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
     }
 }
 /*

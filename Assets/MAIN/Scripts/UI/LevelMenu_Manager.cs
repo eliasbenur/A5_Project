@@ -13,6 +13,9 @@ public class LevelMenu_Manager : MonoBehaviour
     bool pausePanel_active = false;
     public GameObject lose_Panel;
     public GameObject win_Panel;
+    public GameObject objectivesPanel;
+    Animator objetivesPanelAnimaion;
+    public ObjectRemaning objectRemaning;
 
     Player player;
 
@@ -27,6 +30,9 @@ public class LevelMenu_Manager : MonoBehaviour
     void Start()
     {
         player = ReInput.players.GetPlayer(0);
+        objetivesPanelAnimaion = objectivesPanel.GetComponent<Animator>();
+
+        SetUpObjectives();
     }
 
     // Update is called once per frame
@@ -44,6 +50,18 @@ public class LevelMenu_Manager : MonoBehaviour
             }
         }
 
+        if (player.GetButtonDown("ShowObjectives"))
+        {
+            if (objetivesPanelAnimaion.GetBool("show"))
+            {
+                objetivesPanelAnimaion.SetBool("show", false);
+            }
+            else
+            {
+                objetivesPanelAnimaion.SetBool("show", true);
+            }
+        }
+
         if (activeDefaultButton != null)
         {
             float hor_axis = player.GetAxis("Horizontal");
@@ -54,6 +72,20 @@ public class LevelMenu_Manager : MonoBehaviour
                 defaultPauseButton.Select();
             }
 
+        }
+    }
+
+    public void SetUpObjectives()
+    {
+        for (int i = 0; i < objectivesPanel.transform.childCount; i++)
+        {
+            try
+            {
+                objectivesPanel.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
+                    objectRemaning.obj[i].sprite;
+                if (objectRemaning.obj[i].stolen) objectivesPanel.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
+            }
+            catch { }
         }
     }
 
