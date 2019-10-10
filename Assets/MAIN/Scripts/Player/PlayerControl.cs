@@ -124,8 +124,12 @@ public class PlayerControl : MonoBehaviour
         {
             interactableObject = newObject;
             newObject.playerControl = this;
-            newObject.ToHightlight.material = newObject.Highlight;
-            newObject.canvas.gameObject.SetActive(true);
+            if (newObject.ToHightlight != null)
+            {
+                newObject.ToHightlight.material = newObject.Highlight;
+                newObject.canvas.gameObject.SetActive(true);
+            }
+
             canInteract = true;
         }
     }
@@ -138,8 +142,12 @@ public class PlayerControl : MonoBehaviour
         {
             interactableObject = null;
             newObject.playerControl = null;
-            newObject.ToHightlight.material = newObject.Default;
-            newObject.canvas.gameObject.SetActive(false);
+            if (newObject.ToHightlight != null)
+            {
+                newObject.ToHightlight.material = newObject.Default;
+                newObject.canvas.gameObject.SetActive(false);
+            }
+
             canInteract = false;
         }
     }

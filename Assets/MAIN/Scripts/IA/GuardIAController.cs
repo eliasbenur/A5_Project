@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using UnityEngine.AI;
+using UnityEditor;
 
 public class GuardIAController : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class GuardIAController : MonoBehaviour
     public List<Vector2> pointsToPatroll = new List<Vector2>();
 
     public int minPositionsPatrolling, maxPositionsPatrolling;
+
+    public ia_BehaviourType behaviourType;
+    public List<GameObject> patrollZones_List, patrollPoints_List;
 
     //IA
     public Vector2 target;
@@ -160,13 +164,31 @@ public class GuardIAController : MonoBehaviour
     public void GetPointsToPatroll()
     {
         pointsToPatroll = new List<Vector2>();
-        int randomZone = Random.Range(0, ObjectRefs.Instance.GetPatrollZoneList().Count);
-        int nulOfPoints = Random.Range(minPositionsPatrolling, maxPositionsPatrolling);
-        for (int x = 0; x < nulOfPoints; x++)
+        
+        //int randomZone = Random.Range(0, ObjectRefs.Instance.GetPatrollZoneList().Count);
+        switch (behaviourType)
         {
-            Vector2 newPoint = Outils.RandomPointInBounds(ObjectRefs.Instance.GetPatrollZoneList()[randomZone].GetComponent<BoxCollider2D>().bounds);
-            pointsToPatroll.Add(newPoint);
+            case ia_BehaviourType.Stationary:
+                break;
+            case ia_BehaviourType.RandomZone:
+                int randomZone = Random.Range(0, patrollZones_List.Count);
+                int nulOfPoints = Random.Range(minPositionsPatrolling, maxPositionsPatrolling);
+                for (int x = 0; x < nulOfPoints; x++)
+                {
+                    Vector2 newPoint = Outils.RandomPointInBounds(patrollZones_List[randomZone].GetComponent<BoxCollider2D>().bounds);
+                    pointsToPatroll.Add(newPoint);
+                }
+                break;
+            case ia_BehaviourType.SuccessivePoints:
+                for (int x = 0; x < patrollPoints_List.Count; x++)
+                {
+                    Vector2 newPoint = patrollPoints_List[x].transform.position;
+                    pointsToPatroll.Add(newPoint);
+                }
+                break;
         }
+        
+
         playerMakerSFM.SendEvent("PatrollZoneSetUp");
     }
 }

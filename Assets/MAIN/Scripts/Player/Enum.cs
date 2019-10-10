@@ -29,3 +29,10 @@ public enum Power
     CameraOff
 
 }
+
+public enum ia_BehaviourType
+{
+    Stationary,
+    RandomZone,
+    SuccessivePoints
+}
