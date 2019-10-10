@@ -19,6 +19,11 @@ public class PlayerControl : MonoBehaviour
     public AnimationCurve dashCurve;
     public Obj interactableObject;
     public Vector2 moveVector;
+    [HideInInspector]
+    public int nbAntiCam = 0;
+    public float DistanceMinWallApresDash = 0.5f;
+    float distanceDash = 1;
+    public LayerMask layerDash;
 
     public List<Tresor> inventory = new List<Tresor>();
 
@@ -27,6 +32,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(CalculeDistanceDash());
         player = ReInput.players.GetPlayer(0);
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
@@ -40,6 +46,10 @@ public class PlayerControl : MonoBehaviour
             agent.updateRotation = false;
             agent.updateUpAxis = false;
         }
+        if(stat.power== Power.CameraOff)
+        {
+            nbAntiCam = stat.nbAntiCam;
+        }
 
     }
 
@@ -49,6 +59,8 @@ public class PlayerControl : MonoBehaviour
         {
             moveVector.x = player.GetAxis("Horizontal");
             moveVector.y = player.GetAxis("Vertical");
+          
+
             if (moveVector.sqrMagnitude > 1)
             {
                 moveVector.Normalize();
@@ -61,12 +73,19 @@ public class PlayerControl : MonoBehaviour
 
         if(player.GetButtonDown("Dash")&& canDash)
         {
+            canDash = false;
             StartCoroutine(Dash(moveVector));
         }
-
-        if (player.GetButtonDown("Interact") && canInteract)
+        if (canDash)
         {
-            Action(interactableObject);
+            if (player.GetButtonDown("Interact") && canInteract)
+            {
+                Action(interactableObject);
+            }
+            if (player.GetButtonDown("CapacitySpe"))
+            {
+                Capacity();
+            }
         }
     }
 
@@ -105,6 +124,8 @@ public class PlayerControl : MonoBehaviour
         {
             interactableObject = newObject;
             newObject.playerControl = this;
+            newObject.ToHightlight.material = newObject.Highlight;
+            newObject.canvas.gameObject.SetActive(true);
             canInteract = true;
         }
     }
@@ -117,22 +138,75 @@ public class PlayerControl : MonoBehaviour
         {
             interactableObject = null;
             newObject.playerControl = null;
+            newObject.ToHightlight.material = newObject.Default;
+            newObject.canvas.gameObject.SetActive(false);
             canInteract = false;
+        }
+    }
+
+    protected virtual void Capacity()
+    {
+        Debug.Log("capacitySpe");
+        switch (stat.power)
+        {
+            case Power.CameraOff:
+                if (nbAntiCam > 0)
+                {
+                    nbAntiCam--;
+                    Instantiate(stat.ObjAntiCamera, this.transform.position, Quaternion.identity);
+                }
+                break;
+
         }
     }
 
     IEnumerator Dash(Vector2 vDash)
     {
-        canDash = false;
         float curveTime = 0f;
         float curveAmount = dashCurve.Evaluate(curveTime/stat.timeDash);
-        while(curveTime < stat.timeDash)
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, vDash,distanceDash,layerDash);
+        
+        if (hit.collider != null&&hit.distance<distanceDash)
+        {
+            //Debug.Log(hit.distance);
+            //Debug.Log(hit.collider);
+            //Debug.Log(((Vector3)hit.point - transform.position).magnitude);
+            while (((Vector3)hit.point-transform.position).magnitude>DistanceMinWallApresDash)
+            {
+               // Debug.Log(((Vector3)hit.point - transform.position).magnitude);
+                curveTime += Time.deltaTime;
+                curveAmount = dashCurve.Evaluate(curveTime / stat.timeDash);
+                transform.position += (Vector3)vDash * stat.dashSpeed * curveAmount * Time.deltaTime;
+                yield return null;
+            }
+        }
+        else
+        {
+            while (curveTime < stat.timeDash)
+            {
+                curveTime += Time.deltaTime;
+                curveAmount = dashCurve.Evaluate(curveTime / stat.timeDash);
+                transform.position += (Vector3)vDash * stat.dashSpeed * curveAmount * Time.deltaTime;
+                yield return null;
+            }
+        }
+        canDash = true;
+    }
+    IEnumerator CalculeDistanceDash()
+    {
+        float curveTime = 0f;
+        float curveAmount = dashCurve.Evaluate(curveTime / stat.timeDash);
+        Vector3 v = Vector3.zero;
+        
+        while (curveTime < stat.timeDash)
         {
             curveTime += Time.deltaTime;
             curveAmount = dashCurve.Evaluate(curveTime / stat.timeDash);
-            transform.position += (Vector3)vDash * stat.dashSpeed* curveAmount * Time.deltaTime;
+            v += Vector3.up * stat.dashSpeed * curveAmount * Time.deltaTime;
             yield return null;
         }
-        canDash = true;
+        distanceDash = v.magnitude;
+
     }
 }

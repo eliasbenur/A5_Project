@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RVOSim
   - EndZone
+  - Wall
   layers:
   - Default
   - TransparentFX
