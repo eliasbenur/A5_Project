@@ -100,6 +100,7 @@ public class LockedDoor : MonoBehaviour
         {
             playerControl.powerNb -= 1;
             gameObject.GetComponent<Door>().OpenDoor();
+            Destroy(gameObject.GetComponent<LockedDoor>());
         }
         done = true;
         canvas.transform.GetChild(2).gameObject.SetActive(false);

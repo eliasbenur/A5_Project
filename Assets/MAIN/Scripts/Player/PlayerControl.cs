@@ -20,7 +20,6 @@ public class PlayerControl : MonoBehaviour
     public AnimationCurve dashCurve;
     public Obj interactableObject;
     public Vector2 moveVector;
-    public string role = "locksmith";
     public int powerNb;
     [HideInInspector]
     public int nbAntiCam = 0;
@@ -85,7 +84,7 @@ public class PlayerControl : MonoBehaviour
                 if (player.GetButtonDown("Interact") && canInteract)
                 {
                     LockedDoor lockedDoor = interactableObject.gameObject.GetComponent<LockedDoor>();
-                    if (role == "locksmith" && lockedDoor != null)
+                    if (stat.power == Power.AllKey && lockedDoor != null)
                     {
                         if (powerNb > 0)
                         {
