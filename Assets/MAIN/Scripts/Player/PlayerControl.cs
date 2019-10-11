@@ -129,6 +129,11 @@ public class PlayerControl : MonoBehaviour
                 newObject.ToHightlight.material = newObject.Highlight;
                 newObject.canvas.gameObject.SetActive(true);
             }
+            else if (newObject is Door)
+            {
+                newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Highlight;
+                newObject.canvas.gameObject.SetActive(true);
+            }
 
             canInteract = true;
         }
@@ -145,6 +150,11 @@ public class PlayerControl : MonoBehaviour
             if (newObject.ToHightlight != null)
             {
                 newObject.ToHightlight.material = newObject.Default;
+                newObject.canvas.gameObject.SetActive(false);              
+            }
+            else if (newObject is Door)
+            {
+                newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Default;
                 newObject.canvas.gameObject.SetActive(false);
             }
 
