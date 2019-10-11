@@ -43,7 +43,7 @@ public class FOV_v3 : MonoBehaviour
         if (agent == null)
         {
             direction = (Vector2)(Quaternion.Euler(0, 0, transform.eulerAngles.z) * Vector2.down);
-            Debug.Log(transform.eulerAngles.z);
+           // Debug.Log(transform.eulerAngles.z);
             direction_tmp = direction;
         }
         else

@@ -47,9 +47,16 @@ public class PlayerNoise : MonoBehaviour
     void FixedUpdate()
     {
         circlecoll.radius = noiseRadius;
+        var main = particleSystem.main;
+        main.startSpeed = noiseRadius * 2;
+
         if (delayNoiseWave_tmp > 0)
         {
-            delayNoiseWave_tmp -= Time.fixedDeltaTime * (player.moveVector.sqrMagnitude/1);
+            if (player.moveVector.sqrMagnitude > 0)
+            {
+                delayNoiseWave_tmp -= Time.fixedDeltaTime /* * (player.moveVector.sqrMagnitude/1)*/;
+            }
+
         }
         else
         {

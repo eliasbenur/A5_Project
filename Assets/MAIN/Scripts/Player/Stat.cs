@@ -15,8 +15,9 @@ public class Stat : ScriptableObject
     public Power power = Power.None;
     [System.NonSerialized]
     public int nbKey =3;
-    [System.NonSerialized]
+    [HideInInspector]
     public int nbAntiCam = 3;
+    public GameObject ObjAntiCamera;
 
     public Stat (int Speed, int Force, Power Pow)
     {
@@ -55,7 +56,7 @@ public class Stat : ScriptableObject
                     stat.nbKey = EditorGUILayout.IntField("Key:", stat.nbKey);
                     break;
                 case Power.CameraOff:
-                    stat.nbAntiCam = EditorGUILayout.IntField("AntiCam:", stat.nbKey);
+                    stat.nbAntiCam = EditorGUILayout.IntField("AntiCam:", stat.nbAntiCam);
                     break;
             }
             

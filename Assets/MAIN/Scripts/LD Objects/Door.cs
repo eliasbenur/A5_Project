@@ -48,7 +48,7 @@ public class Door : Obj
 
     IEnumerator DelayBake()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         ObjectRefs.Instance.NavMesh.GetComponent<NavMeshSurface2d>().BuildNavMesh();
     }
 
@@ -69,5 +69,6 @@ public class Door : Obj
     {
         Debug.Log("close");
         anim.SetBool("open", false);
+        StartCoroutine(DelayBake());
     }
 }

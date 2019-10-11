@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28f6183bae3e13e4aa32eb1f9eb6680b, type: 3}
-  m_Name: TestAllKey
+  m_Name: statTEst
   m_EditorClassIdentifier: 
-  speed: 5
-  force: 5
-  dashSpeed: 100
-  timeDash: 0.2
+  speed: 0
+  force: 0
+  dashSpeed: 0
+  timeDash: 0
   BruitRadius: 0
   power: 1
   nbAntiCam: 0
-  ObjAntiCamera: {fileID: 7557627805658173458, guid: 44e496352a19c4b4b9edd70022f16fd5,
-    type: 3}
+  ObjAntiCamera: {fileID: 0}

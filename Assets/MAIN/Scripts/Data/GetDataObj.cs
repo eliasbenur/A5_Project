@@ -7,8 +7,18 @@ public class GetDataObj : MonoBehaviour
 {
     public ObjectRemaning objRemaning;
     public List<Tresor> allObj = new List<Tresor>();
-    
- 
+
+    public void Start()
+    {
+        foreach (stringAndBool sb in objRemaning.obj)
+        {
+            if (sb.stolen)
+            {
+                Destroy(GameObject.Find(sb.name));
+            }
+        }
+    }
+
 
     public void GetData()
     {
