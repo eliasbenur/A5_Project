@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class PlayerNoise : MonoBehaviour
 {
+    public Transform toFollow;
     public float noiseRadius;
 
     CircleCollider2D circlecoll;
@@ -40,12 +41,16 @@ public class PlayerNoise : MonoBehaviour
 
         delayNoiseWave_tmp = delayNoiseWave;
 
-        player = transform.parent.GetComponent<PlayerControl>();
+        player = toFollow.gameObject.GetComponent<PlayerControl>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (toFollow != null)
+        {
+            transform.position = toFollow.position;
+        }
         circlecoll.radius = noiseRadius;
         var main = particleSystem.main;
         main.startSpeed = noiseRadius * 2;

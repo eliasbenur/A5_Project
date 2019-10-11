@@ -17,6 +17,7 @@ public class Stat : ScriptableObject
     public int nbKey =3;
     [HideInInspector]
     public int nbAntiCam = 3;
+    [HideInInspector]
     public GameObject ObjAntiCamera;
 
     public Stat (int Speed, int Force, Power Pow)
@@ -57,6 +58,8 @@ public class Stat : ScriptableObject
                     break;
                 case Power.CameraOff:
                     stat.nbAntiCam = EditorGUILayout.IntField("AntiCam:", stat.nbAntiCam);
+                    var objAnt = stat.ObjAntiCamera;
+                    stat.ObjAntiCamera = (GameObject)EditorGUILayout.ObjectField(objAnt, typeof(GameObject));
                     break;
             }
             

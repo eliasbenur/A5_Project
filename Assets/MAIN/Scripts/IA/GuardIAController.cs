@@ -4,6 +4,9 @@ using UnityEngine;
 using Pathfinding;
 using UnityEngine.AI;
 using UnityEditor;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class GuardIAController : MonoBehaviour
 {
@@ -14,6 +17,7 @@ public class GuardIAController : MonoBehaviour
     public int minPositionsPatrolling, maxPositionsPatrolling;
 
     public ia_BehaviourType behaviourType;
+    [HideInInspector]
     public List<GameObject> patrollZones_List, patrollPoints_List;
 
     //IA
@@ -191,4 +195,62 @@ public class GuardIAController : MonoBehaviour
 
         playerMakerSFM.SendEvent("PatrollZoneSetUp");
     }
+
+
+
+#if UNITY_EDITOR
+
+
+    [CustomEditor(typeof(GuardIAController))]
+    public class GuardIAControllerEditor : Editor
+    {
+        private GuardIAController GAC { get { return (target as GuardIAController); } }
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            EditorGUI.BeginChangeCheck();
+            ia_BehaviourType iaB = GAC.behaviourType;
+            EditorGUILayout.Space();
+            switch (iaB)
+            {
+                case ia_BehaviourType.RandomZone:
+                    var list = GAC.patrollZones_List;
+                    int newCount = Mathf.Max(0, EditorGUILayout.IntField("randomZone", list.Count));
+                    while (newCount < list.Count)
+                        list.RemoveAt(list.Count - 1);
+                    while (newCount > list.Count)
+                        list.Add(null);
+
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        list[i] = (GameObject)EditorGUILayout.ObjectField(list[i], typeof(GameObject));
+                    }
+                    break;
+                case ia_BehaviourType.Stationary:
+
+                    break;
+                case ia_BehaviourType.SuccessivePoints:
+                    var list2 = GAC.patrollPoints_List;
+                    int newCount2 = Mathf.Max(0, EditorGUILayout.IntField("randomZone", list2.Count));
+                    while (newCount2 < list2.Count)
+                        list2.RemoveAt(list2.Count - 1);
+                    while (newCount2 > list2.Count)
+                        list2.Add(null);
+
+                    for (int i = 0; i < list2.Count; i++)
+                    {
+                        list2[i] = (GameObject)EditorGUILayout.ObjectField(list2[i], typeof(GameObject));
+                    }
+                    break;
+                    
+
+            }
+
+
+            if (EditorGUI.EndChangeCheck())
+                EditorUtility.SetDirty(GAC);
+        }
+    }
+#endif
 }
