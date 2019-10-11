@@ -319,6 +319,7 @@ MonoBehaviour:
   objectRemaning: {fileID: 11400000, guid: ca7dbc1b2d5b0334990068c0828ba8b2, type: 2}
   panelObj: {fileID: 0}
   default_Button: {fileID: 3589344870781580280}
+  stat: {fileID: 11400000, guid: d2d8e6fc06303f44780209cad97f736d, type: 2}
 --- !u!1 &1319936888
 GameObject:
   m_ObjectHideFlags: 0

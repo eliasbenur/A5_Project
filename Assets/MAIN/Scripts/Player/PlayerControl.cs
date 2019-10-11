@@ -142,7 +142,11 @@ public class PlayerControl : MonoBehaviour
             if (newObject.ToHightlight != null)
             {
                 newObject.ToHightlight.material = newObject.Highlight;
-                newObject.canvas.gameObject.SetActive(true);
+                try
+                {
+                    newObject.canvas?.gameObject.SetActive(true);
+                }
+                catch { }
             }
             else if (newObject is Door)
             {
@@ -165,7 +169,11 @@ public class PlayerControl : MonoBehaviour
             if (newObject.ToHightlight != null)
             {
                 newObject.ToHightlight.material = newObject.Default;
-                newObject.canvas.gameObject.SetActive(false);              
+                try
+                {
+                    newObject.canvas.gameObject.SetActive(false);
+                }
+                catch { }
             }
             else if (newObject is Door)
             {
