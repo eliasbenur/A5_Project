@@ -13254,41 +13254,6 @@ Transform:
   m_Father: {fileID: 1871250487}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1146882692 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2006371110111589331, guid: 47d94b9ed21bedd47b5a40bfeff33425,
-    type: 3}
-  m_PrefabInstance: {fileID: 2388882533668090616}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1146882693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146882692}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e03bc51b0986824e9384620a133c865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 2
-  sequence: []
-  canvas: {fileID: 156474663}
-  timerText: {fileID: 1766981645}
-  inputContainer:
-  - {fileID: 1183585256}
-  - {fileID: 425128210}
-  - {fileID: 1750299283}
-  - {fileID: 855603226}
-  inputSet:
-  - {fileID: 3047817267153756561, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
-  - {fileID: 2228849384606813332, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
-  - {fileID: -2362863600149867366, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
-  - {fileID: 7993863524797170497, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
-  canSelect: 0
-  done: 0
-  success: 0
 --- !u!1001 &1162399575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13692,6 +13657,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248242463}
   m_CullTransparentMesh: 0
+--- !u!1 &1312487572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2006371110111589331, guid: 47d94b9ed21bedd47b5a40bfeff33425,
+    type: 3}
+  m_PrefabInstance: {fileID: 1405771493}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1312487573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312487572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e03bc51b0986824e9384620a133c865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 2
+  sequence: []
+  canvas: {fileID: 156474663}
+  timerText: {fileID: 1766981645}
+  inputContainer:
+  - {fileID: 1183585256}
+  - {fileID: 425128210}
+  - {fileID: 1750299283}
+  - {fileID: 855603226}
+  inputSet:
+  - {fileID: 3047817267153756561, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
+  - {fileID: 2228849384606813332, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
+  - {fileID: -2362863600149867366, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
+  - {fileID: 7993863524797170497, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
+  canSelect: 0
+  done: 0
+  success: 0
 --- !u!1 &1339074768
 GameObject:
   m_ObjectHideFlags: 0
@@ -18622,6 +18622,41 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3302522685719699518}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1700366289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2006371110111589331, guid: 47d94b9ed21bedd47b5a40bfeff33425,
+    type: 3}
+  m_PrefabInstance: {fileID: 1162399575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1700366290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700366289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e03bc51b0986824e9384620a133c865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 2
+  sequence: []
+  canvas: {fileID: 156474663}
+  timerText: {fileID: 1766981645}
+  inputContainer:
+  - {fileID: 1183585256}
+  - {fileID: 425128210}
+  - {fileID: 1750299283}
+  - {fileID: 855603226}
+  inputSet:
+  - {fileID: 3047817267153756561, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
+  - {fileID: 2228849384606813332, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
+  - {fileID: -2362863600149867366, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
+  - {fileID: 7993863524797170497, guid: 6e978cfdb96904441b675c365a736b3a, type: 3}
+  canSelect: 0
+  done: 0
+  success: 0
 --- !u!1 &1715125915
 GameObject:
   m_ObjectHideFlags: 0
@@ -23545,6 +23580,11 @@ PrefabInstance:
         type: 3}
       propertyPath: layerDash.m_Bits
       value: 2304
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927196242011935363, guid: 7b9beae87bec57042a296a6215d6e1df,
+        type: 3}
+      propertyPath: powerNb
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6927196241964887104, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
