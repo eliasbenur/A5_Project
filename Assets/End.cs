@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class End : MonoBehaviour
 {
     public LayerMask playerMask;
+    public ObjectRemaning objectRem;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,13 @@ public class End : MonoBehaviour
             //If Objective Completed
             if (GameManager.Instance.done)
             {
+                for (int x = 0; x < objectRem.obj.Count; x++)
+                {
+                    if (objectRem.obj[x].name == collision.GetComponent<PlayerControl>().inventory[0].name)
+                    {
+                        objectRem.obj[x].stolen = true;
+                    }
+                }
                 ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();
             }
         }

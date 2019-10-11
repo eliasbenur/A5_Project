@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct stringAndBool
+public class stringAndBool
 {
     public string name;
     public bool stolen;
