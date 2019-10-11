@@ -21,6 +21,7 @@ public class PlayerControl : MonoBehaviour
     public Obj interactableObject;
     public Vector2 moveVector;
     public string role = "locksmith";
+    public int powerNb;
     [HideInInspector]
     public int nbAntiCam = 0;
     public float DistanceMinWallApresDash = 0.5f;
@@ -86,8 +87,12 @@ public class PlayerControl : MonoBehaviour
                     LockedDoor lockedDoor = interactableObject.gameObject.GetComponent<LockedDoor>();
                     if (role == "locksmith" && lockedDoor != null)
                     {
-                        activated = false;
-                        lockedDoor.Pick(this);
+                        if (powerNb > 0)
+                        {
+                            //powerNb -= 1;
+                            activated = false;
+                            lockedDoor.Pick(this);
+                        }
                     }
                     else
                         Action(interactableObject);

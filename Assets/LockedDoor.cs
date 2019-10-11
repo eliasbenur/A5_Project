@@ -39,13 +39,9 @@ public class LockedDoor : MonoBehaviour
         {
             sequence[i] = ((inputs)random).ToString();
             inputContainer[i].sprite = inputSet[random];
+            inputContainer[i].color = Color.white;
             random = Random.Range(0, 4);
         }
-    }
-
-    private void Update()
-    {
-        
     }
 
     public void Pick(PlayerControl playerControl)
@@ -71,31 +67,39 @@ public class LockedDoor : MonoBehaviour
             if (player.GetButtonUp(RewiredConsts.Action.A) && canSelect == false)
                 canSelect = true;
 
-            if (count == 5)
+            if (count == 4)
             {
                 success = true;
                 break;
             }
             if (canSelect)
             {
-                if (player.GetButtonDown(RewiredConsts.Action.A) && sequence[count] == "A" ||
+                if (player.GetAnyButtonDown())
+                {
+                    if (player.GetButtonDown(RewiredConsts.Action.A) && sequence[count] == "A" ||
                     player.GetButtonDown(RewiredConsts.Action.B) && sequence[count] == "B" ||
                     player.GetButtonDown(RewiredConsts.Action.X) && sequence[count] == "X" ||
                     player.GetButtonDown(RewiredConsts.Action.Y) && sequence[count] == "Y")
-                {
-                    inputContainer[count].color = Color.green;
-                    count++;
-                }
-                else
-                {
-                    Debug.Log("FAIL");
-                    inputContainer[count].color = Color.red;
-                    break;
+                    {
+                        inputContainer[count].color = Color.green;
+                        count++;
+                    }
+                    else
+                    {
+                        Debug.Log("FAIL");
+                        inputContainer[count].color = Color.red;
+                        break;
+                    }
                 }
             }
-            temp = temp - 0.001f;
-            timerText.text = temp.ToString();
-            yield return new WaitForSecondsRealtime(0.001f);
+            temp = temp - 0.01f;
+            timerText.text = ((float)((int)(temp * 10)) / 10).ToString();
+            yield return new WaitForSecondsRealtime(0.0001f);
+        }
+        if (success == true)
+        {
+            playerControl.powerNb -= 1;
+            gameObject.GetComponent<Door>().OpenDoor();
         }
         done = true;
         canvas.transform.GetChild(2).gameObject.SetActive(false);

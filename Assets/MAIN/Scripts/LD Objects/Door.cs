@@ -52,7 +52,7 @@ public class Door : Obj
         ObjectRefs.Instance.NavMesh.GetComponent<NavMeshSurface2d>().BuildNavMesh();
     }
 
-    void OpenDoor()
+    public void OpenDoor()
     {
         open = !open;
         if (open) Open();
