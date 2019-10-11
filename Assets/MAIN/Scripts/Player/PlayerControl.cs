@@ -15,10 +15,12 @@ public class PlayerControl : MonoBehaviour
     //public float speedMod = 1;
     public bool canMove;
     public bool canInteract;
-    bool canDash = true;
+    public bool canDash = true;
+    public bool activated = true;
     public AnimationCurve dashCurve;
     public Obj interactableObject;
     public Vector2 moveVector;
+    public string role = "locksmith";
 
     public List<Tresor> inventory = new List<Tresor>();
 
@@ -45,28 +47,38 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        if (canMove)
+        if (activated)
         {
-            moveVector.x = player.GetAxis("Horizontal");
-            moveVector.y = player.GetAxis("Vertical");
-            if (moveVector.sqrMagnitude > 1)
+            if (canMove)
+            {
+                moveVector.x = player.GetAxis("Horizontal");
+                moveVector.y = player.GetAxis("Vertical");
+                if (moveVector.sqrMagnitude > 1)
+                {
+                    moveVector.Normalize();
+                }
+            }
+            else
             {
                 moveVector.Normalize();
             }
-        }
-        else
-        {
-            moveVector.Normalize();
-        }
 
-        if(player.GetButtonDown("Dash")&& canDash)
-        {
-            StartCoroutine(Dash(moveVector));
-        }
+            if (player.GetButtonDown("Dash") && canDash)
+            {
+                StartCoroutine(Dash(moveVector));
+            }
 
-        if (player.GetButtonDown("Interact") && canInteract)
-        {
-            Action(interactableObject);
+            if (player.GetButtonDown("Interact") && canInteract)
+            {
+                LockedDoor lockedDoor = interactableObject.gameObject.GetComponent<LockedDoor>();
+                if (role == "locksmith" && lockedDoor != null)
+                {
+                    activated = false;
+                    lockedDoor.Pick(this);
+                }
+                else
+                    Action(interactableObject);
+            }
         }
     }
 
