@@ -13,7 +13,7 @@ public class Stat : ScriptableObject
     public float timeDash;
     public float BruitRadius = 1;
     public Power power = Power.None;
-    [System.NonSerialized]
+    [HideInInspector]
     public int nbKey =3;
     [HideInInspector]
     public int nbAntiCam = 3;

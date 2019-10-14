@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class PlayerControl : MonoBehaviour
@@ -21,6 +22,7 @@ public class PlayerControl : MonoBehaviour
     public Obj interactableObject;
     public Vector2 moveVector;
     public int powerNb;
+    public Text text_PowerNb;
     [HideInInspector]
     public int nbAntiCam = 0;
     public float DistanceMinWallApresDash = 0.5f;
@@ -53,6 +55,18 @@ public class PlayerControl : MonoBehaviour
             nbAntiCam = stat.nbAntiCam;
         }
 
+        SetpowerNb(stat.nbKey);
+    }
+
+    public void SetpowerNb(int value_)
+    {
+        powerNb = value_;
+        text_PowerNb.text = "x " + powerNb;
+    }
+
+    public int GetpowerNb()
+    {
+        return powerNb;
     }
 
     private void Update()

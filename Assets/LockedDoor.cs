@@ -98,7 +98,7 @@ public class LockedDoor : MonoBehaviour
         }
         if (success == true)
         {
-            playerControl.powerNb -= 1;
+            playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
             gameObject.GetComponent<Door>().OpenDoor();
             Destroy(gameObject.GetComponent<LockedDoor>());
         }

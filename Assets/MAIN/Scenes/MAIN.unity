@@ -20133,6 +20133,11 @@ PrefabInstance:
       propertyPath: viewAngle
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 8000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
 --- !u!1001 &123525183755050800
@@ -20315,6 +20320,11 @@ PrefabInstance:
         type: 3}
       propertyPath: viewAngle
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 8000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -20593,6 +20603,11 @@ PrefabInstance:
       propertyPath: viewAngle
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 8000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
 --- !u!4 &123525184292646376
@@ -20836,6 +20851,11 @@ PrefabInstance:
       propertyPath: viewAngle
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 8000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
 --- !u!1 &123525184541428330
@@ -21078,6 +21098,11 @@ PrefabInstance:
         type: 3}
       propertyPath: viewAngle
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 8000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -24083,7 +24108,7 @@ GameObject:
   - component: {fileID: 389562861064653544}
   - component: {fileID: 1017242098860447876}
   m_Layer: 5
-  m_Name: Text
+  m_Name: PowerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24948,12 +24973,12 @@ PrefabInstance:
     - target: {fileID: 6927196242011935365, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.6
+      value: 27.32
       objectReference: {fileID: 0}
     - target: {fileID: 6927196242011935365, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: -9.82
       objectReference: {fileID: 0}
     - target: {fileID: 6927196242011935365, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
@@ -25080,6 +25105,11 @@ PrefabInstance:
       propertyPath: powerNb
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6927196242011935363, guid: 7b9beae87bec57042a296a6215d6e1df,
+        type: 3}
+      propertyPath: text_PowerNb
+      value: 
+      objectReference: {fileID: 1017242098860447876}
     - target: {fileID: 6927196241964887104, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
       propertyPath: m_IsActive
