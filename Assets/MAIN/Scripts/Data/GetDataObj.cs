@@ -30,6 +30,7 @@ public class GetDataObj : MonoBehaviour
             allObj.Add(tres);
             objRemaning?.obj.Add(new stringAndBool(tres.name, false, tres.gameObject.GetComponent<SpriteRenderer>().sprite));
         }
+        EditorUtility.SetDirty(objRemaning);
 
     }
 }

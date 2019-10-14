@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: TestObjectRemaning
   m_EditorClassIdentifier: 
   obj:
-  - name: tresor
-    stolen: 1
-    sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
-  - name: tresor (1)
+  - name: Metal1
     stolen: 0
-    sprite: {fileID: 7728724992391115551, guid: c5608ea8b553ad341a7b146f82acd01e,
-      type: 3}
-  - name: tresor (2)
-    stolen: 0
-    sprite: {fileID: -1606171125206317113, guid: c5608ea8b553ad341a7b146f82acd01e,
-      type: 3}
-  - name: tresor (3)
+    sprite: {fileID: -74071783076391883, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
+  - name: Cloche1
     stolen: 0
     sprite: {fileID: -9070127728172309502, guid: c5608ea8b553ad341a7b146f82acd01e,
       type: 3}
+  - name: LambdaTreasure3
+    stolen: 1
+    sprite: {fileID: -1606171125206317113, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure2
+    stolen: 0
+    sprite: {fileID: 7728724992391115551, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure1
+    stolen: 0
+    sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}

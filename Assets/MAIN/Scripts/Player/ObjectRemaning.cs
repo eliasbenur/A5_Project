@@ -9,6 +9,7 @@ public class ObjectRemaning : ScriptableObject
 {
     public List<stringAndBool> obj = new List<stringAndBool>();
 
+
 #if UNITY_EDITOR
 
     [MenuItem("Assets/Create/ObjectRemaning")]

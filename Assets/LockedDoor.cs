@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Rewired;
 
+[RequireComponent(typeof(Door))]
 public class LockedDoor : MonoBehaviour
 {
     Player player;
@@ -11,8 +12,6 @@ public class LockedDoor : MonoBehaviour
     public string[] sequence;
     public GameObject canvas;
     public Text timerText;
-    public Image[] inputContainer;
-    public Sprite[] inputSet;
 
     public bool canSelect = false;
     public bool done = false;
@@ -38,8 +37,8 @@ public class LockedDoor : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             sequence[i] = ((inputs)random).ToString();
-            inputContainer[i].sprite = inputSet[random];
-            inputContainer[i].color = Color.white;
+            ObjectRefs.Instance.inputContainer[i].sprite = ObjectRefs.Instance.inputSet[random];
+            ObjectRefs.Instance.inputContainer[i].color = Color.white;
             random = Random.Range(0, 4);
         }
     }
@@ -64,7 +63,7 @@ public class LockedDoor : MonoBehaviour
         int count = 0;
         while (temp >= 0)
         {
-            if (player.GetButtonUp(RewiredConsts.Action.A) && canSelect == false)
+            if ((player.GetButtonUp(RewiredConsts.Action.A) || player.GetButtonUp("Interact")) && canSelect == false)
                 canSelect = true;
 
             if (count == 4)
@@ -76,18 +75,18 @@ public class LockedDoor : MonoBehaviour
             {
                 if (player.GetAnyButtonDown())
                 {
-                    if (player.GetButtonDown(RewiredConsts.Action.A) && sequence[count] == "A" ||
-                    player.GetButtonDown(RewiredConsts.Action.B) && sequence[count] == "B" ||
-                    player.GetButtonDown(RewiredConsts.Action.X) && sequence[count] == "X" ||
-                    player.GetButtonDown(RewiredConsts.Action.Y) && sequence[count] == "Y")
+                    if ((player.GetButtonDown(RewiredConsts.Action.A) && sequence[count] == "A") ||
+                    (player.GetButtonDown(RewiredConsts.Action.B) && sequence[count] == "B") ||
+                    (player.GetButtonDown(RewiredConsts.Action.X) && sequence[count] == "X") ||
+                    (player.GetButtonDown(RewiredConsts.Action.Y) && sequence[count] == "Y") || player.GetButtonDown("KeyBoard_LockedDoor"))
                     {
-                        inputContainer[count].color = Color.green;
+                        ObjectRefs.Instance.inputContainer[count].color = Color.green;
                         count++;
                     }
                     else
                     {
-                        Debug.Log("FAIL");
-                        inputContainer[count].color = Color.red;
+                        playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
+                        ObjectRefs.Instance.inputContainer[count].color = Color.red;
                         break;
                     }
                 }
@@ -101,6 +100,7 @@ public class LockedDoor : MonoBehaviour
             playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
             gameObject.GetComponent<Door>().OpenDoor();
             Destroy(gameObject.GetComponent<LockedDoor>());
+            gameObject.GetComponent<Door>().closeKey = false;
         }
         done = true;
         canvas.transform.GetChild(2).gameObject.SetActive(false);

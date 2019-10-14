@@ -21,7 +21,6 @@ public class PlayerControl : MonoBehaviour
     public AnimationCurve dashCurve;
     public Obj interactableObject;
     public Vector2 moveVector;
-    public int powerNb;
     public Text text_PowerNb;
     [HideInInspector]
     public int nbAntiCam = 0;
@@ -60,13 +59,13 @@ public class PlayerControl : MonoBehaviour
 
     public void SetpowerNb(int value_)
     {
-        powerNb = value_;
-        text_PowerNb.text = "x " + powerNb;
+        stat.nbKey_tmp = value_;
+        text_PowerNb.text = "x " + stat.nbKey_tmp;
     }
 
     public int GetpowerNb()
     {
-        return powerNb;
+        return stat.nbKey_tmp;
     }
 
     private void Update()
@@ -106,17 +105,16 @@ public class PlayerControl : MonoBehaviour
             {
                 if (player.GetButtonDown("Interact") && canInteract)
                 {
-                    LockedDoor lockedDoor = interactableObject.gameObject.GetComponent<LockedDoor>();
+                    /*LockedDoor lockedDoor = interactableObject.gameObject.GetComponent<LockedDoor>();
                     if (stat.power == Power.AllKey && lockedDoor != null)
                     {
-                        if (powerNb > 0)
+                        if (stat.nbKey_tmp > 0)
                         {
-                            //powerNb -= 1;
                             activated = false;
                             lockedDoor.Pick(this);
                         }
                     }
-                    else
+                    else*/
                         Action(interactableObject);
                 }
                 if (player.GetButtonDown("CapacitySpe"))

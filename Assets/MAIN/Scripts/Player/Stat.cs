@@ -16,6 +16,8 @@ public class Stat : ScriptableObject
     [HideInInspector]
     public int nbKey =3;
     [HideInInspector]
+    public int nbKey_tmp;
+    [HideInInspector]
     public int nbAntiCam = 3;
     [HideInInspector]
     public GameObject ObjAntiCamera;
