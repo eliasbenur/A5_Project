@@ -67,6 +67,15 @@ public class PlayerControl : MonoBehaviour
                 {
                     moveVector.Normalize();
                 }
+                //Flip Sprite
+                if (moveVector.x > 0)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else if(moveVector.x < 0)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+                }
             }
             else
 
