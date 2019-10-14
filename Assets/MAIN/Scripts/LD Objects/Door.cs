@@ -1,6 +1,7 @@
 ﻿using Rewired;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -129,7 +130,6 @@ public class Door : Obj
                     Pick(ObjectRefs.Instance.player.GetComponent<PlayerControl>());
                 } 
             }
-            //closeKey = false;
         }
         else
         {
