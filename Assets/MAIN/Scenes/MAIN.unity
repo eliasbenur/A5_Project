@@ -20010,6 +20010,11 @@ PrefabInstance:
       propertyPath: speed
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
       propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
@@ -20034,11 +20039,6 @@ PrefabInstance:
         type: 3}
       propertyPath: viewAngle
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Acceleration
-      value: 8000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -20198,6 +20198,11 @@ PrefabInstance:
       propertyPath: speed
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
       propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
@@ -20222,11 +20227,6 @@ PrefabInstance:
         type: 3}
       propertyPath: viewAngle
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Acceleration
-      value: 8000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -20480,6 +20480,11 @@ PrefabInstance:
       propertyPath: speed
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
       propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
@@ -20504,11 +20509,6 @@ PrefabInstance:
         type: 3}
       propertyPath: viewAngle
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Acceleration
-      value: 8000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -20728,6 +20728,11 @@ PrefabInstance:
       propertyPath: speed
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
       propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
@@ -20752,11 +20757,6 @@ PrefabInstance:
         type: 3}
       propertyPath: viewAngle
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Acceleration
-      value: 8000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -20976,6 +20976,11 @@ PrefabInstance:
       propertyPath: speed
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
       propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
@@ -21000,11 +21005,6 @@ PrefabInstance:
         type: 3}
       propertyPath: viewAngle
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638051, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Acceleration
-      value: 8000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -24872,20 +24872,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6705209099861965325, guid: 7b9beae87bec57042a296a6215d6e1df,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6927196242011935365, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.32
+      value: 27.86
       objectReference: {fileID: 0}
     - target: {fileID: 6927196242011935365, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.82
+      value: -6.31
       objectReference: {fileID: 0}
     - target: {fileID: 6927196242011935365, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
@@ -25017,20 +25012,25 @@ PrefabInstance:
       propertyPath: text_PowerNb
       value: 
       objectReference: {fileID: 1017242098860447876}
+    - target: {fileID: 6705209099861965325, guid: 7b9beae87bec57042a296a6215d6e1df,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6927196241964887104, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927196242419072871, guid: 7b9beae87bec57042a296a6215d6e1df,
+        type: 3}
+      propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7982435161013132725, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6927196242419072871, guid: 7b9beae87bec57042a296a6215d6e1df,
-        type: 3}
-      propertyPath: m_FlipX
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b9beae87bec57042a296a6215d6e1df, type: 3}

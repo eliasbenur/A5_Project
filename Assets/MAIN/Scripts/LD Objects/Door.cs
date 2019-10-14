@@ -1,4 +1,5 @@
-﻿using Rewired;
+﻿using MyBox;
+using Rewired;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -11,17 +12,18 @@ public class Door : Obj
     [System.NonSerialized]
     public bool open = false;
     Animator anim;
+
+    [Separator("Bool")]
     public bool closeKey = false;
-
     Player player;
-    public float timer;
-    public string[] sequence;
-    public GameObject canvas_lockedkey;
-    public Text timerText;
+    [ConditionalField(nameof(closeKey))] public float timer_miniGame;
+    string[] sequence;
+    [ConditionalField(nameof(closeKey))] public GameObject canvas_lockedkey;
+    [ConditionalField(nameof(closeKey))] public Text timerText;
 
-    public bool canSelect = false;
-    public bool done = false;
-    public bool success = false;
+    [ConditionalField(nameof(closeKey))] public bool canSelect = false;
+    [ConditionalField(nameof(closeKey))] public bool done = false;
+    [ConditionalField(nameof(closeKey))] public bool success = false;
 
     public enum inputs
     {
@@ -64,11 +66,11 @@ public class Door : Obj
 
         playerControl.activated = false;
         FillSequence();
-        timerText.text = timer.ToString();
+        timerText.text = timer_miniGame.ToString();
         canvas_lockedkey.transform.GetChild(2).gameObject.SetActive(true);
         Debug.Log(canvas_lockedkey.transform.GetChild(2));
 
-        float temp = timer;
+        float temp = timer_miniGame;
         int count = 0;
         while (temp >= 0)
         {
