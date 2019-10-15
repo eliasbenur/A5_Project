@@ -133,6 +133,7 @@ public class LevelMenu_Manager : MonoBehaviour
     {
         if (!losed)
         {
+            GameObject.Find("Player").GetComponent<PlayerControl>().StopVibrations();
             Time.timeScale = 0;
             lose_Panel.SetActive(true);
             activeDefaultButton = defaultLoseButton;
@@ -144,6 +145,7 @@ public class LevelMenu_Manager : MonoBehaviour
 
     public void Active_WinPanel()
     {
+        GameObject.Find("Player").GetComponent<PlayerControl>().StopVibrations();
         Time.timeScale = 0;
         win_Panel.SetActive(true);
         activeDefaultButton = defaultWinButton;
