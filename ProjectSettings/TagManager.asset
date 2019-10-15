@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Door
   - Death
+  - Vibration
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,87 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5632305162957004665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8485441445704390693}
+  - component: {fileID: 3117356470359103685}
+  - component: {fileID: 2439821798201682569}
+  - component: {fileID: 51044573934790143}
+  m_Layer: 0
+  m_Name: Vibrations
+  m_TagString: Vibration
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8485441445704390693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5632305162957004665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6927196242011935365}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &3117356470359103685
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5632305162957004665}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
+--- !u!50 &2439821798201682569
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5632305162957004665}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &51044573934790143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5632305162957004665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0331e71e0fd15045a3281c223b59080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6705209099861965325
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,13 +92,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6705209099861965324}
   - component: {fileID: 6705209099861965323}
+  - component: {fileID: 2053970291}
   m_Layer: 0
   m_Name: Noise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6705209099861965324
 Transform:
   m_ObjectHideFlags: 0
@@ -43,7 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e9461ae8f0e5f478128ad291d0059b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noiseRadius: 3
+  toFollow: {fileID: 0}
+  noiseRadius: 1
   guardList: []
   toNotify:
     serializedVersion: 2
@@ -53,6 +137,27 @@ MonoBehaviour:
   particleSystem: {fileID: 0}
   delayNoiseWave: 0.5
   delayNoiseWave_tmp: 0
+--- !u!50 &2053970291
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705209099861965325}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6705209100856316799
 GameObject:
   m_ObjectHideFlags: 0
@@ -4848,6 +4953,7 @@ Transform:
   - {fileID: 6927196242419072870}
   - {fileID: 6705209099861965324}
   - {fileID: 6705209100856316798}
+  - {fileID: 8485441445704390693}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4888,6 +4994,8 @@ MonoBehaviour:
   stat: {fileID: 11400000, guid: d2d8e6fc06303f44780209cad97f736d, type: 2}
   canMove: 1
   canInteract: 0
+  canDash: 1
+  activated: 1
   dashCurve:
     serializedVersion: 2
     m_Curve:
@@ -4923,11 +5031,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   interactableObject: {fileID: 0}
   moveVector: {x: 0, y: 0}
+  text_PowerNb: {fileID: 0}
   nbAntiCam: 0
   DistanceMinWallApresDash: 0.5
   layerDash:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 6400
   inventory: []
 --- !u!61 &6927196242011935360
 BoxCollider2D:

@@ -148,42 +148,11 @@ public class PlayerControl : MonoBehaviour
         if (newObject != null) newObject.ActiveEvent();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Death")
-        {
-            Vector2 temp = transform.position - collision.transform.position;
-            float power = 0.3f;
-            if (temp.magnitude < 3.5f)
-                power = 0.6f;
-            if (temp.magnitude < 2f)
-                power = 1f;
-            player.SetVibration(0, power);
-            player.SetVibration(1, power);
-            player.SetVibration(2, power);
-            player.SetVibration(3, power);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "EndZone" && GameManager.Instance.done)
         {
             GameManager.Instance.Restart();
-        }
-
-        if (collision.tag == "Death")
-        {
-            Vector2 temp = transform.position - collision.transform.position;
-            float power = 0.3f;
-            if (temp.magnitude < 3.5f)
-                power = 0.6f;
-            if (temp.magnitude < 2f)
-                power = 1f;
-            player.SetVibration(0, power);
-            player.SetVibration(1, power);
-            player.SetVibration(2, power);
-            player.SetVibration(3, power);
         }
 
         Obj newObject = collision.gameObject.GetComponent<Obj>();
@@ -212,13 +181,6 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Death")
-        {
-            player.SetVibration(0, 0);
-            player.SetVibration(1, 0);
-            player.SetVibration(2, 0);
-            player.SetVibration(3, 0);
-        }
 
         Obj newObject = collision.GetComponent<Obj>();
         if (newObject!= null&&newObject == interactableObject)
