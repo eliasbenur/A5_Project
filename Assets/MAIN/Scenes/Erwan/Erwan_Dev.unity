@@ -141,7 +141,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.5
 --- !u!1 &374146546 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1530917790771661442, guid: a46d5f84681fb264aa825994a778215d,
@@ -1512,6 +1512,11 @@ PrefabInstance:
         type: 3}
       propertyPath: powerNb
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3533780210145334339, guid: e19739de1e57b4848a0905ff72364828,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e19739de1e57b4848a0905ff72364828, type: 3}
