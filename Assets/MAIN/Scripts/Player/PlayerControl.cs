@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class PlayerControl : MonoBehaviour
@@ -20,7 +21,7 @@ public class PlayerControl : MonoBehaviour
     public AnimationCurve dashCurve;
     public Obj interactableObject;
     public Vector2 moveVector;
-    public int powerNb;
+    public Text text_PowerNb;
     [HideInInspector]
     public int nbAntiCam = 0;
     public float DistanceMinWallApresDash = 0.5f;
@@ -53,6 +54,18 @@ public class PlayerControl : MonoBehaviour
             nbAntiCam = stat.nbAntiCam;
         }
 
+        SetpowerNb(stat.nbKey);
+    }
+
+    public void SetpowerNb(int value_)
+    {
+        stat.nbKey_tmp = value_;
+        text_PowerNb.text = "x " + stat.nbKey_tmp;
+    }
+
+    public int GetpowerNb()
+    {
+        return stat.nbKey_tmp;
     }
 
     private void Update()
@@ -66,6 +79,15 @@ public class PlayerControl : MonoBehaviour
                 if (moveVector.sqrMagnitude > 1)
                 {
                     moveVector.Normalize();
+                }
+                //Flip Sprite
+                if (moveVector.x > 0)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else if(moveVector.x < 0)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
                 }
             }
             else
@@ -83,17 +105,16 @@ public class PlayerControl : MonoBehaviour
             {
                 if (player.GetButtonDown("Interact") && canInteract)
                 {
-                    LockedDoor lockedDoor = interactableObject.gameObject.GetComponent<LockedDoor>();
+                    /*LockedDoor lockedDoor = interactableObject.gameObject.GetComponent<LockedDoor>();
                     if (stat.power == Power.AllKey && lockedDoor != null)
                     {
-                        if (powerNb > 0)
+                        if (stat.nbKey_tmp > 0)
                         {
-                            //powerNb -= 1;
                             activated = false;
                             lockedDoor.Pick(this);
                         }
                     }
-                    else
+                    else*/
                         Action(interactableObject);
                 }
                 if (player.GetButtonDown("CapacitySpe"))
@@ -142,7 +163,11 @@ public class PlayerControl : MonoBehaviour
             if (newObject.ToHightlight != null)
             {
                 newObject.ToHightlight.material = newObject.Highlight;
-                newObject.canvas.gameObject.SetActive(true);
+                try
+                {
+                    newObject.canvas?.gameObject.SetActive(true);
+                }
+                catch { }
             }
             else if (newObject is Door)
             {
@@ -165,7 +190,11 @@ public class PlayerControl : MonoBehaviour
             if (newObject.ToHightlight != null)
             {
                 newObject.ToHightlight.material = newObject.Default;
-                newObject.canvas.gameObject.SetActive(false);              
+                try
+                {
+                    newObject.canvas.gameObject.SetActive(false);
+                }
+                catch { }
             }
             else if (newObject is Door)
             {

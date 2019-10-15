@@ -74,7 +74,7 @@ public class GuardIAController : MonoBehaviour
                 if (Vector2.Distance(agent.destination, transform.position) < chasingDistance)
                 {
                     chasingPlayer = false;
-                    speed = speed / chasingSpeedFactor;
+                    agent.speed = speed / chasingSpeedFactor;
                     playerMakerSFM.SendEvent("SearchAction");
 
                     //Sprite Spotted
@@ -99,7 +99,7 @@ public class GuardIAController : MonoBehaviour
     {
         agent.SetDestination(target_);
         playerMakerSFM.SendEvent("ChasingPlayer");
-        speed = speed * chasingSpeedFactor;
+        agent.speed = speed * chasingSpeedFactor;
         chasingPlayer = true;
         agent.isStopped = false;
 
@@ -116,7 +116,7 @@ public class GuardIAController : MonoBehaviour
             if (!chasingPlayer)
             {
                 playerMakerSFM.SendEvent("ChasingPlayer");
-                speed = speed * chasingSpeedFactor;
+                agent.speed = speed * chasingSpeedFactor;
                 chasingPlayer = true;
                 agent.isStopped = false;
 

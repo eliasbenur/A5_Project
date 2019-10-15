@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ObjectRefs : MonoBehaviour
 {
@@ -8,10 +9,17 @@ public class ObjectRefs : MonoBehaviour
 
     // Declare any public variables that you want to be able 
     // to access throughout your scene
+    [Header("NavMesh")]
     public GameObject patrollZones;
     private List<GameObject> patrollZones_List;
     public GameObject menuCanvas;
     public GameObject NavMesh;
+    [Header("MiniGame LockedDoors")]
+    public Image[] inputContainer;
+    public Sprite[] inputSet;
+    [Header("Player")]
+    public GameObject player;
+
 
     private void Awake()
     {
@@ -21,6 +29,7 @@ public class ObjectRefs : MonoBehaviour
         if (patrollZones == null) { patrollZones = GameObject.Find("PatrollPoints"); }
         if (menuCanvas == null) { menuCanvas = GameObject.Find("MenuCanvas"); }
         if (NavMesh == null) { NavMesh = GameObject.Find("NavMesh"); }
+        if (player == null) { player = GameObject.Find("Player"); }
     }
     // Start is called before the first frame update
     void Start()

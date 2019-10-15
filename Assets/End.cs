@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,6 +42,7 @@ public class End : MonoBehaviour
                         objectRem.obj[x].stolen = true;
                     }
                 }
+                EditorUtility.SetDirty(objectRem);
                 ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();
             }
         }

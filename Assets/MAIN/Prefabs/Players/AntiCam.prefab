@@ -113,10 +113,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControl: {fileID: 0}
-  SpriteImgCanvas: {fileID: 0}
+  SpriteImgCanvas: {fileID: -5698319580888366682, guid: dc8168360f87afe478dcb6a9b3f4eb19,
+    type: 3}
   ToHightlight: {fileID: 0}
-  Highlight: {fileID: 0}
-  Default: {fileID: 0}
+  Highlight: {fileID: 2100000, guid: 3afc5db015757b34fa567e8acbc71500, type: 2}
+  Default: {fileID: 2100000, guid: 260576a76e2d46a4e928932f9bb38c68, type: 2}
   canvas: {fileID: 0}
   came: []
 --- !u!50 &7557627805658173465

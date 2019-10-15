@@ -17,6 +17,8 @@ public class CharacterSelection_MenuManager : MonoBehaviour
 
     public Button default_Button;
 
+    public Stat stat;
+
     private void Start()
     {
         player = ReInput.players.GetPlayer(0);
@@ -54,10 +56,10 @@ public class CharacterSelection_MenuManager : MonoBehaviour
         switch (characterType)
         {
             case 1:
-                Debug.Log("Character 1 Selected");
+                stat.power = Power.CameraOff;
                 break;
             case 2:
-                Debug.Log("Character 2 Selected");
+                stat.power = Power.AllKey;
                 break;
             default:
                 Debug.Log("No Character Selected!");
