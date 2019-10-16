@@ -19,6 +19,7 @@ public class ObjectRefs : MonoBehaviour
     public Sprite[] inputSet;
     [Header("Player")]
     public GameObject player;
+    public SoundManager soungManager;
 
 
     private void Awake()
@@ -30,6 +31,7 @@ public class ObjectRefs : MonoBehaviour
         if (menuCanvas == null) { menuCanvas = GameObject.Find("MenuCanvas"); }
         if (NavMesh == null) { NavMesh = GameObject.Find("NavMesh"); }
         if (player == null) { player = GameObject.Find("Player"); }
+        if (soungManager == null) { soungManager = GameObject.Find("SoundManager").GetComponent<SoundManager>(); }
     }
     // Start is called before the first frame update
     void Start()

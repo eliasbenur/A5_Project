@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Collider2D),typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D))]
 public class Obj : MonoBehaviour
 {
     [HideInInspector] public PlayerControl playerControl;

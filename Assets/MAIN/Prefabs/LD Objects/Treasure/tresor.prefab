@@ -122,6 +122,7 @@ MonoBehaviour:
   poid: 0
   imageInInventory: {fileID: 0}
   canTake: 0
+  NoiseMalus: 0
 --- !u!1001 &3121912518270829248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194,6 +195,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1593510706379997474, guid: b5917eda0c471734f998831572e0734b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3047817267153756561, guid: 6e978cfdb96904441b675c365a736b3a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5917eda0c471734f998831572e0734b, type: 3}
 --- !u!4 &7649506283422663507 stripped

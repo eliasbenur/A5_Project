@@ -50,6 +50,7 @@ public class FOV_v3 : MonoBehaviour
         {
             if ((Vector2)agent.velocity.normalized == Vector2.zero)
             {
+                direction_tmp = Vector2.up;
                 direction = direction_tmp;
             }
             else

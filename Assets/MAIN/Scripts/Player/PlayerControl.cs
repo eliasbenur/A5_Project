@@ -27,6 +27,7 @@ public class PlayerControl : MonoBehaviour
     public float DistanceMinWallApresDash = 0.5f;
     float distanceDash = 1;
     public LayerMask layerDash;
+    public Sprite cameraManSprite, KeyManSprite;
 
     public List<Tresor> inventory = new List<Tresor>();
 
@@ -55,6 +56,18 @@ public class PlayerControl : MonoBehaviour
         }
 
         SetpowerNb(stat.nbKey);
+
+        switch (stat.power)
+        {
+            case Power.AllKey:
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = KeyManSprite;
+                text_PowerNb.transform.parent.gameObject.SetActive(false);
+                break;
+            case Power.CameraOff:
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = cameraManSprite;
+                break;
+        }
+
     }
 
     public void SetpowerNb(int value_)
@@ -174,6 +187,12 @@ public class PlayerControl : MonoBehaviour
                 newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Highlight;
                 newObject.canvas.gameObject.SetActive(true);
             }
+            else if (newObject is Doorv2)
+            {
+                newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Highlight;
+                newObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().material = newObject.Highlight;
+                newObject.canvas.gameObject.SetActive(true);
+            }
 
             canInteract = true;
         }
@@ -199,6 +218,12 @@ public class PlayerControl : MonoBehaviour
             else if (newObject is Door)
             {
                 newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Default;
+                newObject.canvas.gameObject.SetActive(false);
+            }
+            else if (newObject is Doorv2)
+            {
+                newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Default;
+                newObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().material = newObject.Default;
                 newObject.canvas.gameObject.SetActive(false);
             }
 

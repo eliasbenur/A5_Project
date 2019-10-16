@@ -59,7 +59,8 @@ public class PlayerNoise : MonoBehaviour
         {
             if (player.moveVector.sqrMagnitude > 0)
             {
-                delayNoiseWave_tmp -= Time.fixedDeltaTime /* * (player.moveVector.sqrMagnitude/1)*/;
+                Debug.Log((player.moveVector.sqrMagnitude / 1));
+                delayNoiseWave_tmp -= Time.fixedDeltaTime  * (player.moveVector.sqrMagnitude/1);
             }
 
         }
@@ -67,6 +68,7 @@ public class PlayerNoise : MonoBehaviour
         {
             delayNoiseWave_tmp = delayNoiseWave;
             particleSystem.Play();
+            ObjectRefs.Instance.soungManager.PlaymovementSnd();
             NoiseUpdate();
         }
     }

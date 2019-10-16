@@ -40,6 +40,7 @@ public class End : MonoBehaviour
                     if (objectRem.obj[x].name == collision.GetComponent<PlayerControl>().inventory[0].name)
                     {
                         objectRem.obj[x].stolen = true;
+                        ObjectRefs.Instance.soungManager.PlaywinSnd();
                     }
                 }
                 EditorUtility.SetDirty(objectRem);

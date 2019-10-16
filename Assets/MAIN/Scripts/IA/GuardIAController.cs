@@ -105,6 +105,7 @@ public class GuardIAController : MonoBehaviour
 
         //Sprite Spotted
         playerSpottedSprite.enabled = true;
+        ObjectRefs.Instance.soungManager.PlayguardesAttention();
     }
 
     
@@ -122,6 +123,7 @@ public class GuardIAController : MonoBehaviour
 
                 //Sprite Spotted
                 playerSpottedSprite.enabled = true;
+                ObjectRefs.Instance.soungManager.PlayguardesAttention();
             }
         }
     }

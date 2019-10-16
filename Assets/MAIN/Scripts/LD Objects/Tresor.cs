@@ -23,6 +23,8 @@ public class Tresor : Obj
             GameManager.Instance.CheckObjective(gameObject);
             gameObject.SetActive(false);
             transform.SetParent(playerControl.transform);
+
+            ObjectRefs.Instance.soungManager.PlayitemTaken();
         }
     }
 }
