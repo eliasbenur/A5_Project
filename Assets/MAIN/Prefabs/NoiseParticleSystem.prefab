@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4636679641295741371}
   - component: {fileID: 4636679641295741349}
   - component: {fileID: 4636679641295741348}
+  - component: {fileID: -5761059077709314650}
   m_Layer: 9
   m_Name: NoiseParticleSystem
-  m_TagString: Untagged
+  m_TagString: NoiseParticle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -1361,8 +1362,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 0.5882353}
-        key1: {r: 1, g: 1, b: 1, a: 0.5882353}
+        key0: {r: 1, g: 1, b: 1, a: 0.19607843}
+        key1: {r: 1, g: 1, b: 1, a: 0.19607843}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1380,7 +1381,7 @@ ParticleSystem:
         atime0: 0
         atime1: 32768
         atime2: 65535
-        atime3: 0
+        atime3: 65535
         atime4: 0
         atime5: 0
         atime6: 0
@@ -3799,15 +3800,15 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 256
+      m_Bits: 2304
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 0
+    enabled: 1
     collisionShape0: {fileID: 0}
     collisionShape1: {fileID: 0}
     collisionShape2: {fileID: 0}
@@ -4820,3 +4821,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-5761059077709314650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636679641295741370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aadc84b3f0fe8a4eb51b51ceead7fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guardLayer:
+    serializedVersion: 2
+    m_Bits: 2048

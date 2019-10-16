@@ -49,7 +49,7 @@ public class PlayerNoise : MonoBehaviour
     {
         if (toFollow != null)
         {
-            transform.position = toFollow.position;
+            transform.position = toFollow.position + new Vector3(0,-0.3f,0);
         }
         circlecoll.radius = noiseRadius;
         var main = particleSystem.main;
@@ -88,7 +88,7 @@ public class PlayerNoise : MonoBehaviour
 
     IEnumerator AlertGuard(GameObject guard)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         guard.GetComponent<GuardIAController>().PlayerNoiseDetected(transform.position);
     }
 
@@ -126,6 +126,7 @@ public class PlayerNoise : MonoBehaviour
             guardList.Add(collision.gameObject);
         }
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
