@@ -35,6 +35,7 @@ public class GetDataObj : MonoBehaviour
     }
 }
 
+[ExecuteInEditMode]
 [CustomEditor(typeof(GetDataObj))]
 public class CustomInspectorGetData : Editor
 {
