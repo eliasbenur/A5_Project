@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 7855037608825129011}
   - component: {fileID: 7855037608825129010}
   - component: {fileID: 7855037608825129009}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 2006371110111589329}
   - component: {fileID: 2006371110111589335}
   - component: {fileID: 541939502}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Doorv2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 3540729278032247829}
   - component: {fileID: 4949317751396049577}
   - component: {fileID: 2080823213706631533}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
