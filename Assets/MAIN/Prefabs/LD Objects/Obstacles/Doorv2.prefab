@@ -220,11 +220,11 @@ GameObject:
   - component: {fileID: 2006371109985351424}
   - component: {fileID: 2006371109985351430}
   - component: {fileID: 2006371109985351431}
-  - component: {fileID: 7855037608825129008}
   - component: {fileID: 7855037608825129015}
   - component: {fileID: 7855037608825129011}
   - component: {fileID: 7855037608825129010}
   - component: {fileID: 7855037608825129009}
+  - component: {fileID: 6261783017043151167}
   m_Layer: 12
   m_Name: left
   m_TagString: Untagged
@@ -321,22 +321,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.38, y: 0.68}
   m_EdgeRadius: 0
---- !u!114 &7855037608825129008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006371109985351425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!50 &7855037608825129015
 Rigidbody2D:
   serializedVersion: 4
@@ -435,6 +419,22 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!208 &6261783017043151167
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006371109985351425}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.735, y: 0.34, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2006371110111589331
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,11 +629,11 @@ GameObject:
   - component: {fileID: 6917413608060260316}
   - component: {fileID: 7721865018364230591}
   - component: {fileID: 5510601634855087297}
-  - component: {fileID: 3976061196983438158}
   - component: {fileID: 3685964986991186017}
   - component: {fileID: 3540729278032247829}
   - component: {fileID: 4949317751396049577}
   - component: {fileID: 2080823213706631533}
+  - component: {fileID: 8658270587871910637}
   m_Layer: 12
   m_Name: Right
   m_TagString: Untagged
@@ -730,22 +730,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.38, y: 0.68}
   m_EdgeRadius: 0
---- !u!114 &3976061196983438158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4270280508859887053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!50 &3685964986991186017
 Rigidbody2D:
   serializedVersion: 4
@@ -844,6 +828,22 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!208 &8658270587871910637
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270280508859887053}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.735, y: 0.34, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4546542854904636129
 GameObject:
   m_ObjectHideFlags: 0

@@ -148,7 +148,8 @@ public class Doorv2 : Obj
     IEnumerator DelayBake()
     {
         yield return new WaitForSeconds(0.2f);
-        ObjectRefs.Instance.NavMesh.GetComponent<NavMeshSurface2d>().BuildNavMesh();
+        //ObjectRefs.Instance.NavMesh.GetComponent<NavMeshSurface2d>().BuildNavMesh();
+        //ObjectRefs.Instance.NavMesh.GetComponent<NavMeshSurface2d>().UpdateNavMesh(ObjectRefs.Instance.NavMesh.GetComponent<NavMeshSurface2d>().navMeshData);
     }
 
     public void OpenDoor()

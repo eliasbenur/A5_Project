@@ -20,6 +20,7 @@ public class ObjectRefs : MonoBehaviour
     [Header("Player")]
     public GameObject player;
     public SoundManager soungManager;
+    public ObjectRemaning objRemaning;
 
 
     private void Awake()
@@ -32,6 +33,7 @@ public class ObjectRefs : MonoBehaviour
         if (NavMesh == null) { NavMesh = GameObject.Find("NavMesh"); }
         if (player == null) { player = GameObject.Find("Player"); }
         if (soungManager == null) { soungManager = GameObject.Find("SoundManager").GetComponent<SoundManager>(); }
+        if (objRemaning == null) { Debug.LogError("ObjRemaining Obj not Ini in the ObjectRef Class"); }
     }
     // Start is called before the first frame update
     void Start()

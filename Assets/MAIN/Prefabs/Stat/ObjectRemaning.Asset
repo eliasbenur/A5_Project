@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9201bd935839ac54482b1d68860bc174, type: 3}
-  m_Name: TestObjectRemaning
+  m_Name: ObjectRemaning
   m_EditorClassIdentifier: 
   obj:
+  - name: LambdaTreasure1 (1)
+    stolen: 0
+    sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
   - name: Metal1
-    stolen: 1
+    stolen: 0
     sprite: {fileID: -74071783076391883, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
   - name: Cloche1
     stolen: 0
