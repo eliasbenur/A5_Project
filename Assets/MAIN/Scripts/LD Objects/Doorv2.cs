@@ -21,11 +21,11 @@ public class Doorv2 : Obj
     [ConditionalField(nameof(closeKey))] public float timer_miniGame;
     string[] sequence;
     [ConditionalField(nameof(closeKey))] public GameObject canvas_lockedkey;
-    [ConditionalField(nameof(closeKey))] public Text timerText;
-
-    [ConditionalField(nameof(closeKey))] public bool canSelect = false;
-    [ConditionalField(nameof(closeKey))] public bool done = false;
-    [ConditionalField(nameof(closeKey))] public bool success = false;
+    Text timerText;
+    //Player can start to Make Inputs (for the miniGame)
+    bool canSelect = false;
+    //MiniGame Succes -> Door Open
+    bool success = false;
 
     public enum inputs
     {
@@ -44,6 +44,8 @@ public class Doorv2 : Obj
 
         posiPorteLeft = transform.GetChild(0).transform.localPosition;
         posiPorteRight = transform.GetChild(1).transform.localPosition;
+
+        timerText = canvas_lockedkey.transform.GetChild(0).GetComponent<Text>();
     }
 
     public void FillSequence()
@@ -66,18 +68,17 @@ public class Doorv2 : Obj
 
     public IEnumerator PickLock(PlayerControl playerControl)
     {
-        done = false;
         canSelect = false;
+        bool inputFailed = false;
 
         playerControl.activated = false;
         FillSequence();
         timerText.text = timer_miniGame.ToString();
-        canvas_lockedkey.transform.GetChild(2).gameObject.SetActive(true);
-        Debug.Log(canvas_lockedkey.transform.GetChild(2));
+        canvas_lockedkey.SetActive(true);
 
         float temp = timer_miniGame;
         int count = 0;
-        while (temp >= 0)
+        while (temp >= 0 && !inputFailed)
         {
             if ((player.GetButtonUp(RewiredConsts.Action.A) || player.GetButtonUp("Interact")) && canSelect == false)
                 canSelect = true;
@@ -101,9 +102,7 @@ public class Doorv2 : Obj
                     }
                     else
                     {
-                        playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
-                        ObjectRefs.Instance.inputContainer[count].color = Color.red;
-                        break;
+                        inputFailed = true;
                     }
                 }
             }
@@ -118,8 +117,13 @@ public class Doorv2 : Obj
             Destroy(gameObject.GetComponent<LockedDoor>());
             gameObject.GetComponent<Doorv2>().closeKey = false;
         }
-        done = true;
-        canvas_lockedkey.transform.GetChild(2).gameObject.SetActive(false);
+        else
+        {
+            playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
+            ObjectRefs.Instance.inputContainer[count].color = Color.red;
+        }
+        canSelect = false;
+        canvas_lockedkey.SetActive(false);
         playerControl.activated = true;
         yield return null;
     }
@@ -145,13 +149,6 @@ public class Doorv2 : Obj
  
     }
 
-    IEnumerator DelayBake()
-    {
-        yield return new WaitForSeconds(0.2f);
-        //ObjectRefs.Instance.NavMesh.GetComponent<NavMeshSurface2d>().BuildNavMesh();
-        //ObjectRefs.Instance.NavMesh.GetComponent<NavMeshSurface2d>().UpdateNavMesh(ObjectRefs.Instance.NavMesh.GetComponent<NavMeshSurface2d>().navMeshData);
-    }
-
     public void OpenDoor()
     {
         open = !open;
@@ -161,36 +158,32 @@ public class Doorv2 : Obj
 
     void Open()
     {
-        //anim.SetBool("open", true);
+        //Left 
         transform.GetChild(0).transform.localPosition = posiPorteLeft + Vector3.right * decalage;
         transform.GetChild(0).transform.gameObject.GetComponent<Collider2D>().enabled = false;
-        //transform.GetChild(0).transform.gameObject.SetActive(false);
         transform.GetChild(0).transform.gameObject.GetComponent<SpriteRenderer>().color = new Vector4(0,1,1,0.3f);
+        //Right
         transform.GetChild(1).transform.localPosition = posiPorteRight - Vector3.right * decalage;
         transform.GetChild(1).transform.gameObject.GetComponent<Collider2D>().enabled = false;
-        //transform.GetChild(1).transform.gameObject.SetActive(false);
         transform.GetChild(1).transform.gameObject.GetComponent<SpriteRenderer>().color = new Vector4(0, 1, 1, 0.3f);
-        Destroy(transform.GetChild(0).GetComponent<NavMeshModifier>());
-        Destroy(transform.GetChild(1).GetComponent<NavMeshModifier>());
-        StartCoroutine(DelayBake());
+
+        //NavMesh 
+        transform.GetChild(0).GetComponent<NavMeshObstacle>().enabled = false;
+        transform.GetChild(1).GetComponent<NavMeshObstacle>().enabled = false;
     }
     void Close()
     {
-        //anim.SetBool("open", false);
+        //Left
         transform.GetChild(0).transform.localPosition = posiPorteLeft;
         transform.GetChild(0).transform.gameObject.GetComponent<Collider2D>().enabled = true;
-        transform.GetChild(0).transform.gameObject.SetActive(true);
         transform.GetChild(0).transform.gameObject.GetComponent<SpriteRenderer>().color = new Vector4(0, 1, 1, 1);
+        //Right
         transform.GetChild(1).transform.localPosition = posiPorteRight;
         transform.GetChild(1).transform.gameObject.GetComponent<Collider2D>().enabled = true;
-        transform.GetChild(1).transform.gameObject.SetActive(true);
         transform.GetChild(1).transform.gameObject.GetComponent<SpriteRenderer>().color = new Vector4(0, 1, 1, 1);
-        NavMeshModifier nmm_tmp =  transform.GetChild(0).gameObject.AddComponent<NavMeshModifier>();
-        nmm_tmp.overrideArea = true;
-        nmm_tmp.area = 1;
-        nmm_tmp = transform.GetChild(1).gameObject.AddComponent<NavMeshModifier>();
-        nmm_tmp.overrideArea = true;
-        nmm_tmp.area = 1;
-        StartCoroutine(DelayBake());
+
+        //NavMesh 
+        transform.GetChild(0).GetComponent<NavMeshObstacle>().enabled = true;
+        transform.GetChild(1).GetComponent<NavMeshObstacle>().enabled = true;
     }
 }

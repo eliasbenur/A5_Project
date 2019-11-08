@@ -69,7 +69,7 @@ public class GuardIAController : MonoBehaviour
         }
         else
         {
-            if (fow.visiblePlayer.Count == 0)
+            if (fow.objToCheckList.Count == 0)
             {
                 if (Vector2.Distance(agent.destination, transform.position) < chasingDistance)
                 {
@@ -83,9 +83,9 @@ public class GuardIAController : MonoBehaviour
             }
             else
             {
-                agent.SetDestination(fow.visiblePlayer[0].transform.position);
+                agent.SetDestination(fow.objToCheckList[0].transform.position);
 
-                if (Vector2.Distance(fow.visiblePlayer[0].transform.position, transform.position) < chasingDistance)
+                if (Vector2.Distance(fow.objToCheckList[0].transform.position, transform.position) < chasingDistance)
                 {
                     Debug.Log("PlayerChased!");
                     ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
@@ -112,7 +112,7 @@ public class GuardIAController : MonoBehaviour
 
     public void CheckPlayer()
     {
-        if (fow.visiblePlayer.Count > 0)
+        if (fow.objToCheckList.Count > 0)
         {
             if (!chasingPlayer)
             {

@@ -7,19 +7,16 @@ using UnityEngine.Events;
 public class Obj : MonoBehaviour
 {
     [HideInInspector] public PlayerControl playerControl;
-    public Sprite SpriteImgCanvas;
     //public string StringAction;
     [HideInInspector]public SpriteRenderer ToHightlight;
     public Material Highlight;
     public Material Default;
-    public Canvas canvas;
+    public Canvas Interaction_Canvas;
     
 
     protected virtual void Start()
     {
-        if (SpriteImgCanvas == null&& GetComponent<SpriteRenderer>() != null)
-            SpriteImgCanvas = GetComponent<SpriteRenderer>().sprite;
-        if (canvas == null) canvas = new Canvas();
+        if (Interaction_Canvas == null) Interaction_Canvas = new Canvas();
         InitialisationToHighlight();
     }
 

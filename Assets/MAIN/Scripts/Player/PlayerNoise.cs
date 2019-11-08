@@ -7,18 +7,17 @@ public class PlayerNoise : MonoBehaviour
 {
     public Transform toFollow;
     public float noiseRadius;
-
     CircleCollider2D circlecoll;
 
-    public List<GameObject> guardList = new List<GameObject>();
+    List<GameObject> guardList = new List<GameObject>();
 
     public LayerMask toNotify;
 
     public GameObject particleSystemPrefab;
-    public ParticleSystem particleSystem;
+    ParticleSystem particleSystem;
 
     public float delayNoiseWave;
-    public float delayNoiseWave_tmp;
+    float delayNoiseWave_tmp;
 
     PlayerControl player;
 
@@ -41,7 +40,7 @@ public class PlayerNoise : MonoBehaviour
 
         delayNoiseWave_tmp = delayNoiseWave;
 
-        player = toFollow.gameObject.GetComponent<PlayerControl>();
+        player = ObjectRefs.Instance.player.GetComponent<PlayerControl>();
     }
 
     // Update is called once per frame
@@ -59,7 +58,6 @@ public class PlayerNoise : MonoBehaviour
         {
             if (player.moveVector.sqrMagnitude > 0)
             {
-                Debug.Log((player.moveVector.sqrMagnitude / 1));
                 delayNoiseWave_tmp -= Time.fixedDeltaTime  * (player.moveVector.sqrMagnitude/1);
             }
 
@@ -84,7 +82,6 @@ public class PlayerNoise : MonoBehaviour
                     StartCoroutine(AlertGuard(guardList[x]));
                 }
             }
-
         }
     }
 

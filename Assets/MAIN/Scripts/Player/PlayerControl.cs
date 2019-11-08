@@ -61,10 +61,10 @@ public class PlayerControl : MonoBehaviour
         {
             case Power.AllKey:
                 transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = KeyManSprite;
-                text_PowerNb.transform.parent.gameObject.SetActive(false);
                 break;
             case Power.CameraOff:
                 transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = cameraManSprite;
+                text_PowerNb.transform.parent.gameObject.SetActive(false);
                 break;
         }
 
@@ -163,9 +163,9 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "EndZone" && GameManager.Instance.done)
+        if (collision.tag == "EndZone" && GameManager.Instance.objectiveDone)
         {
-            GameManager.Instance.Restart();
+            GameManager.Instance.RestartGame();
         }
 
         Obj newObject = collision.gameObject.GetComponent<Obj>();
@@ -178,20 +178,20 @@ public class PlayerControl : MonoBehaviour
                 newObject.ToHightlight.material = newObject.Highlight;
                 try
                 {
-                    newObject.canvas?.gameObject.SetActive(true);
+                    newObject.Interaction_Canvas?.gameObject.SetActive(true);
                 }
                 catch { }
             }
             else if (newObject is Door)
             {
                 newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Highlight;
-                newObject.canvas.gameObject.SetActive(true);
+                newObject.Interaction_Canvas.gameObject.SetActive(true);
             }
             else if (newObject is Doorv2)
             {
                 newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Highlight;
                 newObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().material = newObject.Highlight;
-                newObject.canvas.gameObject.SetActive(true);
+                newObject.Interaction_Canvas.gameObject.SetActive(true);
             }
 
             canInteract = true;
@@ -211,20 +211,20 @@ public class PlayerControl : MonoBehaviour
                 newObject.ToHightlight.material = newObject.Default;
                 try
                 {
-                    newObject.canvas.gameObject.SetActive(false);
+                    newObject.Interaction_Canvas.gameObject.SetActive(false);
                 }
                 catch { }
             }
             else if (newObject is Door)
             {
                 newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Default;
-                newObject.canvas.gameObject.SetActive(false);
+                newObject.Interaction_Canvas.gameObject.SetActive(false);
             }
             else if (newObject is Doorv2)
             {
                 newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Default;
                 newObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().material = newObject.Default;
-                newObject.canvas.gameObject.SetActive(false);
+                newObject.Interaction_Canvas.gameObject.SetActive(false);
             }
 
             canInteract = false;

@@ -8,29 +8,32 @@ using UnityEngine.UI;
 
 public class LevelMenu_Manager : MonoBehaviour
 {
-
+    [Header("Panels")]
     public GameObject pause_Panel;
-    bool pausePanel_active = false;
     public GameObject lose_Panel;
     public GameObject win_Panel;
     public GameObject objectivesPanel;
-    Animator objetivesPanelAnimaion;
-    public ObjectRemaning objectRemaning;
+    Animator objetivesPanelAnimaton;
+    ObjectRemaning objectivesData;
 
     Player player;
 
-    public Button activeDefaultButton;
+    //GamePad MenuNavigation "Focus"
+    [Header ("GamePad MenuNavigation")]
     public Button defaultPauseButton;
     public Button defaultLoseButton;
     public Button defaultWinButton;
+    Button activeDefaultButton;
+
 
     bool losed = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        objectivesData = ObjectRefs.Instance.objectivesData;
         player = ReInput.players.GetPlayer(0);
-        objetivesPanelAnimaion = objectivesPanel.GetComponent<Animator>();
+        objetivesPanelAnimaton = objectivesPanel.GetComponent<Animator>();
 
         SetUpObjectives();
     }
@@ -40,7 +43,7 @@ public class LevelMenu_Manager : MonoBehaviour
     {
         if (player.GetButtonDown("Pause"))
         {
-            if (pausePanel_active)
+            if (pause_Panel.activeSelf)
             {
                 Distactive_PausePanel();
             }
@@ -52,24 +55,24 @@ public class LevelMenu_Manager : MonoBehaviour
 
         if (player.GetButtonDown("ShowObjectives"))
         {
-            if (objetivesPanelAnimaion.GetBool("show"))
+            if (objetivesPanelAnimaton.GetBool("show"))
             {
-                objetivesPanelAnimaion.SetBool("show", false);
+                objetivesPanelAnimaton.SetBool("show", false);
             }
             else
             {
-                objetivesPanelAnimaion.SetBool("show", true);
+                objetivesPanelAnimaton.SetBool("show", true);
             }
         }
 
+        //Refocus the GamePad Menu Navigation if the players makes a input with
         if (activeDefaultButton != null)
         {
             float hor_axis = player.GetAxis("Horizontal");
             float ver_axis = player.GetAxis("Vertical");
-            //Debug.Log(EventSystem.current.currentSelectedGameObject + "////" + hor_axis + "// " + ver_axis + "  /// " + activeDefaultButton);
             if ((hor_axis != 0 || ver_axis != 0) && EventSystem.current.currentSelectedGameObject == null)
             {
-                defaultPauseButton.Select();
+                activeDefaultButton.Select();
             }
 
         }
@@ -82,8 +85,8 @@ public class LevelMenu_Manager : MonoBehaviour
             try
             {
                 objectivesPanel.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
-                    objectRemaning.obj[i].sprite;
-                if (objectRemaning.obj[i].stolen) objectivesPanel.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
+                    objectivesData.obj[i].sprite;
+                if (objectivesData.obj[i].stolen) objectivesPanel.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
             }
             catch { }
         }
@@ -91,7 +94,6 @@ public class LevelMenu_Manager : MonoBehaviour
 
     public void Active_PausePanel()
     {
-        pausePanel_active = true;
         pause_Panel.SetActive(true);
         Time.timeScale = 0;
         activeDefaultButton = defaultPauseButton;
@@ -100,7 +102,6 @@ public class LevelMenu_Manager : MonoBehaviour
 
     public void Distactive_PausePanel()
     {
-        pausePanel_active = false;
         pause_Panel.SetActive(false);
         Time.timeScale = 1;
         activeDefaultButton = null;

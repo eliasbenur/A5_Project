@@ -6,28 +6,19 @@ using UnityEngine;
 public class GetDataObj : MonoBehaviour
 {
     public ObjectRemaning objRemaning;
-    public List<Tresor> allObj = new List<Tresor>();
 
     public void Start()
     {
-        foreach (stringAndBool sb in objRemaning.obj)
-        {
-            if (sb.stolen)
-            {
-                Destroy(GameObject.Find(sb.name));
-            }
-        }
+
     }
 
 
     public void GetData()
     {
-        allObj.Clear();
         objRemaning?.obj.Clear();
         var t = FindObjectsOfType<Tresor>();
         foreach(Tresor tres in t)
         {
-            allObj.Add(tres);
             objRemaning?.obj.Add(new stringAndBool(tres.name, false, tres.gameObject.GetComponent<SpriteRenderer>().sprite));
         }
         EditorUtility.SetDirty(objRemaning);

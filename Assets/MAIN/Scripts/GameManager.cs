@@ -8,12 +8,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public GameObject objectiveCanvas;
-    public GameObject[] objectiveList;
+    public GameObject currentObjective_Canvas;
+    public GameObject objectiveDone_Canvas;
 
-    public GameObject objective;
-    public Sprite objectiveSprite;
-    public bool done;
+    //If the player has taken a treasure in the Lvl
+    public bool objectiveDone;
 
     private void Awake()
     {
@@ -22,44 +21,39 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        objective = objectiveList[Random.Range(0, objectiveList.Length)];
-        objectiveSprite = objective.GetComponent<Sprite>();
-    }
-
-
-    void Update()
-    {
-
+        //Desactive treasure already stolen
+        foreach (stringAndBool sb in ObjectRefs.Instance.objectivesData.obj)
+        {
+            if (sb.stolen)
+            {
+                //Destroy(GameObject.Find(sb.name));
+                GameObject.Find(sb.name).SetActive(false);
+            }
+        }
     }
 
     public void CheckObjective(GameObject newObject)
     {
-        //ObjectRefs.Instance.objRemaning.obj.Contains();
-        if (Outils.GameObjectExistInArray(objectiveList, newObject))
+        //If the treasure taken is in the list of objectives
+        if (Outils.GameObjectExistInArray(ObjectRefs.Instance.objectivesRef_List, newObject))
         {
-            //objectiveCanvas.SwitchPanel(true);
-            objectiveCanvas.transform.GetChild(0).gameObject.SetActive(false);
-            objectiveCanvas.transform.GetChild(1).gameObject.SetActive(true);
-            done = true;
-        }
-        else
-        {
-            //objectiveCanvas.SwitchPanel(false);
-            objectiveCanvas.transform.GetChild(0).gameObject.SetActive(true);
-            objectiveCanvas.transform.GetChild(1).gameObject.SetActive(false);
-            done = false;
+            currentObjective_Canvas.gameObject.SetActive(false);
+            objectiveDone_Canvas.gameObject.SetActive(true);
+            objectiveDone = true;
         }
     }
 
-    public void Restart()
+    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    /*Player detected by a Metal Detector */
     public void DetectorMetal()
     {
         ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
     }
+    /*Player detected by a Camera */
     public void DetectorCamera()
     {
         ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();

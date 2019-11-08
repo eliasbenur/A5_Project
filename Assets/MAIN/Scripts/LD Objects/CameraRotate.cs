@@ -33,8 +33,6 @@ public class CameraRotate : MonoBehaviour
         if (angle > angleRotation / 2) multiplicateur = -1;
         if (angle < -angleRotation / 2) multiplicateur = 1;
         transform.eulerAngles += Vector3.forward * multiplicateur * Speed * Time.deltaTime;
-        //Debug.Log("att " + (angle + 360));
-        //Debug.Log(angleRotation / 2);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

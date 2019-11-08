@@ -41,7 +41,7 @@ public class Voleur : MonoBehaviour
             objCanInteract = o;
            // o.voleur = this;
             o.ToHightlight.material = o.Highlight;
-            o.canvas.gameObject?.SetActive(true);
+            o.Interaction_Canvas.gameObject?.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -52,7 +52,7 @@ public class Voleur : MonoBehaviour
             objCanInteract = null;
             o.playerControl = null;
             o.ToHightlight.material = o.Default;
-            o.canvas.gameObject?.SetActive(false);
+            o.Interaction_Canvas.gameObject?.SetActive(false);
         }
     }
 }
