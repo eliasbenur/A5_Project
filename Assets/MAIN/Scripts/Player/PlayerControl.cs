@@ -31,6 +31,17 @@ public class PlayerControl : MonoBehaviour
 
     public List<Tresor> inventory = new List<Tresor>();
 
+    //Power Vars
+    Slider powerSlider;
+    bool powerActive = false;
+    bool powerunavailable = false;
+    float powerDelay_tmp;
+
+    //PowersUps
+    public bool securityZone1 = false;
+    public bool securityZone2 = false;
+    public GameObject donutPrefab;
+
     NavMeshAgent agent;
 
 
@@ -67,6 +78,9 @@ public class PlayerControl : MonoBehaviour
                 text_PowerNb.transform.parent.gameObject.SetActive(false);
                 break;
         }
+
+        powerSlider = ObjectRefs.Instance.powerSlider;
+        powerDelay_tmp = stat.powerDelay;
 
     }
 
@@ -118,17 +132,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (player.GetButtonDown("Interact") && canInteract)
                 {
-                    /*LockedDoor lockedDoor = interactableObject.gameObject.GetComponent<LockedDoor>();
-                    if (stat.power == Power.AllKey && lockedDoor != null)
-                    {
-                        if (stat.nbKey_tmp > 0)
-                        {
-                            activated = false;
-                            lockedDoor.Pick(this);
-                        }
-                    }
-                    else*/
-                        Action(interactableObject);
+                    Action(interactableObject);
                 }
                 if (player.GetButtonDown("CapacitySpe"))
                 {
@@ -136,6 +140,38 @@ public class PlayerControl : MonoBehaviour
                 }
             }
         }
+
+        PowerUpdate();
+    }
+
+    public void PowerUpdate()
+    {
+        if (powerActive)
+        {
+            if (powerDelay_tmp > 0)
+            {
+                powerDelay_tmp -= Time.deltaTime;
+            }
+            else
+            {
+                powerActive = false;
+                powerunavailable = true;
+            }
+
+        }
+        else
+        {
+            if (powerDelay_tmp < stat.powerDelay)
+            {
+                powerDelay_tmp += Time.deltaTime;
+            }
+            else
+            {
+                powerunavailable = false;
+            }
+        }
+
+        powerSlider.value = powerDelay_tmp / stat.powerDelay;
     }
 
     private void FixedUpdate()
@@ -241,7 +277,6 @@ public class PlayerControl : MonoBehaviour
 
     protected virtual void Capacity()
     {
-        Debug.Log("capacitySpe");
         switch (stat.power)
         {
             case Power.CameraOff:
@@ -251,8 +286,27 @@ public class PlayerControl : MonoBehaviour
                     Instantiate(stat.ObjAntiCamera, this.transform.position, Quaternion.identity);
                 }
                 break;
+            case Power.Cook:
+                if (powerDelay_tmp >= stat.powerDelay)
+                {
+                    powerDelay_tmp = 0;
+                    //Power
+                    Instantiate(donutPrefab, this.transform.position, Quaternion.identity);
+                }
+                break;
+            default:
+                if (!powerActive && !powerunavailable)
+                {
+                    powerActive = true;
+                }
+                else
+                {
+                    powerActive = false;
+                }
+                break;
 
         }
+
     }
 
     IEnumerator Dash(Vector2 vDash)

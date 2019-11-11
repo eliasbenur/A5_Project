@@ -9,10 +9,12 @@ using UnityEngine.UI;
 public class MainMenu_Manager : MonoBehaviour
 {
     public string NameScenePlay = "Play";
-    public GameObject option;
+    public GameObject creditsPanel;
     public GameObject basePanel;
 
     public Button default_Button;
+    public Button default_CreditsButton;
+    public Button default_BaseButton;
 
     Player player;
 
@@ -26,9 +28,22 @@ public class MainMenu_Manager : MonoBehaviour
         SceneManager.LoadScene(NameScenePlay);
     }
 
-    public void OptionButton()
+    public void CreaditsButton()
     {
-        //option.SetActive(true);
+        if (creditsPanel.activeSelf) {
+            creditsPanel.SetActive(false);
+            basePanel.SetActive(true);
+            default_Button = default_BaseButton;
+            default_Button.Select();
+        }
+        else
+        {
+            creditsPanel.SetActive(true);
+            basePanel.SetActive(false);
+            default_Button = default_CreditsButton;
+            default_Button.Select();
+        }
+
     }
 
     public void QuitButton()
@@ -38,6 +53,7 @@ public class MainMenu_Manager : MonoBehaviour
 
     private void Update()
     {
+        // Refocus the GamePad Menu Navigation
         float hor_axis = player.GetAxis("Horizontal");
         float ver_axis = player.GetAxis("Vertical");
         if ((hor_axis != 0 || ver_axis != 0) && EventSystem.current.currentSelectedGameObject == null)

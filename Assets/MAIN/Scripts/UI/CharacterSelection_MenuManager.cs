@@ -61,6 +61,18 @@ public class CharacterSelection_MenuManager : MonoBehaviour
             case 2:
                 stat.power = Power.AllKey;
                 break;
+            case 3:
+                stat.power = Power.Cheater;
+                break;
+            case 4:
+                stat.power = Power.Hunter;
+                break;
+            case 5:
+                stat.power = Power.Cook;
+                break;
+            case 6:
+                stat.power = Power.Ninja;
+                break;
             default:
                 Debug.Log("No Character Selected!");
                 break;

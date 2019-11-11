@@ -33,6 +33,12 @@ public class GuardIAController : MonoBehaviour
 
     public bool chasingPlayer = false;
 
+    //Donut
+    public bool chasingDonut = false;
+    public bool eatingDonut = false;
+    public GameObject donutRef;
+    public float eatingDonutTime;
+
     public float chasingDistance;
     public float chasingSpeedFactor;
 
@@ -116,14 +122,35 @@ public class GuardIAController : MonoBehaviour
         {
             if (!chasingPlayer)
             {
-                playerMakerSFM.SendEvent("ChasingPlayer");
-                agent.speed = speed * chasingSpeedFactor;
-                chasingPlayer = true;
-                agent.isStopped = false;
+                foreach (Transform objs in fow.objToCheckList)
+                {
+                    if (objs.gameObject.layer == 9)//Player
+                    {
+                        playerMakerSFM.SendEvent("ChasingPlayer");
+                        agent.speed = speed * chasingSpeedFactor;
+                        chasingPlayer = true;
+                        agent.isStopped = false;
+                        eatingDonut = false;
+                        chasingDonut = false;
+                        StopAllCoroutines();
 
-                //Sprite Spotted
-                playerSpottedSprite.enabled = true;
-                ObjectRefs.Instance.soungManager.PlayguardesAttention();
+                        //Sprite Spotted
+                        playerSpottedSprite.enabled = true;
+                        ObjectRefs.Instance.soungManager.PlayguardesAttention();
+                    }else if (objs.gameObject.layer == 13) // Donut
+                    {
+                        if (!chasingDonut)
+                        {
+                            pointsToPatroll.Insert(0, objs.transform.position);
+                            agent.SetDestination(pointsToPatroll[0]);
+                            donutRef = objs.gameObject;
+                            //playerMakerSFM.SendEvent("ChasingDonut");
+                            agent.isStopped = false;
+                            chasingDonut = true;
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -155,15 +182,38 @@ public class GuardIAController : MonoBehaviour
 
         if (distance < targetDistanceDetection)
         {
-            agent.isStopped = true;
-            pointsToPatroll.RemoveAt(0);
-            playerMakerSFM.SendEvent("PointReached");
-            return;
+            if (chasingDonut)
+            {
+                if (!eatingDonut)
+                {
+                    StartCoroutine(EatingDonnut());
+                }
+            }
+            else
+            {
+                agent.isStopped = true;
+                pointsToPatroll.RemoveAt(0);
+                playerMakerSFM.SendEvent("PointReached");
+                return;
+            }
         }
         else
         {
             agent.SetDestination(pointsToPatroll[0]);
         }
+    }
+
+    IEnumerator EatingDonnut()
+    {
+        eatingDonut = true;
+        yield return new WaitForSeconds(eatingDonutTime);
+        Destroy(donutRef);
+        chasingDonut = false;
+        agent.isStopped = true;
+        pointsToPatroll.RemoveAt(0);
+        playerMakerSFM.SendEvent("PointReached");
+        eatingDonut = false;
+
     }
 
     /*Returns the points that is going to patroll in a RandomZone*/

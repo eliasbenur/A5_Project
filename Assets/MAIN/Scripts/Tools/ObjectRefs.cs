@@ -24,6 +24,8 @@ public class ObjectRefs : MonoBehaviour
     [Header ("Treasures/Objectives")]
     public ObjectRemaning objectivesData;
     public GameObject[] objectivesRef_List;
+    [Header("UI")]
+    public Slider powerSlider;
 
 
     private void Awake()

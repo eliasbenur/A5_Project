@@ -35,12 +35,12 @@ public class GameManager : MonoBehaviour
     public void CheckObjective(GameObject newObject)
     {
         //If the treasure taken is in the list of objectives
-        if (Outils.GameObjectExistInArray(ObjectRefs.Instance.objectivesRef_List, newObject))
+        /*if (Outils.GameObjectExistInArray(ObjectRefs.Instance.objectivesRef_List, newObject))
         {
             currentObjective_Canvas.gameObject.SetActive(false);
             objectiveDone_Canvas.gameObject.SetActive(true);
             objectiveDone = true;
-        }
+        }*/
     }
 
     public void RestartGame()

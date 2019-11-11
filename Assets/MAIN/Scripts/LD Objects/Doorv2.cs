@@ -134,12 +134,13 @@ public class Doorv2 : Obj
 
         if (closeKey)
         {
-            if(playerControl.stat.power == Power.AllKey)
+            //if(playerControl.stat.power == Power.AllKey)
+            if(playerControl.securityZone1)
             {
-                if (ObjectRefs.Instance.player.GetComponent<PlayerControl>().stat.nbKey_tmp > 0) {
-                    ObjectRefs.Instance.player.GetComponent<PlayerControl>().activated = true;
-                    Pick(ObjectRefs.Instance.player.GetComponent<PlayerControl>());
-                } 
+                //if (playerControl.stat.nbKey_tmp > 0) {
+                    playerControl.activated = true;
+                    Pick(playerControl);
+                //} 
             }
         }
         else
