@@ -24,7 +24,7 @@ public class PlayerNoise : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         circlecoll = GetComponent<CircleCollider2D>();
         if (circlecoll == null)
