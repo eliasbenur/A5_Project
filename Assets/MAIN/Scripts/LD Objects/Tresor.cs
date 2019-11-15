@@ -18,7 +18,7 @@ public class Tresor : Obj
             playerControl.interactableObject = null;
             playerControl.inventory.Add(this);
             playerControl.transform.Find("Noise").GetComponent<PlayerNoise>().noiseRadius += NoiseMalus;
-            GameManager.Instance.CheckObjective(gameObject);
+            GameManager.Instance.objectiveDone = true;
             gameObject.SetActive(false);
             transform.SetParent(playerControl.transform);
 
