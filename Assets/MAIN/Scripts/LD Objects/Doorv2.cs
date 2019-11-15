@@ -45,7 +45,11 @@ public class Doorv2 : Obj
         posiPorteLeft = transform.GetChild(0).transform.localPosition;
         posiPorteRight = transform.GetChild(1).transform.localPosition;
 
-        timerText = canvas_lockedkey.transform.GetChild(0).GetComponent<Text>();
+        if (closeKey)
+        {
+            timerText = canvas_lockedkey.transform.GetChild(0).GetComponent<Text>();
+        }
+
     }
 
     public void FillSequence()
