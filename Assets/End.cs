@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 public class End : MonoBehaviour
 {
     public LayerMask playerMask;
-    public ObjectRemaning objectRem;
+    ObjectRemaning objectivesData;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        objectivesData = ObjectRefs.Instance.objectivesData;
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class End : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (GameManager.Instance.done)
+        if (GameManager.Instance.objectiveDone)
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -33,17 +33,17 @@ public class End : MonoBehaviour
         if (((1 << collision.gameObject.layer) & playerMask) != 0)
         {
             //If Objective Completed
-            if (GameManager.Instance.done)
+            if (GameManager.Instance.objectiveDone)
             {
-                for (int x = 0; x < objectRem.obj.Count; x++)
+                for (int x = 0; x < objectivesData.obj.Count; x++)
                 {
-                    if (objectRem.obj[x].name == collision.GetComponent<PlayerControl>().inventory[0].name)
+                    if (objectivesData.obj[x].name == collision.GetComponent<PlayerControl>().inventory[0].name)
                     {
-                        objectRem.obj[x].stolen = true;
+                        objectivesData.obj[x].stolen = true;
                         ObjectRefs.Instance.soungManager.PlaywinSnd();
                     }
                 }
-                EditorUtility.SetDirty(objectRem);
+                EditorUtility.SetDirty(objectivesData);
                 ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();
             }
         }

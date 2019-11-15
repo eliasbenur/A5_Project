@@ -18,6 +18,7 @@ public class PlayerControl : MonoBehaviour
     public bool canInteract;
     public bool canDash = true;
     public bool activated = true;
+    public LevelMenu_Manager menuManager;
     public AnimationCurve dashCurve;
     public Obj interactableObject;
     public Vector2 moveVector;
@@ -30,6 +31,17 @@ public class PlayerControl : MonoBehaviour
     public Sprite cameraManSprite, KeyManSprite;
 
     public List<Tresor> inventory = new List<Tresor>();
+
+    //Power Vars
+    Slider powerSlider;
+    bool powerActive = false;
+    bool powerunavailable = false;
+    float powerDelay_tmp;
+
+    //PowersUps
+    public bool securityZone1 = false;
+    public bool securityZone2 = false;
+    public GameObject donutPrefab;
 
     NavMeshAgent agent;
 
@@ -61,12 +73,15 @@ public class PlayerControl : MonoBehaviour
         {
             case Power.AllKey:
                 transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = KeyManSprite;
-                text_PowerNb.transform.parent.gameObject.SetActive(false);
                 break;
             case Power.CameraOff:
                 transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = cameraManSprite;
+                text_PowerNb.transform.parent.gameObject.SetActive(false);
                 break;
         }
+
+        powerSlider = ObjectRefs.Instance.powerSlider;
+        powerDelay_tmp = stat.powerDelay;
 
     }
 
@@ -85,6 +100,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (activated)
         {
+            menuManager.canShowObjective = true;
+
             if (canMove)
             {
                 moveVector.x = player.GetAxis("Horizontal");
@@ -118,17 +135,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (player.GetButtonDown("Interact") && canInteract)
                 {
-                    /*LockedDoor lockedDoor = interactableObject.gameObject.GetComponent<LockedDoor>();
-                    if (stat.power == Power.AllKey && lockedDoor != null)
-                    {
-                        if (stat.nbKey_tmp > 0)
-                        {
-                            activated = false;
-                            lockedDoor.Pick(this);
-                        }
-                    }
-                    else*/
-                        Action(interactableObject);
+                    Action(interactableObject);
                 }
                 if (player.GetButtonDown("CapacitySpe"))
                 {
@@ -136,6 +143,45 @@ public class PlayerControl : MonoBehaviour
                 }
             }
         }
+<<<<<<< HEAD
+        else
+        {
+            menuManager.canShowObjective = false;
+        }
+=======
+
+        PowerUpdate();
+    }
+
+    public void PowerUpdate()
+    {
+        if (powerActive)
+        {
+            if (powerDelay_tmp > 0)
+            {
+                powerDelay_tmp -= Time.deltaTime;
+            }
+            else
+            {
+                powerActive = false;
+                powerunavailable = true;
+            }
+
+        }
+        else
+        {
+            if (powerDelay_tmp < stat.powerDelay)
+            {
+                powerDelay_tmp += Time.deltaTime;
+            }
+            else
+            {
+                powerunavailable = false;
+            }
+        }
+
+        powerSlider.value = powerDelay_tmp / stat.powerDelay;
+>>>>>>> b8965f6b887252b19c078801c15bb12b6af6883b
     }
 
     private void FixedUpdate()
@@ -163,9 +209,9 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "EndZone" && GameManager.Instance.done)
+        if (collision.tag == "EndZone" && GameManager.Instance.objectiveDone)
         {
-            GameManager.Instance.Restart();
+            GameManager.Instance.RestartGame();
         }
 
         Obj newObject = collision.gameObject.GetComponent<Obj>();
@@ -178,20 +224,20 @@ public class PlayerControl : MonoBehaviour
                 newObject.ToHightlight.material = newObject.Highlight;
                 try
                 {
-                    newObject.canvas?.gameObject.SetActive(true);
+                    newObject.Interaction_Canvas?.gameObject.SetActive(true);
                 }
                 catch { }
             }
             else if (newObject is Door)
             {
                 newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Highlight;
-                newObject.canvas.gameObject.SetActive(true);
+                newObject.Interaction_Canvas.gameObject.SetActive(true);
             }
             else if (newObject is Doorv2)
             {
                 newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Highlight;
                 newObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().material = newObject.Highlight;
-                newObject.canvas.gameObject.SetActive(true);
+                newObject.Interaction_Canvas.gameObject.SetActive(true);
             }
 
             canInteract = true;
@@ -211,20 +257,20 @@ public class PlayerControl : MonoBehaviour
                 newObject.ToHightlight.material = newObject.Default;
                 try
                 {
-                    newObject.canvas.gameObject.SetActive(false);
+                    newObject.Interaction_Canvas.gameObject.SetActive(false);
                 }
                 catch { }
             }
             else if (newObject is Door)
             {
                 newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Default;
-                newObject.canvas.gameObject.SetActive(false);
+                newObject.Interaction_Canvas.gameObject.SetActive(false);
             }
             else if (newObject is Doorv2)
             {
                 newObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().material = newObject.Default;
                 newObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().material = newObject.Default;
-                newObject.canvas.gameObject.SetActive(false);
+                newObject.Interaction_Canvas.gameObject.SetActive(false);
             }
 
             canInteract = false;
@@ -241,7 +287,6 @@ public class PlayerControl : MonoBehaviour
 
     protected virtual void Capacity()
     {
-        Debug.Log("capacitySpe");
         switch (stat.power)
         {
             case Power.CameraOff:
@@ -251,8 +296,27 @@ public class PlayerControl : MonoBehaviour
                     Instantiate(stat.ObjAntiCamera, this.transform.position, Quaternion.identity);
                 }
                 break;
+            case Power.Cook:
+                if (powerDelay_tmp >= stat.powerDelay)
+                {
+                    powerDelay_tmp = 0;
+                    //Power
+                    Instantiate(donutPrefab, this.transform.position, Quaternion.identity);
+                }
+                break;
+            default:
+                if (!powerActive && !powerunavailable)
+                {
+                    powerActive = true;
+                }
+                else
+                {
+                    powerActive = false;
+                }
+                break;
 
         }
+
     }
 
     IEnumerator Dash(Vector2 vDash)

@@ -6,7 +6,6 @@ public class Tresor : Obj
 {
     public MaterialObj materialObj;
     public float poid = 0;
-    public GameObject imageInInventory = null;
     public EnumObjPlayer canTake= EnumObjPlayer.All;
     // 0 if no Malus
     public float NoiseMalus;
@@ -19,7 +18,6 @@ public class Tresor : Obj
             playerControl.interactableObject = null;
             playerControl.inventory.Add(this);
             playerControl.transform.Find("Noise").GetComponent<PlayerNoise>().noiseRadius += NoiseMalus;
-            //imageInInventory = GameManager2.Instance.AddObjInInvetory(SpriteImgCanvas);
             GameManager.Instance.CheckObjective(gameObject);
             gameObject.SetActive(false);
             transform.SetParent(playerControl.transform);

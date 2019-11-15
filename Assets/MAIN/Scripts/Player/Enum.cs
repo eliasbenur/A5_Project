@@ -26,8 +26,11 @@ public enum Power
 {
     None,
     AllKey,
-    CameraOff
-
+    CameraOff,
+    Cook,
+    Hunter,
+    Cheater,
+    Ninja,
 }
 
 public enum ia_BehaviourType

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,11 @@ public class ObjectRefs : MonoBehaviour
     [Header("Player")]
     public GameObject player;
     public SoundManager soungManager;
+    [Header ("Treasures/Objectives")]
+    public ObjectRemaning objectivesData;
+    public GameObject[] objectivesRef_List;
+    [Header("UI")]
+    public Slider powerSlider;
 
 
     private void Awake()
@@ -32,7 +38,22 @@ public class ObjectRefs : MonoBehaviour
         if (NavMesh == null) { NavMesh = GameObject.Find("NavMesh"); }
         if (player == null) { player = GameObject.Find("Player"); }
         if (soungManager == null) { soungManager = GameObject.Find("SoundManager").GetComponent<SoundManager>(); }
+        if (objectivesData == null) { Debug.LogError("ObjRemaining Obj not Ini in the ObjectRef Class"); }
+        InitObjectiveList();
     }
+
+    public void InitObjectiveList()
+    {
+        var t = FindObjectsOfType<Tresor>();
+        objectivesRef_List = new GameObject[t.Length];
+        int x = 0;
+        foreach (Tresor tres in t)
+        {
+            objectivesRef_List[x] = tres.gameObject;
+            x++;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -5,13 +5,14 @@ using UnityEngine.AI;
 
 public class FOV_v3 : MonoBehaviour
 {
+    [Header ("FOV Values")]
     public float viewRadius;
     [Range(0, 360)]
     public float viewAngle;
 
-    public LayerMask obstacleMask, playerMask;
+    public LayerMask obstacleMask, ObjToCheckMask;
+    [Header ("Other Values")]
     public MeshFilter viewMeshFilter;
-
     public float meshResolution;
     public int edgeResolveIterations;
     public float edgeDstThreshold;
@@ -25,7 +26,8 @@ public class FOV_v3 : MonoBehaviour
     Vector2 direction_tmp;
 
     Collider2D[] playerInRadius;
-    public List<Transform> visiblePlayer = new List<Transform>();
+    [HideInInspector]
+    public List<Transform> objToCheckList = new List<Transform>();
 
     void Start()
     {
@@ -129,13 +131,13 @@ public class FOV_v3 : MonoBehaviour
     {
         playerInRadius = Physics2D.OverlapCircleAll(transform.position, viewRadius);
 
-        visiblePlayer.Clear();
+        objToCheckList.Clear();
 
         for (int x = 0; x < playerInRadius.Length; x++)
         {
             Transform player = playerInRadius[x].transform;
             //Debug.Log(playerMask.value);
-            if (((1 << player.gameObject.layer) & playerMask) != 0)
+            if (((1 << player.gameObject.layer) & ObjToCheckMask) != 0)
             {
                 Vector2 dirPlayer = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
                 if (Vector2.Angle(dirPlayer, direction_tmp.normalized) < (viewAngle / 2))
@@ -144,7 +146,7 @@ public class FOV_v3 : MonoBehaviour
 
                     if (!Physics2D.Raycast(transform.position, dirPlayer, distancePlayer, obstacleMask))
                     {
-                        visiblePlayer.Add(player);
+                        objToCheckList.Add(player);
                     }
                 }
             }

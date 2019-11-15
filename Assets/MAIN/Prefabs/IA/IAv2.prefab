@@ -313,8 +313,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 296
-        y: 211
+        x: 472
+        y: 227
         width: 117
         height: 16
       isBreakpoint: 0
@@ -428,8 +428,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 829.21875
-        y: 113.1875
+        x: 1005.21875
+        y: 129.1875
         width: 120
         height: 32
       isBreakpoint: 0
@@ -558,8 +558,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 821.75
-        y: 219.27344
+        x: 997.75
+        y: 235.27344
         width: 148
         height: 32
       isBreakpoint: 0
@@ -647,8 +647,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 541.5703
-        y: 120.10156
+        x: 717.5703
+        y: 136.10156
         width: 171
         height: 32
       isBreakpoint: 0
@@ -760,8 +760,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 50
-        y: 119.234375
+        x: 226
+        y: 135.23438
         width: 149
         height: 32
       isBreakpoint: 0
@@ -820,9 +820,61 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 55.875
-        y: 187.72656
+        x: 231.875
+        y: 203.72656
         width: 132
+        height: 16
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions: []
+      actionData:
+        actionNames: []
+        customNames: []
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams: []
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams: []
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams: []
+        byteData: 
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 
+        paramName: []
+        paramDataPos: 
+        paramByteDataSize: 
+    - name: ChasingDonut
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 51.721504
+        y: 106.50635
+        width: 121
         height: 16
       isBreakpoint: 0
       isSequence: 0
@@ -871,6 +923,9 @@ MonoBehaviour:
     - name: FINISHED
       isSystemEvent: 1
       isGlobal: 0
+    - name: ChasingDonut
+      isSystemEvent: 0
+      isGlobal: 0
     - name: ChasingPlayer
       isSystemEvent: 0
       isGlobal: 0
@@ -914,6 +969,14 @@ MonoBehaviour:
         isSystemEvent: 0
         isGlobal: 0
       toState: ChasingPlayer
+      linkStyle: 0
+      linkConstraint: 0
+      colorIndex: 0
+    - fsmEvent:
+        name: ChasingDonut
+        isSystemEvent: 0
+        isGlobal: 0
+      toState: ChasingDonut
       linkStyle: 0
       linkConstraint: 0
       colorIndex: 0
@@ -963,7 +1026,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 1
@@ -1058,12 +1121,12 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 256
-  playerMask:
+  ObjToCheckMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   viewMeshFilter: {fileID: 6343589689973687530}
   meshResolution: 1
   edgeResolveIterations: 3
   edgeDstThreshold: 0.1
   maskCutawayDst: 0
-  visiblePlayer: []
+  objToCheckList: []

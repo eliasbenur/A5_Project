@@ -21,6 +21,7 @@ public class Stat : ScriptableObject
     public int nbAntiCam = 3;
     [HideInInspector]
     public GameObject ObjAntiCamera;
+    public float powerDelay;
 
     public Stat (int Speed, int Force, Power Pow)
     {

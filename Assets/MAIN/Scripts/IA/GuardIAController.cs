@@ -33,6 +33,12 @@ public class GuardIAController : MonoBehaviour
 
     public bool chasingPlayer = false;
 
+    //Donut
+    public bool chasingDonut = false;
+    public bool eatingDonut = false;
+    public GameObject donutRef;
+    public float eatingDonutTime;
+
     public float chasingDistance;
     public float chasingSpeedFactor;
 
@@ -69,7 +75,7 @@ public class GuardIAController : MonoBehaviour
         }
         else
         {
-            if (fow.visiblePlayer.Count == 0)
+            if (fow.objToCheckList.Count == 0)
             {
                 if (Vector2.Distance(agent.destination, transform.position) < chasingDistance)
                 {
@@ -83,9 +89,9 @@ public class GuardIAController : MonoBehaviour
             }
             else
             {
-                agent.SetDestination(fow.visiblePlayer[0].transform.position);
+                agent.SetDestination(fow.objToCheckList[0].transform.position);
 
-                if (Vector2.Distance(fow.visiblePlayer[0].transform.position, transform.position) < chasingDistance)
+                if (Vector2.Distance(fow.objToCheckList[0].transform.position, transform.position) < chasingDistance)
                 {
                     Debug.Log("PlayerChased!");
                     ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
@@ -112,18 +118,39 @@ public class GuardIAController : MonoBehaviour
 
     public void CheckPlayer()
     {
-        if (fow.visiblePlayer.Count > 0)
+        if (fow.objToCheckList.Count > 0)
         {
             if (!chasingPlayer)
             {
-                playerMakerSFM.SendEvent("ChasingPlayer");
-                agent.speed = speed * chasingSpeedFactor;
-                chasingPlayer = true;
-                agent.isStopped = false;
+                foreach (Transform objs in fow.objToCheckList)
+                {
+                    if (objs.gameObject.layer == 9)//Player
+                    {
+                        playerMakerSFM.SendEvent("ChasingPlayer");
+                        agent.speed = speed * chasingSpeedFactor;
+                        chasingPlayer = true;
+                        agent.isStopped = false;
+                        eatingDonut = false;
+                        chasingDonut = false;
+                        StopAllCoroutines();
 
-                //Sprite Spotted
-                playerSpottedSprite.enabled = true;
-                ObjectRefs.Instance.soungManager.PlayguardesAttention();
+                        //Sprite Spotted
+                        playerSpottedSprite.enabled = true;
+                        ObjectRefs.Instance.soungManager.PlayguardesAttention();
+                    }else if (objs.gameObject.layer == 13) // Donut
+                    {
+                        if (!chasingDonut)
+                        {
+                            pointsToPatroll.Insert(0, objs.transform.position);
+                            agent.SetDestination(pointsToPatroll[0]);
+                            donutRef = objs.gameObject;
+                            //playerMakerSFM.SendEvent("ChasingDonut");
+                            agent.isStopped = false;
+                            chasingDonut = true;
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -155,15 +182,38 @@ public class GuardIAController : MonoBehaviour
 
         if (distance < targetDistanceDetection)
         {
-            agent.isStopped = true;
-            pointsToPatroll.RemoveAt(0);
-            playerMakerSFM.SendEvent("PointReached");
-            return;
+            if (chasingDonut)
+            {
+                if (!eatingDonut)
+                {
+                    StartCoroutine(EatingDonnut());
+                }
+            }
+            else
+            {
+                agent.isStopped = true;
+                pointsToPatroll.RemoveAt(0);
+                playerMakerSFM.SendEvent("PointReached");
+                return;
+            }
         }
         else
         {
             agent.SetDestination(pointsToPatroll[0]);
         }
+    }
+
+    IEnumerator EatingDonnut()
+    {
+        eatingDonut = true;
+        yield return new WaitForSeconds(eatingDonutTime);
+        Destroy(donutRef);
+        chasingDonut = false;
+        agent.isStopped = true;
+        pointsToPatroll.RemoveAt(0);
+        playerMakerSFM.SendEvent("PointReached");
+        eatingDonut = false;
+
     }
 
     /*Returns the points that is going to patroll in a RandomZone*/

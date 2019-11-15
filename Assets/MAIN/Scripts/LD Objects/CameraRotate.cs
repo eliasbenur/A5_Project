@@ -12,16 +12,53 @@ public class CameraRotate : MonoBehaviour
     int multiplicateur = 1;
     float rotationInitial = 0;
     public LayerMask playerMask;
+    public bool hackeable = false;
+    public float timeHacked;
+    public float timeUnHacked;
+    public float timeH_tmp;
+    public bool isHacked;
+    PlayerControl playerControl;
 
 
     void Start()
     {
         rotationInitial = transform.eulerAngles.z;
+        playerControl = ObjectRefs.Instance.player.GetComponent<PlayerControl>();
+        timeH_tmp = timeHacked;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerControl.securityZone2 && hackeable)
+        {
+            if (isHacked)
+            {
+                timeH_tmp -= Time.deltaTime;
+                if (timeH_tmp < 0)
+                {
+                    isHacked = false;
+                    timeH_tmp = timeUnHacked;
+                    //
+                    GetComponent<Collider2D>().enabled = true;
+                    if (transform.childCount > 0)
+                        transform.GetChild(0).gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                timeH_tmp -= Time.deltaTime;
+                if (timeH_tmp < 0)
+                {
+                    isHacked = true;
+                    timeH_tmp = timeHacked;
+                    //
+                    gameObject.GetComponent<Collider2D>().enabled = false;
+                    if (transform.childCount > 0)
+                        transform.GetChild(0).gameObject.SetActive(false);
+                }
+            }
+        }
         MoveCamera();
     }
 
@@ -33,8 +70,6 @@ public class CameraRotate : MonoBehaviour
         if (angle > angleRotation / 2) multiplicateur = -1;
         if (angle < -angleRotation / 2) multiplicateur = 1;
         transform.eulerAngles += Vector3.forward * multiplicateur * Speed * Time.deltaTime;
-        //Debug.Log("att " + (angle + 360));
-        //Debug.Log(angleRotation / 2);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
