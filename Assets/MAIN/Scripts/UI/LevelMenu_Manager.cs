@@ -64,7 +64,7 @@ public class LevelMenu_Manager : MonoBehaviour
             {
                 objetivesPanelAnimaton.SetBool("show", true);
             }
-        }*/
+        }
 
         //Refocus the GamePad Menu Navigation if the players makes a input with
         if (activeDefaultButton != null)
