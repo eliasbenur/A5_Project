@@ -143,12 +143,10 @@ public class PlayerControl : MonoBehaviour
                 }
             }
         }
-<<<<<<< HEAD
         else
         {
             menuManager.canShowObjective = false;
         }
-=======
 
         PowerUpdate();
     }
@@ -181,7 +179,6 @@ public class PlayerControl : MonoBehaviour
         }
 
         powerSlider.value = powerDelay_tmp / stat.powerDelay;
->>>>>>> b8965f6b887252b19c078801c15bb12b6af6883b
     }
 
     private void FixedUpdate()

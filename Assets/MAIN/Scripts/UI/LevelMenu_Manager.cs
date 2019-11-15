@@ -53,13 +53,8 @@ public class LevelMenu_Manager : MonoBehaviour
                 Active_PausePanel();
             }
         }
-<<<<<<< HEAD
-        
-        if (player.GetButtonDown("ShowObjectives") && canShowObjective)
-=======
 
-        /*if (player.GetButtonDown("ShowObjectives"))
->>>>>>> b8965f6b887252b19c078801c15bb12b6af6883b
+        if (player.GetButtonDown("ShowObjectives") && canShowObjective)
         {
             if (objetivesPanelAnimaton.GetBool("show"))
             {

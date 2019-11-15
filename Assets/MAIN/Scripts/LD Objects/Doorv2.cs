@@ -78,14 +78,9 @@ public class Doorv2 : Obj
 
         float temp = timer_miniGame;
         int count = 0;
-<<<<<<< HEAD
-
         SwitchColor(count);
 
         while (temp >= 0)
-=======
-        while (temp >= 0 && !inputFailed)
->>>>>>> b8965f6b887252b19c078801c15bb12b6af6883b
         {
             if ((player.GetButtonUp(RewiredConsts.Action.A) || player.GetButtonUp("Interact")) && canSelect == false)
                 canSelect = true;
@@ -110,12 +105,8 @@ public class Doorv2 : Obj
                     }
                     else
                     {
-<<<<<<< HEAD
-                        playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
+                        //playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
                         break;
-=======
-                        inputFailed = true;
->>>>>>> b8965f6b887252b19c078801c15bb12b6af6883b
                     }
                 }
             }
