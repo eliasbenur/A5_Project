@@ -10,13 +10,15 @@ public class MetalDetector : MonoBehaviour
         PlayerControl voleur = collision.gameObject.GetComponent<PlayerControl>();
         if (voleur!= null)
         {
-            bool metal = false;
-            foreach(Tresor tre in voleur.inventory)
+            if ((voleur.stat.power == Power.Cheater && !voleur.isPowerActive()) || (voleur.stat.power != Power.Cheater))
             {
-                if (tre.materialObj == MaterialObj.Metal) metal = true;
+                bool metal = false;
+                foreach (Tresor tre in voleur.inventory)
+                {
+                    if (tre.materialObj == MaterialObj.Metal) metal = true;
+                }
+                if (metal) { GameManager.Instance.DetectorMetal(); }
             }
-            if (metal) { GameManager.Instance.DetectorMetal(); }
-
         }
     }
 }

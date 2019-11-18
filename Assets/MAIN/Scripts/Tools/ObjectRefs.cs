@@ -20,6 +20,7 @@ public class ObjectRefs : MonoBehaviour
     public Sprite[] inputSet;
     [Header("Player")]
     public GameObject player;
+    public PlayerNoise playerNoise;
     public SoundManager soungManager;
     [Header ("Treasures/Objectives")]
     public ObjectRemaning objectivesData;
@@ -37,6 +38,7 @@ public class ObjectRefs : MonoBehaviour
         if (menuCanvas == null) { menuCanvas = GameObject.Find("MenuCanvas"); }
         if (NavMesh == null) { NavMesh = GameObject.Find("NavMesh"); }
         if (player == null) { player = GameObject.Find("Player"); }
+        if (playerNoise == null) { playerNoise = GameObject.Find("PlayerNoise").GetComponent<PlayerNoise>(); }
         if (soungManager == null) { soungManager = GameObject.Find("SoundManager").GetComponent<SoundManager>(); }
         if (objectivesData == null) { Debug.LogError("ObjRemaining Obj not Ini in the ObjectRef Class"); }
         InitObjectiveList();

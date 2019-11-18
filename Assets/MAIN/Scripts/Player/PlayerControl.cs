@@ -30,6 +30,8 @@ public class PlayerControl : MonoBehaviour
     public LayerMask layerDash;
     public Sprite cameraManSprite, KeyManSprite;
 
+    public float sprint;
+
     public List<Tresor> inventory = new List<Tresor>();
 
     //Power Vars
@@ -44,6 +46,15 @@ public class PlayerControl : MonoBehaviour
     public GameObject donutPrefab;
 
     NavMeshAgent agent;
+
+    public bool isPowerActive()
+    {
+        if (powerActive)
+        {
+            return true;
+        }
+        return false;
+    }
 
 
     private void Start()
@@ -163,6 +174,7 @@ public class PlayerControl : MonoBehaviour
             {
                 powerActive = false;
                 powerunavailable = true;
+                DisablePower();
             }
 
         }
@@ -181,6 +193,38 @@ public class PlayerControl : MonoBehaviour
         powerSlider.value = powerDelay_tmp / stat.powerDelay;
     }
 
+    public void ActivePower()
+    {
+        switch (stat.power)
+        {
+            case Power.Cheater:
+                if (inventory.Count > 0)
+                {
+                    ObjectRefs.Instance.playerNoise.noiseRadius -= inventory[0].NoiseMalus;
+                }
+                break;
+            case Power.Ninja:
+                ObjectRefs.Instance.playerNoise.noiseRadius -= ObjectRefs.Instance.playerNoise.getBaseNoiseRadius();
+                break;
+        }
+    }
+
+    public void DisablePower()
+    {
+        switch (stat.power)
+        {
+            case Power.Cheater:
+                if (inventory.Count > 0)
+                {
+                    ObjectRefs.Instance.playerNoise.noiseRadius += inventory[0].NoiseMalus;
+                }
+                break;
+            case Power.Ninja:
+                ObjectRefs.Instance.playerNoise.noiseRadius += ObjectRefs.Instance.playerNoise.getBaseNoiseRadius();
+                break;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (canDash)
@@ -189,7 +233,7 @@ public class PlayerControl : MonoBehaviour
             {
                 //agent.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
                 //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
-                transform.position += (Vector3)moveVector * stat.speed * Time.deltaTime;
+                transform.position += (Vector3)moveVector * stat.speed * Time.deltaTime * sprint;
             }
             else
             {
@@ -305,10 +349,12 @@ public class PlayerControl : MonoBehaviour
                 if (!powerActive && !powerunavailable)
                 {
                     powerActive = true;
+                    ActivePower();
                 }
                 else
                 {
                     powerActive = false;
+                    DisablePower();
                 }
                 break;
 

@@ -7,6 +7,7 @@ public class PlayerNoise : MonoBehaviour
 {
     public Transform toFollow;
     public float noiseRadius;
+    float noiseRadius_base;
     CircleCollider2D circlecoll;
 
     List<GameObject> guardList = new List<GameObject>();
@@ -41,6 +42,13 @@ public class PlayerNoise : MonoBehaviour
         delayNoiseWave_tmp = delayNoiseWave;
 
         player = ObjectRefs.Instance.player.GetComponent<PlayerControl>();
+
+        noiseRadius_base = noiseRadius;
+    }
+
+    public float getBaseNoiseRadius()
+    {
+        return noiseRadius_base;
     }
 
     // Update is called once per frame
