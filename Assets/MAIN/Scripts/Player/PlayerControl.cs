@@ -14,6 +14,8 @@ public class PlayerControl : MonoBehaviour
     Rigidbody2D rb;
     public Stat stat;
     //public float speedMod = 1;
+    public float sprintMod;
+    public float noiseMod;
     public bool canMove;
     public bool canInteract;
     public bool canDash = true;
@@ -112,6 +114,20 @@ public class PlayerControl : MonoBehaviour
         if (activated)
         {
             menuManager.canShowObjective = true;
+
+            if (player.GetButtonDown("Sprint"))
+            {
+                ObjectRefs.Instance.playerNoise.noiseRadius = noiseMod;
+                ParticleSystem.MainModule newMain = transform.GetChild(1).GetComponent<PlayerNoise>().particleSystemPrefab.GetComponent<ParticleSystem>().main;
+                newMain.duration = noiseMod;
+
+            }
+            if (player.GetButtonUp("Sprint"))
+            {
+                ObjectRefs.Instance.playerNoise.noiseRadius = 1.5f;
+                ParticleSystem.MainModule newMain = transform.GetChild(1).GetComponent<PlayerNoise>().particleSystemPrefab.GetComponent<ParticleSystem>().main;
+                newMain.startLifetime = 1;
+            }
 
             if (canMove)
             {
@@ -229,16 +245,35 @@ public class PlayerControl : MonoBehaviour
     {
         if (canDash)
         {
-            if (moveVector != Vector2.zero)
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, moveVector, 0.5f, layerDash);
+
+            if (hit.collider != null && hit.distance < 0.5f)
             {
-                //agent.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
-                //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
-                transform.position += (Vector3)moveVector * stat.speed * Time.deltaTime * sprint;
+                if (moveVector != Vector2.zero)
+                {
+                    transform.position += (Vector3)moveVector * (stat.speed * Time.fixedDeltaTime);
+                }
             }
             else
             {
-                //agent.velocity -= agent.velocity * 0.25f;
-                //rb.velocity -= rb.velocity * 0.25f;
+                if (moveVector != Vector2.zero)
+                {
+                    //agent.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
+                    //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
+                    if (player.GetButton("Sprint"))
+                    {
+                        transform.position += (Vector3)moveVector * (stat.speed * Time.fixedDeltaTime * sprintMod);
+                    }
+                    else
+                    {
+                        transform.position += (Vector3)moveVector * (stat.speed * Time.fixedDeltaTime);
+                    }
+                }
+                else
+                {
+                    //agent.velocity -= agent.velocity * 0.25f;
+                    //rb.velocity -= rb.velocity * 0.25f;
+                }
             }
         }
     }

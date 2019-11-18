@@ -128,15 +128,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toFollow: {fileID: 0}
   noiseRadius: 1
-  guardList: []
   toNotify:
     serializedVersion: 2
     m_Bits: 2048
   particleSystemPrefab: {fileID: 4636679641295741370, guid: bcb9c086a06f219429b568fbb745ef05,
     type: 3}
-  particleSystem: {fileID: 0}
   delayNoiseWave: 0.5
-  delayNoiseWave_tmp: 0
 --- !u!50 &2053970291
 Rigidbody2D:
   serializedVersion: 4
@@ -4992,10 +4989,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intPlayer: 1
   stat: {fileID: 11400000, guid: d2d8e6fc06303f44780209cad97f736d, type: 2}
+  sprintMod: 2
+  noiseMod: 5
   canMove: 1
   canInteract: 0
   canDash: 1
   activated: 1
+  menuManager: {fileID: 0}
   dashCurve:
     serializedVersion: 2
     m_Curve:
@@ -5037,7 +5037,13 @@ MonoBehaviour:
   layerDash:
     serializedVersion: 2
     m_Bits: 6400
+  cameraManSprite: {fileID: 0}
+  KeyManSprite: {fileID: 0}
+  sprint: 0
   inventory: []
+  securityZone1: 0
+  securityZone2: 0
+  donutPrefab: {fileID: 0}
 --- !u!61 &6927196242011935360
 BoxCollider2D:
   m_ObjectHideFlags: 0
