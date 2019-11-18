@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 6343589690461638061}
   m_Layer: 11
   m_Name: IAv2
-  m_TagString: Untagged
+  m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,7 +188,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6343589690461638052}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.17, y: 6.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -255,10 +255,10 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6343589690461638052}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -334000983
   m_Radius: 0.3
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -581,7 +581,7 @@ MonoBehaviour:
         customNames:
         - 
         - 
-        actionEnabled: 0101
+        actionEnabled: 0100
         actionIsOpen: 0101
         actionStartIndex: 0000000003000000
         actionHashCodes: 27fbe10348c01101
@@ -605,7 +605,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 3
+          value: 0
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 1
@@ -1078,14 +1078,28 @@ MonoBehaviour:
   minPositionsPatrolling: 1
   maxPositionsPatrolling: 5
   behaviourType: 0
-  patrollZones_List: []
-  patrollPoints_List: []
+  patrollZones_List:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  patrollPoints_List:
+  - {fileID: 8389463740290324385, guid: 9cc1a26393c88f94381dbebfeeba6555, type: 3}
+  - {fileID: 8389463741401710366, guid: 9cc1a26393c88f94381dbebfeeba6555, type: 3}
+  - {fileID: 8389463741961699700, guid: 9cc1a26393c88f94381dbebfeeba6555, type: 3}
+  - {fileID: 8389463740730401243, guid: 9cc1a26393c88f94381dbebfeeba6555, type: 3}
   target: {x: 0, y: 0}
   target_tmp: {x: 0, y: 0}
-  speed: 0
+  speed: 3.5
   targetDistanceDetection: 0.2
   chasingPlayer: 0
-  chasingDistance: 0.5
+  chasingDonut: 0
+  eatingDonut: 0
+  donutRef: {fileID: 0}
+  eatingDonutTime: 5
+  chasingDistance: 0.8
   chasingSpeedFactor: 2
   playerSpottedSprite: {fileID: 6343589690345122260}
 --- !u!70 &6343589690461638049
@@ -1116,14 +1130,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca0e3ab3521a1c43883d5847d3040aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 5
+  viewRadius: 7
   viewAngle: 90
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
   ObjToCheckMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8704
   viewMeshFilter: {fileID: 6343589689973687530}
   meshResolution: 1
   edgeResolveIterations: 3

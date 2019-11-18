@@ -37,5 +37,6 @@ public enum ia_BehaviourType
 {
     Stationary,
     RandomZone,
-    SuccessivePoints
+    SuccessivePoints,
+    SpawnedIA
 }
