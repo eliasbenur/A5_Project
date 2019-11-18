@@ -14,8 +14,6 @@ public class PlayerControl : MonoBehaviour
     Rigidbody2D rb;
     public Stat stat;
     //public float speedMod = 1;
-    public float sprintMod;
-    public float noiseMod;
     public bool canMove;
     public bool canInteract;
     public bool canDash = true;
@@ -27,7 +25,7 @@ public class PlayerControl : MonoBehaviour
     public Text text_PowerNb;
     [HideInInspector]
     public int nbAntiCam = 0;
-    public float minAfterDashDistance = 0.5f;
+    public float DistanceMinWallApresDash = 0.5f;
     float distanceDash = 1;
     public LayerMask layerDash;
     public Sprite cameraManSprite, KeyManSprite;
@@ -103,23 +101,11 @@ public class PlayerControl : MonoBehaviour
         if (activated)
         {
             menuManager.canShowObjective = true;
-            if (player.GetButtonDown("Sprint"))
-            {
-                transform.GetChild(1).GetComponent<PlayerNoise>().noiseRadius = noiseMod;
-                transform.GetChild(1).GetComponent<PlayerNoise>().Start();
-
-            }
-            if (player.GetButtonUp("Sprint"))
-            {
-                transform.GetChild(1).GetComponent<PlayerNoise>().noiseRadius = 1;
-                transform.GetChild(1).GetComponent<PlayerNoise>().Start();
-            }
 
             if (canMove)
             {
                 moveVector.x = player.GetAxis("Horizontal");
                 moveVector.y = player.GetAxis("Vertical");
-
                 if (moveVector.sqrMagnitude > 1)
                 {
                     moveVector.Normalize();
@@ -199,35 +185,16 @@ public class PlayerControl : MonoBehaviour
     {
         if (canDash)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, moveVector, 0.5f, layerDash);
-
-            if (hit.collider != null && hit.distance < 0.5f)
+            if (moveVector != Vector2.zero)
             {
-                if (moveVector != Vector2.zero)
-                {
-                    transform.position += (Vector3)moveVector * (stat.speed * Time.fixedDeltaTime);
-                }
+                //agent.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
+                //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
+                transform.position += (Vector3)moveVector * stat.speed * Time.deltaTime;
             }
             else
             {
-                if (moveVector != Vector2.zero)
-                {
-                    //agent.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
-                    //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
-                    if (player.GetButton("Sprint"))
-                    {
-                        transform.position += (Vector3)moveVector * (stat.speed * Time.fixedDeltaTime * sprintMod);
-                    }
-                    else
-                    {
-                        transform.position += (Vector3)moveVector * (stat.speed * Time.fixedDeltaTime);
-                    }
-                }
-                else
-                {
-                    //agent.velocity -= agent.velocity * 0.25f;
-                    //rb.velocity -= rb.velocity * 0.25f;
-                }
+                //agent.velocity -= agent.velocity * 0.25f;
+                //rb.velocity -= rb.velocity * 0.25f;
             }
         }
     }
@@ -334,7 +301,7 @@ public class PlayerControl : MonoBehaviour
                     Instantiate(donutPrefab, this.transform.position, Quaternion.identity);
                 }
                 break;
-                default:
+            default:
                 if (!powerActive && !powerunavailable)
                 {
                     powerActive = true;
@@ -361,7 +328,7 @@ public class PlayerControl : MonoBehaviour
             //Debug.Log(hit.distance);
             //Debug.Log(hit.collider);
             //Debug.Log(((Vector3)hit.point - transform.position).magnitude);
-            while (((Vector3)hit.point-transform.position).magnitude>minAfterDashDistance)
+            while (((Vector3)hit.point-transform.position).magnitude>DistanceMinWallApresDash)
             {
                // Debug.Log(((Vector3)hit.point - transform.position).magnitude);
                 curveTime += Time.deltaTime;
