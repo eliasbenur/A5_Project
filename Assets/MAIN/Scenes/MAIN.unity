@@ -91373,6 +91373,16 @@ PrefabInstance:
       propertyPath: menuManager
       value: 
       objectReference: {fileID: 943960357}
+    - target: {fileID: 6927196242011935363, guid: 7b9beae87bec57042a296a6215d6e1df,
+        type: 3}
+      propertyPath: sprintMod
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927196242011935363, guid: 7b9beae87bec57042a296a6215d6e1df,
+        type: 3}
+      propertyPath: noiseMod
+      value: 5000
+      objectReference: {fileID: 0}
     - target: {fileID: 6927196241964887104, guid: 7b9beae87bec57042a296a6215d6e1df,
         type: 3}
       propertyPath: m_IsActive
