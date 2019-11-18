@@ -6,6 +6,10 @@ using Rewired;
 public class Vibration : MonoBehaviour
 {
     Player player;
+    public float maxDistance = 2.55f;
+    public float closeThresholdDistance = 1.9f;
+    public float farPower = 0.5f;
+    public float closePower = 1f;
 
     private void Start()
     {
@@ -18,10 +22,10 @@ public class Vibration : MonoBehaviour
         {
             Vector2 temp = transform.position - collision.transform.position;
             float power = 0.1f;
-            if (temp.magnitude < 2.55f)
-                power = 0.5f;
-            if (temp.magnitude < 1.9f)
-                power = 1f;
+            if (temp.magnitude < maxDistance)
+                power = farPower;
+            if (temp.magnitude < closeThresholdDistance)
+                power = closePower;
             player.SetVibration(0, power);
             player.SetVibration(1, power);
             player.SetVibration(2, power);
