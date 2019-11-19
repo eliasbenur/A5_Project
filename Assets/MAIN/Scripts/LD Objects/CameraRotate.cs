@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -18,6 +19,13 @@ public class CameraRotate : MonoBehaviour
     public float timeH_tmp;
     public bool isHacked;
     PlayerControl playerControl;
+
+    //Spawn IA Vars
+    public Transform IASpawn;
+    public GameObject IAPrefab;
+    public int IASpawnNum;
+    public float delaySpawn = 5;
+    float delaySpawn_tmp;
 
 
     void Start()
@@ -60,6 +68,12 @@ public class CameraRotate : MonoBehaviour
             }
         }
         MoveCamera();
+
+        //Spawn Delay
+        if (delaySpawn_tmp > 0)
+        {
+            delaySpawn_tmp -= Time.deltaTime;
+        }
     }
 
     void MoveCamera()
@@ -71,12 +85,24 @@ public class CameraRotate : MonoBehaviour
         if (angle < -angleRotation / 2) multiplicateur = 1;
         transform.eulerAngles += Vector3.forward * multiplicateur * Speed * Time.deltaTime;
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (((1 << collision.gameObject.layer) & playerMask) != 0)
         {
-            ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
+            //ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
+            if (IASpawn != null && delaySpawn_tmp <= 0)
+            {
+                for (int x = 0; x < IASpawnNum; ++x)
+                {
+                    Vector3 whereToSpawn = Outils.RandomPointInBounds(IASpawn.gameObject.GetComponent<BoxCollider2D>().bounds);
+                    GameObject IA_tmp = Instantiate(IAPrefab, whereToSpawn, Quaternion.identity);
+                    IA_tmp.GetComponent<GuardIAController>().behaviourType = ia_BehaviourType.SpawnedIA;
+                    IA_tmp.GetComponent<GuardIAController>().StartChasingPlayerVarInis();
+                    IA_tmp.GetComponent<NavMeshAgent>().SetDestination(ObjectRefs.Instance.player.transform.position);
+
+                    delaySpawn_tmp = delaySpawn;
+                }
+            }
         }
     }
 

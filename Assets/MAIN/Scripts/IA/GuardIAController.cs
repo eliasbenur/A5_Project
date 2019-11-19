@@ -8,6 +8,8 @@ using UnityEditor;
 using UnityEditor;
 #endif
 
+
+
 public class GuardIAController : MonoBehaviour
 {
     public PlayMakerFSM playerMakerSFM;
@@ -44,6 +46,15 @@ public class GuardIAController : MonoBehaviour
 
     public SpriteRenderer playerSpottedSprite;
 
+    public Bounds OrthographicBounds(Camera camera)
+    {
+        float screenAspect = (float)Screen.width / (float)Screen.height;
+        float cameraHeight = camera.orthographicSize * 2;
+        Bounds bounds = new Bounds(
+            camera.transform.position,
+            new Vector3(cameraHeight * screenAspect, cameraHeight, 0));
+        return bounds;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +82,18 @@ public class GuardIAController : MonoBehaviour
             {
                 //Movement
                 IsPointReached();
+            }
+            if (behaviourType == ia_BehaviourType.SpawnedIA)
+            {
+                Bounds CameraBound = OrthographicBounds(Camera.main);
+                CameraBound.center = new Vector3(CameraBound.center.x, CameraBound.center.y, 0);
+                CameraBound.size = new Vector3(CameraBound.size.x + 15, CameraBound.size.y + 15, 0);
+                Vector2 IABound = (Vector2)transform.position;
+                if (!CameraBound.Contains(IABound))
+                {
+                    Debug.Log("Hey");
+                    StartCoroutine(DesPawn(1));
+                }
             }
         }
         else
@@ -101,6 +124,8 @@ public class GuardIAController : MonoBehaviour
         CheckPlayer();
     }
 
+
+
     public void PlayerNoiseDetected(Vector3 target_)
     {
         agent.SetDestination(target_);
@@ -114,7 +139,30 @@ public class GuardIAController : MonoBehaviour
         ObjectRefs.Instance.soungManager.PlayguardesAttention();
     }
 
-    
+    public IEnumerator DesPawn(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(this.gameObject);
+    }
+
+    public void StartChasingPlayerVarInis()
+    {
+        playerMakerSFM.SendEvent("ChasingPlayer");
+        if (agent == null)
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
+        agent.speed = speed * chasingSpeedFactor;
+        chasingPlayer = true;
+        agent.isStopped = false;
+        eatingDonut = false;
+        chasingDonut = false;
+        StopAllCoroutines();
+
+        //Sprite Spotted
+        playerSpottedSprite.enabled = true;
+        ObjectRefs.Instance.soungManager.PlayguardesAttention();
+    }
 
     public void CheckPlayer()
     {
@@ -126,18 +174,9 @@ public class GuardIAController : MonoBehaviour
                 {
                     if (objs.gameObject.layer == 9)//Player
                     {
-                        playerMakerSFM.SendEvent("ChasingPlayer");
-                        agent.speed = speed * chasingSpeedFactor;
-                        chasingPlayer = true;
-                        agent.isStopped = false;
-                        eatingDonut = false;
-                        chasingDonut = false;
-                        StopAllCoroutines();
-
-                        //Sprite Spotted
-                        playerSpottedSprite.enabled = true;
-                        ObjectRefs.Instance.soungManager.PlayguardesAttention();
-                    }else if (objs.gameObject.layer == 13) // Donut
+                        StartChasingPlayerVarInis();
+                    }
+                    else if (objs.gameObject.layer == 13) // Donut
                     {
                         if (!chasingDonut)
                         {
