@@ -20,6 +20,7 @@ public class PlayerControl : MonoBehaviour
     public bool canInteract;
     public bool canDash = true;
     public bool activated = true;
+    public GameObject fullMap;
     public LevelMenu_Manager menuManager;
     public AnimationCurve dashCurve;
     public Obj interactableObject;
@@ -169,6 +170,21 @@ public class PlayerControl : MonoBehaviour
                     Capacity();
                 }
             }
+            if (player.GetButtonDown("ShowMap"))
+            {
+                if (fullMap.activeSelf == true)
+                {
+                    ActiveMap(false);
+                }
+                else
+                {
+                    ActiveMap(true);
+                }
+            }
+            if (player.GetButtonDown("Back") && fullMap.activeSelf == true)
+            {
+                ActiveMap(false);
+            }
         }
         else
         {
@@ -176,6 +192,15 @@ public class PlayerControl : MonoBehaviour
         }
 
         PowerUpdate();
+    }
+
+    public void ActiveMap(bool status)
+    {
+        fullMap.SetActive(status);
+        if (status)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1f;
     }
 
     public void PowerUpdate()
