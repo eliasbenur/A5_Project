@@ -45,14 +45,15 @@ public class FOV_v3 : MonoBehaviour
         if (agent == null)
         {
             direction = (Vector2)(Quaternion.Euler(0, 0, transform.eulerAngles.z) * Vector2.down);
-           // Debug.Log(transform.eulerAngles.z);
+            //Debug.Log(transform.eulerAngles.z);
             direction_tmp = direction;
         }
         else
         {
             if ((Vector2)agent.velocity.normalized == Vector2.zero)
             {
-                direction_tmp = Vector2.up;
+                //direction_tmp = Vector2.up;
+                direction_tmp = transform.GetComponent<GuardIAController>().stationaryDirection;
                 direction = direction_tmp;
             }
             else

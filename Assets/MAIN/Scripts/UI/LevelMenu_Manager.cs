@@ -34,7 +34,6 @@ public class LevelMenu_Manager : MonoBehaviour
     {
         objectivesData = ObjectRefs.Instance.objectivesData;
         player = ReInput.players.GetPlayer(0);
-        objetivesPanelAnimaton = objectivesPanel.GetComponent<Animator>();
 
         SetUpObjectives();
     }
@@ -56,13 +55,19 @@ public class LevelMenu_Manager : MonoBehaviour
 
         if (player.GetButtonDown("ShowObjectives") && canShowObjective)
         {
-            if (objetivesPanelAnimaton.GetBool("show"))
+            if (!objectivesPanel.activeSelf)
             {
-                objetivesPanelAnimaton.SetBool("show", false);
+
+                objectivesPanel.SetActive(true);
+                Time.timeScale = 0;
             }
-            else
+        }
+        if (player.GetButtonDown("Back"))
+        {
+            if (objectivesPanel.activeSelf)
             {
-                objetivesPanelAnimaton.SetBool("show", true);
+                objectivesPanel.SetActive(false);
+                Time.timeScale = 1;
             }
         }
 
@@ -124,6 +129,12 @@ public class LevelMenu_Manager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void RestartGameButton()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MAIN");
     }
 
     public void QuitButton()

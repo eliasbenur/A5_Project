@@ -10,7 +10,8 @@ public class NoiseParticleTrigger : MonoBehaviour
         
         if (((1 << other.layer) & guardLayer) != 0)
         {
-            other.GetComponent<GuardIAController>().PlayerNoiseDetected(ObjectRefs.Instance.player.transform.position);
+            //other.GetComponent<GuardIAController>().PlayerNoiseDetected(ObjectRefs.Instance.player.transform.position);
+            other.GetComponent<GuardIAController_v2>().PlayerNoiseDetected(ObjectRefs.Instance.player.transform.position);
         }
     }
 

@@ -25,6 +25,8 @@ public class GuardIAController : MonoBehaviour
     //IA
     public Vector2 target;
     public Vector2 target_tmp;
+    public Vector2 iniPos;
+    public Vector2 stationaryDirection;
 
     public float speed = 3;
     public float targetDistanceDetection = 0.2f;
@@ -46,6 +48,11 @@ public class GuardIAController : MonoBehaviour
 
     public SpriteRenderer playerSpottedSprite;
 
+    public bool checkingZone = false;
+    public SpriteRenderer checkingZoneSprite;
+    public int checkingZoneNumPoints;
+    public Vector2 checkingZone_RandomZoneSize;
+
     public Bounds OrthographicBounds(Camera camera)
     {
         float screenAspect = (float)Screen.width / (float)Screen.height;
@@ -59,6 +66,7 @@ public class GuardIAController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ObjectRefs.Instance.GAIC.Add(this);
         if (playerMakerSFM == null)
         {
             gameObject.GetComponent<PlayMakerFSM>();
@@ -69,6 +77,13 @@ public class GuardIAController : MonoBehaviour
         agent.updateUpAxis = false;
 
         fow = GetComponent<FOV_v3>();
+
+        if (behaviourType == ia_BehaviourType.Stationary)
+        {
+            iniPos = transform.position;
+        }
+
+        agent.speed = speed;
 
     }
 
@@ -102,12 +117,33 @@ public class GuardIAController : MonoBehaviour
             {
                 if (Vector2.Distance(agent.destination, transform.position) < chasingDistance)
                 {
-                    chasingPlayer = false;
-                    agent.speed = speed / chasingSpeedFactor;
-                    playerMakerSFM.SendEvent("SearchAction");
+                    /*if (checkingZone)
+                    {*/
+                        chasingPlayer = false;
+                        checkingZone = false;
+                        agent.speed = speed / chasingSpeedFactor;
+                        playerMakerSFM.SendEvent("SearchAction");
 
-                    //Sprite Spotted
-                    playerSpottedSprite.enabled = false;
+                        playerSpottedSprite.enabled = false;
+                        checkingZoneSprite.enabled = false;
+                    /*}
+                    else
+                    {
+                        checkingZone = true;
+
+                        chasingPlayer = false;
+                        playerSpottedSprite.enabled = false;
+                        checkingZoneSprite.enabled = true;
+
+                        Bounds bound_tmp = new Bounds(transform.position, checkingZone_RandomZoneSize);
+                        for (int x = 0; x < checkingZoneNumPoints; x++)
+                        {
+                            Vector2 newPoint = Outils.RandomPointInBounds(bound_tmp);
+                            pointsToPatroll.Add(newPoint);
+                        }
+                    }*/
+
+
                 }
             }
             else
@@ -264,6 +300,7 @@ public class GuardIAController : MonoBehaviour
         switch (behaviourType)
         {
             case ia_BehaviourType.Stationary:
+                pointsToPatroll.Add(iniPos);
                 break;
             case ia_BehaviourType.RandomZone:
                 int randomZone = Random.Range(0, patrollZones_List.Count);

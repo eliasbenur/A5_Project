@@ -32,6 +32,8 @@ public class PlayerControl : MonoBehaviour
     float distanceDash = 1;
     public LayerMask layerDash;
     public Sprite cameraManSprite, KeyManSprite;
+    public GameObject traceDePas;//Pierro
+    public List<GameObject> traceDePasActiv;
 
     public float sprint;
 
@@ -170,7 +172,7 @@ public class PlayerControl : MonoBehaviour
                     Capacity();
                 }
             }
-            if (player.GetButtonDown("ShowMap"))
+            if (player.GetButtonDown("ShowMap") && fullMap != null)
             {
                 if (fullMap.activeSelf == true)
                 {
@@ -181,7 +183,7 @@ public class PlayerControl : MonoBehaviour
                     ActiveMap(true);
                 }
             }
-            if (player.GetButtonDown("Back") && fullMap.activeSelf == true)
+            if (player.GetButtonDown("Back") && fullMap != null && fullMap.activeSelf == true)
             {
                 ActiveMap(false);
             }
@@ -247,6 +249,9 @@ public class PlayerControl : MonoBehaviour
             case Power.Ninja:
                 ObjectRefs.Instance.playerNoise.noiseRadius -= ObjectRefs.Instance.playerNoise.getBaseNoiseRadius();
                 break;
+            case Power.Hunter:
+                NinjaAct();
+                break;
         }
     }
 
@@ -262,6 +267,9 @@ public class PlayerControl : MonoBehaviour
                 break;
             case Power.Ninja:
                 ObjectRefs.Instance.playerNoise.noiseRadius += ObjectRefs.Instance.playerNoise.getBaseNoiseRadius();
+                break;
+            case Power.Hunter:
+                CleanTraceDePasActiv();
                 break;
         }
     }
@@ -470,5 +478,46 @@ public class PlayerControl : MonoBehaviour
         }
         distanceDash = v.magnitude;
 
+    }
+
+    void NinjaAct()//Pierro
+    {
+        foreach (GuardIAController g in ObjectRefs.Instance.GAIC)
+        {
+            for (int i = 0; i < g.patrollPoints_List.Count; i++)
+            {
+                if (i != g.patrollPoints_List.Count - 1)
+                {
+                    Vector3 v = g.patrollPoints_List[i].transform.position - g.patrollPoints_List[i + 1].transform.position;
+                    float dist = v.magnitude;
+                    v.Normalize();
+                    for (int j = 0; j < dist; j += 2)
+                    {
+                        GameObject go = Instantiate(traceDePas, g.patrollPoints_List[i + 1].transform.position + v * j, Quaternion.identity);
+                        traceDePasActiv.Add(go);
+                    }
+                }
+                else
+                {
+                    Vector3 v = g.patrollPoints_List[i].transform.position - g.patrollPoints_List[0].transform.position;
+                    float dist = v.magnitude;
+                    v.Normalize();
+                    for (int j = 0; j < dist; j += 2)
+                    {
+                        GameObject go = Instantiate(traceDePas, g.patrollPoints_List[0].transform.position + v * j, Quaternion.identity);
+                        traceDePasActiv.Add(go);
+                    }
+                }
+            }
+        }
+
+    }
+    void CleanTraceDePasActiv()
+    {
+        for (int i = 0; i < traceDePasActiv.Count; i++)
+        {
+            Destroy(traceDePasActiv[i]);
+        }
+        traceDePasActiv.Clear();
     }
 }

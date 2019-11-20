@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tresor : Obj
 {
@@ -12,10 +13,11 @@ public class Tresor : Obj
     public override void ActiveEvent()
     {
         base.ActiveEvent();
-        if (playerControl.inventory.Count == 0&&
+        if (playerControl.inventory.Count < 3 &&
             (canTake==EnumObjPlayer.All||canTake.ToString()== "Player"+playerControl.intPlayer))
         {
             playerControl.interactableObject = null;
+            ObjectRefs.Instance.playerInventory.transform.GetChild(2).GetChild(playerControl.inventory.Count).GetComponent<Image>().sprite = GetComponent<SpriteRenderer>().sprite;
             playerControl.inventory.Add(this);
             ObjectRefs.Instance.playerNoise.noiseRadius += NoiseMalus;
             GameManager.Instance.objectiveDone = true;
