@@ -197,6 +197,7 @@ public class PlayerControl : MonoBehaviour
     public void ActiveMap(bool status)
     {
         fullMap.SetActive(status);
+        fullMap.GetComponent<MapControl>().Start();
         if (status)
             Time.timeScale = 0f;
         else
