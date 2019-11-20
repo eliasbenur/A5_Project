@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class ObjectRefs : MonoBehaviour
@@ -13,6 +14,7 @@ public class ObjectRefs : MonoBehaviour
     [Header("NavMesh")]
     public GameObject patrollZones;
     private List<GameObject> patrollZones_List;
+    public List<GuardIAController> GAIC = new List<GuardIAController>();//Pierro
     public GameObject menuCanvas;
     public GameObject NavMesh;
     [Header("MiniGame LockedDoors")]
@@ -27,6 +29,7 @@ public class ObjectRefs : MonoBehaviour
     public GameObject[] objectivesRef_List;
     [Header("UI")]
     public Slider powerSlider;
+    public GameObject playerInventory;
 
 
     private void Awake()

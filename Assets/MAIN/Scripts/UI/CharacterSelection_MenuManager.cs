@@ -13,7 +13,8 @@ public class CharacterSelection_MenuManager : MonoBehaviour
     Player player;
 
     public ObjectRemaning objectRemaning;
-    public GameObject panelObj;
+    public GameObject panelObjImg, panelObjText, canSwitchLeft, canSwitchRight;
+    int index = 0;
 
     public Button default_Button;
 
@@ -23,10 +24,10 @@ public class CharacterSelection_MenuManager : MonoBehaviour
     {
         player = ReInput.players.GetPlayer(0);
 
-        if (panelObj != null && objectRemaning != null)
+        if (panelObjImg != null && objectRemaning != null)
         {
             int j = 0;
-            for (int i = 0; i < panelObj.transform.childCount; i++)
+            for (int i = 0; i < panelObjImg.transform.childCount; i++)
             {
                 try
                 {
@@ -39,9 +40,11 @@ public class CharacterSelection_MenuManager : MonoBehaviour
                           else j++;
                       }*/
 
-                    panelObj.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
+                    panelObjImg.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
                         objectRemaning.obj[i].sprite;
-                    if (objectRemaning.obj[i].stolen) panelObj.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
+                    panelObjText.transform.GetChild(i).GetComponent<Text>().text =
+                        objectRemaning.obj[i].name;
+                    if (objectRemaning.obj[i].stolen) panelObjImg.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
                     // j++;
                 }
                 catch { }
@@ -93,6 +96,52 @@ public class CharacterSelection_MenuManager : MonoBehaviour
         if ((hor_axis != 0 || ver_axis != 0) && EventSystem.current.currentSelectedGameObject == null)
         {
             default_Button.Select();
+        }
+
+
+        //Carrosel
+        if (player.GetButtonDown("SwitchObjL"))
+        {
+            if (index > 0)
+            {
+                index--;
+                if (index == 0) canSwitchLeft.SetActive(false);
+                if (objectRemaning.obj.Count > 5) canSwitchRight.SetActive(true);
+                for (int i = 0; i < panelObjImg.transform.childCount; i++)
+                {
+                    panelObjImg.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
+                        objectRemaning.obj[index + i].sprite;
+                    panelObjText.transform.GetChild(i).GetComponent<Text>().text =
+                        objectRemaning.obj[index + i].name;
+                    if (objectRemaning.obj[index + i].stolen) panelObjImg.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
+                    else
+                    {
+                        panelObjImg.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+        //if (Input.GetKeyDown("e"))
+        if (player.GetButtonDown("SwitchObjR"))
+        {
+            if (index < objectRemaning.obj.Count - 5)
+            {
+                index++;
+                if (index == objectRemaning.obj.Count - 5) canSwitchRight.SetActive(false);
+                if (objectRemaning.obj.Count > 5) canSwitchLeft.SetActive(true);
+                for (int i = 0; i < panelObjImg.transform.childCount; i++)
+                {
+                    panelObjImg.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
+                            objectRemaning.obj[index + i].sprite;
+                    panelObjText.transform.GetChild(i).GetComponent<Text>().text =
+                        objectRemaning.obj[index + i].name;
+                    if (objectRemaning.obj[index + i].stolen) panelObjImg.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
+                    else
+                    {
+                        panelObjImg.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
+                    }
+                }
+            }
         }
     }
 }

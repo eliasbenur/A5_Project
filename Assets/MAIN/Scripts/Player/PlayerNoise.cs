@@ -96,7 +96,8 @@ public class PlayerNoise : MonoBehaviour
     IEnumerator AlertGuard(GameObject guard)
     {
         yield return new WaitForSeconds(0.2f);
-        guard.GetComponent<GuardIAController>().PlayerNoiseDetected(transform.position);
+        //guard.GetComponent<GuardIAController>().PlayerNoiseDetected(transform.position);
+        guard.GetComponent<GuardIAController_v2>().PlayerNoiseDetected(transform.position);
     }
 
     float CalculatePathLength(Vector3 targetPosition, GameObject originalObject)

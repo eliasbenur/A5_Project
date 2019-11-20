@@ -37,11 +37,15 @@ public class End : MonoBehaviour
             {
                 for (int x = 0; x < objectivesData.obj.Count; x++)
                 {
-                    if (objectivesData.obj[x].name == collision.GetComponent<PlayerControl>().inventory[0].name)
+                    for (int y = 0; y < collision.GetComponent<PlayerControl>().inventory.Count; ++y)
                     {
-                        objectivesData.obj[x].stolen = true;
-                        ObjectRefs.Instance.soungManager.PlaywinSnd();
+                        if (objectivesData.obj[x].name == collision.GetComponent<PlayerControl>().inventory[y].name)
+                        {
+                            objectivesData.obj[x].stolen = true;
+                            ObjectRefs.Instance.soungManager.PlaywinSnd();
+                        }
                     }
+
                 }
                 EditorUtility.SetDirty(objectivesData);
                 ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();

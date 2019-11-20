@@ -69,7 +69,7 @@ public class CameraRotate : MonoBehaviour
         }
         MoveCamera();
 
-        //Spawn Delay
+        //Spawn Delay   
         if (delaySpawn_tmp > 0)
         {
             delaySpawn_tmp -= Time.deltaTime;
