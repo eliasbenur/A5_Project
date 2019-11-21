@@ -7,15 +7,12 @@ public class MapControl : MonoBehaviour
 {
     Player player;
 
-    public float minDist = 50;
-    public float maxDist = 25;
+    public float minClamp = 5;
+    public float maxClamp = 17.1f;
     public float zoomSpeedMod = 5;
-
-    public float minX;
-    public float maxX;
-
-    public float minY;
-    public float maxY;
+    public float[] zoomLevels;
+    public int level = 2;
+    public bool returnZero = true;
 
     public float speedMod = 5;
 
@@ -33,6 +30,16 @@ public class MapControl : MonoBehaviour
         UpdateCameraLevel();
         Vector3 pos = player_GameObject.transform.position;
         fullMapCamera.transform.position = new Vector3(pos.x, pos.y, fullMapCamera.transform.position.z);
+
+        zoomLevels = new float[5];
+        zoomLevels[0] = minClamp;
+        zoomLevels[1] = ((minClamp + maxClamp) / 3);
+        zoomLevels[2] = ((minClamp + maxClamp) / 2);
+        zoomLevels[3] = ((minClamp + maxClamp) / 3 * 2);
+        zoomLevels[4] = maxClamp;
+
+        fullMapCamera.orthographicSize = zoomLevels[level];
+
     }
 
     void Update()
@@ -50,10 +57,26 @@ public class MapControl : MonoBehaviour
             fullMapCamera.transform.position += (Vector3)move_Vector * (0.02f * speedMod);
         }
 
-        if (zoom_Vector != 0)
+        if (zoom_Vector != 0 && returnZero)
         {
-            fullMapCamera.orthographicSize += zoom_Vector * zoomSpeedMod;
-            fullMapCamera.orthographicSize = Mathf.Clamp(fullMapCamera.orthographicSize, 5, 17.3f);
+            if (zoom_Vector > 0 && level < 4)
+            {
+                level++;
+                fullMapCamera.orthographicSize = zoomLevels[level];
+            }
+            if (zoom_Vector < 0 && level > 0)
+            {
+                level--;
+                fullMapCamera.orthographicSize = zoomLevels[level];
+            }
+            //fullMapCamera.orthographicSize += zoom_Vector * zoomSpeedMod;
+            //fullMapCamera.orthographicSize = Mathf.Clamp(fullMapCamera.orthographicSize, 5, 17.3f);
+            returnZero = false;
+        }
+        else
+        {
+            if (zoom_Vector == 0)
+                returnZero = true;
         }
         UpdateCameraLevel();
 
