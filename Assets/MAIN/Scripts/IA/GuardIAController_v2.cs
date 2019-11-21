@@ -70,6 +70,9 @@ public class GuardIAController_v2 : MonoBehaviour
     public LayerMask collidersCheckZone;
     public LayerMask playerMask;
 
+    //
+    public bool spawnedIA;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +93,32 @@ public class GuardIAController_v2 : MonoBehaviour
     {
         SpeedUpdate();
         AlertModeUpdate();
+
+        //Game Over
+        if (Vector2.Distance(ObjectRefs.Instance.player.transform.position, transform.position) < distancePointsCheck)
+        {
+            Debug.Log("PlayerChased!");
+            ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
+        }
+
+        if (spawnedIA)
+        {
+            Bounds CameraBound = OrthographicBounds(Camera.main);
+            CameraBound.center = new Vector3(CameraBound.center.x, CameraBound.center.y, 0);
+            CameraBound.size = new Vector3(CameraBound.size.x + 15, CameraBound.size.y + 15, 0);
+            Vector2 IABound = (Vector2)transform.position;
+            if (!CameraBound.Contains(IABound))
+            {
+                Debug.Log("Hey");
+                StartCoroutine(DesPawn(1));
+            }
+        }
+    }
+
+    public IEnumerator DesPawn(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(this.gameObject);
     }
 
     public void AlertModeUpdate()
@@ -153,8 +182,19 @@ public class GuardIAController_v2 : MonoBehaviour
     {
         if (!checkingtheZone && !chasingPlayer)
         {
+            pointToGo = new List<Vector3>();
             pointToGo.Clear();
             pointToGo.Add(position);
+            if (agent == null)
+            {
+                agent = GetComponent<NavMeshAgent>();
+                if (spawnedIA)
+                {
+                    patrollPoints_List = new List<Transform>();
+                    patrollPoints_List.Add(this.transform);
+                }
+
+            }
             agent.SetDestination(position);
             CheckingZoneIni();
             //checkingZoneSprite.enabled = true;

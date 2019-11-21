@@ -208,6 +208,16 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 512
+  hackeable: 0
+  timeHacked: 0
+  timeUnHacked: 0
+  timeH_tmp: 0
+  isHacked: 0
+  IASpawn: {fileID: 0}
+  IAPrefab: {fileID: 1891490840076524664, guid: 4e85c029dd5b7ff49b35781ba16fdb7f,
+    type: 3}
+  IASpawnNum: 0
+  delaySpawn: 5
 --- !u!114 &1671300775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,12 +235,12 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 0
-  playerMask:
+  ObjToCheckMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   viewMeshFilter: {fileID: 1634634207}
   meshResolution: 1
   edgeResolveIterations: 3
   edgeDstThreshold: 0.1
   maskCutawayDst: 0
-  visiblePlayer: []
+  objToCheckList: []

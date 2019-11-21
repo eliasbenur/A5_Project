@@ -71,6 +71,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0545a3c2c56974b4fa1545eec4a436fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IASpawn: {fileID: 0}
+  IAPrefab: {fileID: 1891490840076524664, guid: 4e85c029dd5b7ff49b35781ba16fdb7f,
+    type: 3}
+  IASpawnNum: 0
+  delaySpawn: 5
 --- !u!212 &765280685
 SpriteRenderer:
   m_ObjectHideFlags: 0

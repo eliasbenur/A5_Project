@@ -96,8 +96,8 @@ public class CameraRotate : MonoBehaviour
                 {
                     Vector3 whereToSpawn = Outils.RandomPointInBounds(IASpawn.gameObject.GetComponent<BoxCollider2D>().bounds);
                     GameObject IA_tmp = Instantiate(IAPrefab, whereToSpawn, Quaternion.identity);
-                    IA_tmp.GetComponent<GuardIAController>().behaviourType = ia_BehaviourType.SpawnedIA;
-                    IA_tmp.GetComponent<GuardIAController>().StartChasingPlayerVarInis();
+                    IA_tmp.GetComponent<GuardIAController_v2>().spawnedIA = true;
+                    IA_tmp.GetComponent<GuardIAController_v2>().PlayerNoiseDetected(ObjectRefs.Instance.player.transform.position);
                     IA_tmp.GetComponent<NavMeshAgent>().SetDestination(ObjectRefs.Instance.player.transform.position);
 
                     delaySpawn_tmp = delaySpawn;

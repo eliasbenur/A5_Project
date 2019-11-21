@@ -423,6 +423,8 @@ public class PlayerControl : MonoBehaviour
                     Instantiate(donutPrefab, this.transform.position, Quaternion.identity);
                 }
                 break;
+            case Power.DejaVu:
+                break;
             default:
                 if (!powerActive && !powerunavailable)
                 {

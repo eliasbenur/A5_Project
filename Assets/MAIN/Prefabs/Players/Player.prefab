@@ -82,6 +82,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0331e71e0fd15045a3281c223b59080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistance: 2.55
+  closeThresholdDistance: 1.9
+  farPower: 0.5
+  closePower: 1
 --- !u!1 &6705209099861965325
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,6 +4999,7 @@ MonoBehaviour:
   canInteract: 0
   canDash: 1
   activated: 1
+  fullMap: {fileID: 0}
   menuManager: {fileID: 0}
   dashCurve:
     serializedVersion: 2
@@ -5039,11 +5044,15 @@ MonoBehaviour:
     m_Bits: 6400
   cameraManSprite: {fileID: 0}
   KeyManSprite: {fileID: 0}
+  traceDePas: {fileID: 0}
+  traceDePasActiv: []
   sprint: 0
   inventory: []
   securityZone1: 0
   securityZone2: 0
   donutPrefab: {fileID: 0}
+  currentSpeedMod: 1
+  SpeedMod: 0.5
 --- !u!61 &6927196242011935360
 BoxCollider2D:
   m_ObjectHideFlags: 0
