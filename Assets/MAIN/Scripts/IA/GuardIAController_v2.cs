@@ -3,66 +3,72 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using MyBox;
 public enum GUARD_TYPE { Normal, Elite };
 
 public class GuardIAController_v2 : MonoBehaviour
 {
-
-    NavMeshAgent agent;
+    [Separator("NavMesh")]
     public List<Transform> patrollPoints_List;
-    public List<Vector3> pointToGo;
+    List<Vector3> pointToGo;
+    NavMeshAgent agent;
     public float distancePointsCheck;
 
-    FOV_vBT fow;
+    [Separator("Guard Type")]
+    public GUARD_TYPE guardType;
 
+    [Separator("FOW")]
     public Vector2 stationaryDirection;
-    public Quaternion stationaryAngle;
-    public float stationaryDegreeRotation;
-
-    public Vector2 checkZoneSize;
-
-    public int checkZone_NumPoints;
-
-    public bool checkingtheZone = false;
-    public bool chasingPlayer = false;
-    public bool turningInPlace = false;
-    public bool inAlertMode = false;
-
-    public LayerMask collidersCheckZone;
-    public float turningDelay;
-    public float turningDelay_tmp;
-
-    public SpriteRenderer checkingZoneSprite;
-    public SpriteRenderer playerSpottedSprite;
-
-    public bool eatingDonut;
-    public float eatingDonutDelay;
-    public float eatingDonutDelay_tmp;
-    public GameObject donutRef;
-
-    //Spread
-    public GameObject spreadRef;
-    public LayerMask guardMask;
-    public float spreadRadius;
-
-    //Angles - FOV
+    FOV_vBT fow;
     public float baseviewAngle;
     public float alertviewAngle;
 
+
+    [Separator("Turning")]
+    public float turningDelay;
+    float turningDelay_tmp;
+    float stationaryDegreeRotation;
+
+    [Separator("SeekZone")]
+    public Vector2 checkZoneSize;
+    public int checkZone_NumPoints;
+
+
+    // IA States
+    bool checkingtheZone = false;
+    bool chasingPlayer = false;
+    bool turningInPlace = false;
+    bool inAlertMode = false;
+
+    [Separator("Sprites")]
+    public SpriteRenderer checkingZoneSprite;
+    public SpriteRenderer playerSpottedSprite;
+
+    [Separator("Donut")]
+    public float eatingDonutDelay;
+    float eatingDonutDelay_tmp;
+    GameObject donutRef;
+    bool eatingDonut;
+
+    [Separator("Spread")]
+    public float spreadRadius;
+
+    [Separator("Speed")]
     public AnimationCurve speedCurve;
-    public float speedCurve_CurrentTime;
+    float speedCurve_CurrentTime;
     public float speedCurve_MaxTime;
-    public float currentSpeed;
+    float currentSpeed;
     public float maxSpeed;
     public float Chasing_maxSpeed;
 
-    public LayerMask playerMask;
-
+    [Separator("AlertMode")]
     public float alertModeTime;
-    public float alertModeTime_tmp;
+    float alertModeTime_tmp;
 
-    public GUARD_TYPE guardType;
-
+    [Separator("LayersMasks")]
+    public LayerMask guardMask;
+    public LayerMask collidersCheckZone;
+    public LayerMask playerMask;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +81,8 @@ public class GuardIAController_v2 : MonoBehaviour
 
         turningDelay_tmp = -1;
         alertModeTime_tmp = -1;
+
+        pointToGo = new List<Vector3>();
     }
 
     // Update is called once per frame
@@ -182,7 +190,6 @@ public class GuardIAController_v2 : MonoBehaviour
 
     public void Turn()
     {
-        Debug.Log("Turning");
         if (turningDelay_tmp < 0)
         {
             turningInPlace = false;

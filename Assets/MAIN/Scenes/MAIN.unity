@@ -1487,10 +1487,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrollPoints_List:
   - {fileID: 150389403}
-  pointToGo: []
   distancePointsCheck: 1
   stationaryDirection: {x: 1, y: 0}
-  stationaryAngle: {x: 0, y: 0, z: 0, w: 0}
   stationaryDegreeRotation: 0
   checkZoneSize: {x: 10, y: 10}
   checkZone_NumPoints: 3
@@ -94114,10 +94112,8 @@ MonoBehaviour:
   - {fileID: 1890482982}
   - {fileID: 525427969}
   - {fileID: 408912822}
-  pointToGo: []
   distancePointsCheck: 1
   stationaryDirection: {x: 1, y: 0}
-  stationaryAngle: {x: 0, y: 0, z: 0, w: 0}
   stationaryDegreeRotation: 0
   checkZoneSize: {x: 10, y: 10}
   checkZone_NumPoints: 3
@@ -94177,7 +94173,7 @@ MonoBehaviour:
     m_Bits: 512
   alertModeTime: 10
   alertModeTime_tmp: 0
-  guardType: 1
+  guardType: 0
 --- !u!114 &6343589690386522931
 MonoBehaviour:
   m_ObjectHideFlags: 0
