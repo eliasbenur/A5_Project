@@ -53,7 +53,7 @@ public class MapControl : MonoBehaviour
         if (zoom_Vector != 0)
         {
             fullMapCamera.orthographicSize += zoom_Vector * zoomSpeedMod;
-            fullMapCamera.orthographicSize = Mathf.Clamp(fullMapCamera.orthographicSize, 5, 17.4f);
+            fullMapCamera.orthographicSize = Mathf.Clamp(fullMapCamera.orthographicSize, 5, 17.3f);
         }
         UpdateCameraLevel();
 

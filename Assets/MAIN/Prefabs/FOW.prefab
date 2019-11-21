@@ -30,7 +30,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 13.319716}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5206994144098925078}
   m_Father: {fileID: 517870288130057500}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -206,12 +207,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entered: 0
   isOpen: 0
+  checkOpen: 0
+  playerIn: 0
   guards: []
-  doors:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  doors: []
 --- !u!1 &2234396553200838110
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +239,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8771219839016463254}
-  - {fileID: 5206994144098925078}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -255,8 +253,6 @@ GameObject:
   - component: {fileID: 5206994144098925078}
   - component: {fileID: 4041618416501081180}
   - component: {fileID: 1011310630041624821}
-  - component: {fileID: 6960982983366591183}
-  - component: {fileID: 3672207904187933058}
   m_Layer: 14
   m_Name: RoomFOW 1_MiniMap
   m_TagString: Untagged
@@ -272,15 +268,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2544864133213946868}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 13.319716}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 517870288130057500}
-  m_RootOrder: 1
+  m_Father: {fileID: 8771219839016463254}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.869918, y: 3.9918454}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1971053207 &4041618416501081180
@@ -392,67 +388,3 @@ MonoBehaviour:
   m_UpdateCollider: 1
   m_OptimizeCollider: 1
   m_OptimizeGeometry: 1
---- !u!60 &6960982983366591183
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2544864133213946868}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -6.0768986, y: -6.479454}
-      - {x: -6.0663624, y: -4.1242948}
-      - {x: -6.0583463, y: -0.57928026}
-      - {x: -6.0568123, y: 2.0771885}
-      - {x: -6.060728, y: 4.6235433}
-      - {x: -6.072153, y: 6.7643995}
-      - {x: -6.081326, y: 7.590458}
-      - {x: -6.0931487, y: 8.204372}
-      - {x: 5.9336405, y: 8.269038}
-      - {x: 5.9398313, y: 6.701682}
-      - {x: 5.9357576, y: 4.542561}
-      - {x: 5.917232, y: 0.7525781}
-      - {x: 5.8707423, y: -6.197376}
-      - {x: 5.8694544, y: -6.505971}
-      - {x: -0.43146932, y: -6.485437}
-      - {x: -4.5753875, y: -6.4764724}
-      - {x: -5.2936797, y: -6.476252}
-      - {x: -5.807143, y: -6.477188}
-      - {x: -6.0768986, y: -6.479454}
---- !u!114 &3672207904187933058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2544864133213946868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68beeb9717cc66142ae72ba2aef0327c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entered: 0
-  isOpen: 0
-  guards: []
-  doors:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
