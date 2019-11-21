@@ -54,7 +54,7 @@ public class MapControl : MonoBehaviour
 
         if (move_Vector != Vector2.zero)
         {
-            fullMapCamera.transform.position += (Vector3)move_Vector * (0.02f * speedMod);
+            fullMapCamera.transform.position += (Vector3)move_Vector * (0.02f * speedMod * zoomLevels[level]);
         }
 
         if (zoom_Vector != 0 && returnZero)
