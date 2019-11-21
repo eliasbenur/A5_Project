@@ -30,11 +30,13 @@ public static class Outils
         NavMeshPath path = new NavMeshPath();
         NavMeshAgent nav = originalObject.GetComponent<NavMeshAgent>();
 
+        bool nose = false;
         if (nav.enabled)
         {
-            nav.CalculatePath(targetPosition, path);
+            //nav.CalculatePath(targetPosition, path);
+            nose = NavMesh.CalculatePath(originPosition, targetPosition, NavMesh.AllAreas, path);
         }
-        if (!NavMesh.CalculatePath(targetPosition, originalObject.transform.position, NavMesh.AllAreas, path))
+        if (!nose)
         {
             return false;
         }
@@ -56,7 +58,7 @@ public static class Outils
         {
             //Debug.Log(NavMesh.CalculatePath(allWayPoints[i], allWayPoints[i + 1], NavMesh.AllAreas, path));
             RaycastHit2D hit = Physics2D.Raycast(allWayPoints[i], allWayPoints[i + 1] - allWayPoints[i], Vector2.Distance(allWayPoints[i], allWayPoints[i + 1]), layerM);
-            Debug.DrawLine(allWayPoints[i], allWayPoints[i + 1], Color.red, Vector2.Distance(allWayPoints[i], allWayPoints[i + 1]));
+            Debug.DrawLine(allWayPoints[i], allWayPoints[i + 1], Color.red,9999);
             if (hit.collider != null)
             {
                 return false;

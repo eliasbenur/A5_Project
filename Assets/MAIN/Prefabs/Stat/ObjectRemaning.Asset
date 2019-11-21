@@ -40,13 +40,13 @@ MonoBehaviour:
     sprite: {fileID: 2228849384606813332, guid: 6e978cfdb96904441b675c365a736b3a,
       type: 3}
   - name: LambdaTreasure1 (1)
-    stolen: 1
+    stolen: 0
     sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
   - name: LambdaTreasure1 (4)
     stolen: 0
     sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
   - name: LambdaTreasure1 (2)
-    stolen: 1
+    stolen: 0
     sprite: {fileID: 7978978396411436921, guid: c5608ea8b553ad341a7b146f82acd01e,
       type: 3}
   - name: LambdaTreasure1 (6)

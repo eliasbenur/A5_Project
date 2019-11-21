@@ -10,7 +10,7 @@ public class GuardIAController_v2 : MonoBehaviour
 {
     [Separator("NavMesh")]
     public List<Transform> patrollPoints_List;
-    List<Vector3> pointToGo;
+    public List<Vector3> pointToGo;
     NavMeshAgent agent;
     public float distancePointsCheck;
 
@@ -35,7 +35,7 @@ public class GuardIAController_v2 : MonoBehaviour
 
 
     // IA States
-    bool checkingtheZone = false;
+    public bool checkingtheZone = false;
     bool chasingPlayer = false;
     bool turningInPlace = false;
     bool inAlertMode = false;
@@ -74,7 +74,7 @@ public class GuardIAController_v2 : MonoBehaviour
     public bool spawnedIA;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -86,6 +86,8 @@ public class GuardIAController_v2 : MonoBehaviour
         alertModeTime_tmp = -1;
 
         pointToGo = new List<Vector3>();
+
+        SetUpPatrollPoints();
     }
 
     // Update is called once per frame
@@ -180,7 +182,7 @@ public class GuardIAController_v2 : MonoBehaviour
 
     public void PlayerNoiseDetected(Vector3 position)
     {
-        if (!checkingtheZone && !chasingPlayer)
+        if (!chasingPlayer)
         {
             pointToGo = new List<Vector3>();
             pointToGo.Clear();
@@ -203,12 +205,16 @@ public class GuardIAController_v2 : MonoBehaviour
 
     public void GoingToFirstPoint()
     {
-        agent.SetDestination(pointToGo[0]);
+        if (pointToGo.Count > 0)
+        {
+            agent.SetDestination(pointToGo[0]);
+        }
+
     }
 
     public bool CheckIfFirstPointReached()
     {
-        if (Vector3.Distance(transform.position, pointToGo[0]) < distancePointsCheck)
+        if (pointToGo.Count > 0 && Vector3.Distance(transform.position, pointToGo[0]) < distancePointsCheck)
         {
             if ((checkingtheZone || inAlertMode) && !turningInPlace)
             {
@@ -435,6 +441,13 @@ public class GuardIAController_v2 : MonoBehaviour
         GetComponent<FOV_vBT>().viewAngle = alertviewAngle;
     }
 
+    public void IASpawned(Vector3 positiontoGo)
+    {
+        pointToGo.Clear();
+        pointToGo.Add(positiontoGo);
+        CheckingZoneIni();
+    }
+
     public void CheckingZoneIni()
     {
         checkingtheZone = true;
@@ -450,12 +463,18 @@ public class GuardIAController_v2 : MonoBehaviour
             Bounds bounds_tmp = new Bounds(pointToGo[0], checkZoneSize);
             Vector3 pointTmp = new Vector3(0, 0, 0);
             bool check = false;
-            while (!check)
+            int checkNum = 0;
+            while (!check && checkNum < 10)
             {
                 pointTmp = Outils.RandomPointInBounds(bounds_tmp);
                 check = Outils.IsPointRecheable(pointTmp, pointToGo[0], this.gameObject, collidersCheckZone);
+                ++checkNum;
             }
-            pointToGo.Add(pointTmp);
+            if (checkNum < 10)
+            {
+                pointToGo.Add(pointTmp);
+            }
+
         }
     }
 
