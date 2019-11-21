@@ -127,10 +127,10 @@ public class GuardIAController_v2 : MonoBehaviour
         agent.speed = currentSpeed;
     }
 
-    public void CheckIfPlayerisNearby()
+    public bool CheckIfPlayerisNearby()
     {
-        if (!checkingtheZone) return;
-        Collider2D[] guardsinRdaius = Physics2D.OverlapCircleAll(transform.position, 3);
+        if (!checkingtheZone) return false;
+        Collider2D[] guardsinRdaius = Physics2D.OverlapCircleAll(transform.position, 2);
         for (int x = 0; x < guardsinRdaius.Length; x++)
         {
             Transform guard = guardsinRdaius[x].transform;
@@ -142,8 +142,10 @@ public class GuardIAController_v2 : MonoBehaviour
                 agent.SetDestination(ObjectRefs.Instance.player.transform.position);
 
                 ChasinPlayerIni();
+                return true;
             }
         }
+        return false;
     }
 
 
@@ -379,6 +381,7 @@ public class GuardIAController_v2 : MonoBehaviour
     public void ChasinPlayerIni()
     {
 
+        turningInPlace = false;
 
         chasingPlayer = true;
         playerSpottedSprite.enabled = true;

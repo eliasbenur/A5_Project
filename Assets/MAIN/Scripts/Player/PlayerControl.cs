@@ -52,6 +52,10 @@ public class PlayerControl : MonoBehaviour
 
     NavMeshAgent agent;
 
+    //Speed modifiers 
+    public float currentSpeedMod;
+    public float SpeedMod;
+
     public bool isPowerActive()
     {
         if (powerActive)
@@ -156,8 +160,9 @@ public class PlayerControl : MonoBehaviour
                 moveVector.Normalize();
             }
 
-            if (player.GetButtonDown("Dash") && canDash)
+            if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= stat.powerDelay / 2)
             {
+                powerDelay_tmp -= stat.powerDelay / 2;
                 canDash = false;
                 StartCoroutine(Dash(moveVector));
             }
@@ -246,9 +251,11 @@ public class PlayerControl : MonoBehaviour
                 {
                     ObjectRefs.Instance.playerNoise.noiseRadius -= inventory[0].NoiseMalus;
                 }
+                currentSpeedMod = SpeedMod;
                 break;
             case Power.Ninja:
                 ObjectRefs.Instance.playerNoise.noiseRadius -= ObjectRefs.Instance.playerNoise.getBaseNoiseRadius();
+                currentSpeedMod = SpeedMod;
                 break;
             case Power.Hunter:
                 NinjaAct();
@@ -265,9 +272,11 @@ public class PlayerControl : MonoBehaviour
                 {
                     ObjectRefs.Instance.playerNoise.noiseRadius += inventory[0].NoiseMalus;
                 }
+                currentSpeedMod = 1;
                 break;
             case Power.Ninja:
                 ObjectRefs.Instance.playerNoise.noiseRadius += ObjectRefs.Instance.playerNoise.getBaseNoiseRadius();
+                currentSpeedMod = 1;
                 break;
             case Power.Hunter:
                 CleanTraceDePasActiv();
@@ -285,7 +294,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (moveVector != Vector2.zero)
                 {
-                    transform.position += (Vector3)moveVector * (stat.speed * Time.fixedDeltaTime);
+                    transform.position += (Vector3)moveVector * (stat.speed * currentSpeedMod * Time.fixedDeltaTime);
                 }
             }
             else
@@ -296,11 +305,11 @@ public class PlayerControl : MonoBehaviour
                     //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
                     if (player.GetButton("Sprint"))
                     {
-                        transform.position += (Vector3)moveVector * (stat.speed * Time.fixedDeltaTime * sprintMod);
+                        transform.position += (Vector3)moveVector * (stat.speed * currentSpeedMod * Time.fixedDeltaTime * sprintMod);
                     }
                     else
                     {
-                        transform.position += (Vector3)moveVector * (stat.speed * Time.fixedDeltaTime);
+                        transform.position += (Vector3)moveVector * (stat.speed * currentSpeedMod * Time.fixedDeltaTime);
                     }
                 }
                 else

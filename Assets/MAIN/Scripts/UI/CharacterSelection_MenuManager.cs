@@ -76,6 +76,9 @@ public class CharacterSelection_MenuManager : MonoBehaviour
             case 6:
                 stat.power = Power.Ninja;
                 break;
+            case 7:
+                stat.power = Power.DejaVu;
+                break;
             default:
                 Debug.Log("No Character Selected!");
                 break;

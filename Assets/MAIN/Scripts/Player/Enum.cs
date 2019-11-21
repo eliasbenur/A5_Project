@@ -31,6 +31,7 @@ public enum Power
     Hunter,
     Cheater,
     Ninja,
+    DejaVu
 }
 
 public enum ia_BehaviourType
