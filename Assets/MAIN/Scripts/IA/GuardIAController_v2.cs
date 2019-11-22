@@ -88,6 +88,8 @@ public class GuardIAController_v2 : MonoBehaviour
         pointToGo = new List<Vector3>();
 
         SetUpPatrollPoints();
+
+        ObjectRefs.Instance.GAIC.Add(this);
     }
 
     // Update is called once per frame

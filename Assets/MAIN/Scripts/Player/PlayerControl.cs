@@ -494,7 +494,7 @@ public class PlayerControl : MonoBehaviour
 
     void NinjaAct()//Pierro
     {
-        foreach (GuardIAController g in ObjectRefs.Instance.GAIC)
+        foreach (GuardIAController_v2 g in ObjectRefs.Instance.GAIC)
         {
             for (int i = 0; i < g.patrollPoints_List.Count; i++)
             {

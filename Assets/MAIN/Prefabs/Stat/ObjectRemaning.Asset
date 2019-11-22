@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: ObjectRemaning
   m_EditorClassIdentifier: 
   obj:
+  - name: LambdaTreasure1
+    stolen: 0
+    sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
+  - name: Cloche1
+    stolen: 0
+    sprite: {fileID: -9070127728172309502, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
   - name: Metal1
     stolen: 0
     sprite: {fileID: -74071783076391883, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
@@ -21,35 +28,109 @@ MonoBehaviour:
     sprite: {fileID: 7728724992391115551, guid: c5608ea8b553ad341a7b146f82acd01e,
       type: 3}
   - name: LambdaTreasure3
-    stolen: 1
+    stolen: 0
     sprite: {fileID: -1606171125206317113, guid: c5608ea8b553ad341a7b146f82acd01e,
-      type: 3}
-  - name: LambdaTreasure1
-    stolen: 0
-    sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
-  - name: Cloche1
-    stolen: 0
-    sprite: {fileID: -9070127728172309502, guid: c5608ea8b553ad341a7b146f82acd01e,
-      type: 3}
-  - name: LambdaTreasure1 (3)
-    stolen: 0
-    sprite: {fileID: -8464175484605495713, guid: c5608ea8b553ad341a7b146f82acd01e,
-      type: 3}
-  - name: LambdaTreasure1 (5)
-    stolen: 1
-    sprite: {fileID: 2228849384606813332, guid: 6e978cfdb96904441b675c365a736b3a,
       type: 3}
   - name: LambdaTreasure1 (1)
     stolen: 0
     sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
+  - name: LambdaTreasure1 (19)
+    stolen: 0
+    sprite: {fileID: 7978978396411436921, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure3 (2)
+    stolen: 0
+    sprite: {fileID: -1606171125206317113, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
   - name: LambdaTreasure1 (4)
+    stolen: 0
+    sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
+  - name: LambdaTreasure1 (12)
     stolen: 0
     sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
   - name: LambdaTreasure1 (2)
     stolen: 0
     sprite: {fileID: 7978978396411436921, guid: c5608ea8b553ad341a7b146f82acd01e,
       type: 3}
+  - name: LambdaTreasure1 (18)
+    stolen: 0
+    sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
   - name: LambdaTreasure1 (6)
     stolen: 0
     sprite: {fileID: -2580696453838880790, guid: 7590744495c970c458de208963349bfd,
+      type: 3}
+  - name: LambdaTreasure1 (7)
+    stolen: 0
+    sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
+  - name: LambdaTreasure1 (17)
+    stolen: 0
+    sprite: {fileID: 7978978396411436921, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: Metal1 (2)
+    stolen: 0
+    sprite: {fileID: -74071783076391883, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
+  - name: LambdaTreasure1 (8)
+    stolen: 0
+    sprite: {fileID: -8464175484605495713, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure2 (1)
+    stolen: 0
+    sprite: {fileID: 7728724992391115551, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure1 (13)
+    stolen: 0
+    sprite: {fileID: 7978978396411436921, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure1 (22)
+    stolen: 0
+    sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
+  - name: LambdaTreasure1 (3)
+    stolen: 0
+    sprite: {fileID: -8464175484605495713, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure1 (9)
+    stolen: 0
+    sprite: {fileID: 243626335910822555, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
+  - name: LambdaTreasure3 (3)
+    stolen: 0
+    sprite: {fileID: -1606171125206317113, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure1 (5)
+    stolen: 0
+    sprite: {fileID: 2228849384606813332, guid: 6e978cfdb96904441b675c365a736b3a,
+      type: 3}
+  - name: Metal1 (1)
+    stolen: 0
+    sprite: {fileID: -74071783076391883, guid: c5608ea8b553ad341a7b146f82acd01e, type: 3}
+  - name: LambdaTreasure1 (11)
+    stolen: 0
+    sprite: {fileID: -2580696453838880790, guid: 7590744495c970c458de208963349bfd,
+      type: 3}
+  - name: LambdaTreasure3 (1)
+    stolen: 0
+    sprite: {fileID: -1606171125206317113, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure1 (21)
+    stolen: 0
+    sprite: {fileID: -8464175484605495713, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure1 (15)
+    stolen: 0
+    sprite: {fileID: -8464175484605495713, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure1 (14)
+    stolen: 0
+    sprite: {fileID: -8464175484605495713, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure1 (16)
+    stolen: 0
+    sprite: {fileID: -2580696453838880790, guid: 7590744495c970c458de208963349bfd,
+      type: 3}
+  - name: LambdaTreasure1 (10)
+    stolen: 0
+    sprite: {fileID: 7978978396411436921, guid: c5608ea8b553ad341a7b146f82acd01e,
+      type: 3}
+  - name: LambdaTreasure1 (20)
+    stolen: 0
+    sprite: {fileID: 7978978396411436921, guid: c5608ea8b553ad341a7b146f82acd01e,
       type: 3}

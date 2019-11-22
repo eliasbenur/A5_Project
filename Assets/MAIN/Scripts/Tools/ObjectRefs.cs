@@ -14,7 +14,7 @@ public class ObjectRefs : MonoBehaviour
     [Header("NavMesh")]
     public GameObject patrollZones;
     private List<GameObject> patrollZones_List;
-    public List<GuardIAController> GAIC = new List<GuardIAController>();//Pierro
+    public List<GuardIAController_v2> GAIC = new List<GuardIAController_v2>();//Pierro
     public GameObject menuCanvas;
     public GameObject NavMesh;
     [Header("MiniGame LockedDoors")]

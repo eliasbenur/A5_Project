@@ -66,7 +66,7 @@ public class GuardIAController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ObjectRefs.Instance.GAIC.Add(this);
+        //ObjectRefs.Instance.GAIC.Add(this);
         if (playerMakerSFM == null)
         {
             gameObject.GetComponent<PlayMakerFSM>();
