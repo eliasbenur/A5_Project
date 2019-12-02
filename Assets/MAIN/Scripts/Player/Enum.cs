@@ -14,7 +14,12 @@ public enum EnumObjPlayer
 public enum MaterialObj
 {
     None,
-    Metal
+    Metal,
+    Soap,
+    HeavyStone,
+    ShinoRock,
+    CursedObject,
+    GlassOFCrystal
 }
 
 public enum EtatMusee

@@ -44,6 +44,14 @@ public class PlayerControl : MonoBehaviour
     bool powerActive = false;
     bool powerunavailable = false;
     float powerDelay_tmp;
+    [HideInInspector] public float malusCursedObject=0;
+    [HideInInspector] public float multiplicaterGlassOfCrystal = 1;
+
+    //inertie
+    public bool inertie=false;
+    public Vector3 vectorInertie;
+    public float valeurInertie = 0.01f;
+    public float inertieDim = 0.999f;
 
     //PowersUps
     public bool securityZone1 = false;
@@ -155,7 +163,6 @@ public class PlayerControl : MonoBehaviour
                 }
             }
             else
-
             {
                 moveVector.Normalize();
             }
@@ -217,7 +224,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (powerDelay_tmp > 0)
             {
-                powerDelay_tmp -= Time.deltaTime;
+                powerDelay_tmp -= Time.deltaTime *multiplicaterGlassOfCrystal;
             }
             else
             {
@@ -292,6 +299,7 @@ public class PlayerControl : MonoBehaviour
 
             if (hit.collider != null && hit.distance < 0.5f)
             {
+            
                 if (moveVector != Vector2.zero)
                 {
                     transform.position += (Vector3)moveVector * (stat.speed * currentSpeedMod * Time.fixedDeltaTime);
@@ -299,7 +307,7 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
-                if (moveVector != Vector2.zero)
+                if (moveVector != Vector2.zero&&!inertie)
                 {
                     //agent.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
                     //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
@@ -311,9 +319,34 @@ public class PlayerControl : MonoBehaviour
                     {
                         transform.position += (Vector3)moveVector * (stat.speed * currentSpeedMod * Time.fixedDeltaTime);
                     }
+                    
                 }
                 else
                 {
+                    if (vectorInertie.magnitude == 0)
+                    {
+                        vectorInertie = moveVector; 
+                    }
+                    else
+                    {
+                        if (moveVector.magnitude == 0) { vectorInertie *= inertieDim; }
+                        else
+                        {
+                            if (moveVector.x != 0)
+                                vectorInertie.x = vectorInertie.x < moveVector.x ? vectorInertie.x + valeurInertie : vectorInertie.x - valeurInertie;
+                            if (moveVector.y != 0)
+                                vectorInertie.y = vectorInertie.y < moveVector.y ? vectorInertie.y + valeurInertie : vectorInertie.y - valeurInertie;
+                            vectorInertie.Normalize();
+                        }
+                        Debug.DrawLine(transform.position, transform.position + vectorInertie, Color.red);
+                        transform.position += vectorInertie * (stat.speed * currentSpeedMod * Time.fixedDeltaTime);
+
+                        
+
+                    }
+
+
+
                     //agent.velocity -= agent.velocity * 0.25f;
                     //rb.velocity -= rb.velocity * 0.25f;
                 }
