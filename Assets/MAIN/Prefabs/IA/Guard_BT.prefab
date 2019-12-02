@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 1891490840076524671}
   - component: {fileID: 1891490840076524656}
   - component: {fileID: 1891490840076524669}
-  - component: {fileID: 1891490840076524657}
   - component: {fileID: 1891490840076524667}
   - component: {fileID: 4771310726237213151}
   - component: {fileID: 1891490840076524666}
@@ -231,32 +230,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.12}
   m_Size: {x: 0.61, y: 0.92}
   m_Direction: 0
---- !u!114 &1891490840076524657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1891490840076524664}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dca0e3ab3521a1c43883d5847d3040aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 7
-  viewAngle: 90
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 4352
-  ObjToCheckMask:
-    serializedVersion: 2
-    m_Bits: 8704
-  viewMeshFilter: {fileID: 1891490840599532854}
-  meshResolution: 1
-  edgeResolveIterations: 3
-  edgeDstThreshold: 0.1
-  maskCutawayDst: 0
-  objToCheckList: []
 --- !u!114 &1891490840076524667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +237,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891490840076524664}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 486890813d926c94f88376b39a06c7c6, type: 3}
   m_Name: 
@@ -294,7 +267,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891490840076524664}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -381,7 +354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891490840076524664}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a86e2c9b70c68c419e1241efe0f5ade, type: 3}
   m_Name: 
