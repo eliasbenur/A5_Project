@@ -39,11 +39,18 @@ public class PlayerControl : MonoBehaviour
 
     public List<Tresor> inventory = new List<Tresor>();
 
+    public bool noisyMalus;
+    public bool shinyRockMalus;
+    public float cursedObjectMalus;
+    public bool cursedObjectMalusActivated;
+    public float glassOfCrystalMalus;
+    public bool glassOfCrystalMalysActivated;
+
     //Power Vars
     Slider powerSlider;
     bool powerActive = false;
     bool powerunavailable = false;
-    float powerDelay_tmp;
+    public float powerDelay_tmp;
     [HideInInspector] public float malusCursedObject=0;
     [HideInInspector] public float multiplicaterGlassOfCrystal = 1;
 
@@ -224,7 +231,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (powerDelay_tmp > 0)
             {
-                powerDelay_tmp -= Time.deltaTime *multiplicaterGlassOfCrystal;
+                powerDelay_tmp -= Time.deltaTime;
             }
             else
             {
@@ -236,7 +243,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (powerDelay_tmp < stat.powerDelay)
+            if (powerDelay_tmp < stat.powerDelay + cursedObjectMalus)
             {
                 powerDelay_tmp += Time.deltaTime;
             }
@@ -245,8 +252,23 @@ public class PlayerControl : MonoBehaviour
                 powerunavailable = false;
             }
         }
+        if (powerActive)
+        {
+            if (glassOfCrystalMalysActivated)
+            {
+                powerSlider.value = powerDelay_tmp / (stat.powerDelay - glassOfCrystalMalus);
+            }
+            else
+            {
+                powerSlider.value = powerDelay_tmp / stat.powerDelay;
+            }
 
-        powerSlider.value = powerDelay_tmp / stat.powerDelay;
+        }
+        else
+        {
+            powerSlider.value = powerDelay_tmp / (stat.powerDelay + cursedObjectMalus);
+        }
+
     }
 
     public void ActivePower()
@@ -336,13 +358,10 @@ public class PlayerControl : MonoBehaviour
                                 vectorInertie.x = vectorInertie.x < moveVector.x ? vectorInertie.x + valeurInertie : vectorInertie.x - valeurInertie;
                             if (moveVector.y != 0)
                                 vectorInertie.y = vectorInertie.y < moveVector.y ? vectorInertie.y + valeurInertie : vectorInertie.y - valeurInertie;
-                            vectorInertie.Normalize();
+                            
                         }
                         Debug.DrawLine(transform.position, transform.position + vectorInertie, Color.red);
                         transform.position += vectorInertie * (stat.speed * currentSpeedMod * Time.fixedDeltaTime);
-
-                        
-
                     }
 
 
@@ -457,16 +476,46 @@ public class PlayerControl : MonoBehaviour
                 }
                 break;
             case Power.DejaVu:
+                if (glassOfCrystalMalysActivated)
+                {
+                    powerDelay_tmp = 0;
+                }
                 break;
             default:
                 if (!powerActive && !powerunavailable)
                 {
                     powerActive = true;
+                    float glass_tmp = stat.powerDelay;
+                    if (glassOfCrystalMalysActivated)
+                    {
+                        glass_tmp -= glassOfCrystalMalus;
+                    }
+                    float cursed_tmp = stat.powerDelay;
+                    if (cursedObjectMalusActivated)
+                    {
+                        cursed_tmp += cursedObjectMalus;
+                    }
+                    
+                    powerDelay_tmp = (powerDelay_tmp * glass_tmp) / (cursed_tmp);
+
                     ActivePower();
                 }
                 else
                 {
                     powerActive = false;
+                    float glass_tmp = stat.powerDelay;
+                    if (glassOfCrystalMalysActivated)
+                    {
+                        glass_tmp -= glassOfCrystalMalus;
+                    }
+                    float cursed_tmp = stat.powerDelay;
+                    if (cursedObjectMalusActivated)
+                    {
+                        cursed_tmp += cursedObjectMalus;
+                    }
+
+                    powerDelay_tmp = (powerDelay_tmp * glass_tmp) / (cursed_tmp);
+
                     DisablePower();
                 }
                 break;

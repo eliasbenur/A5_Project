@@ -23,4 +23,4 @@ MonoBehaviour:
   nbAntiCam: 3
   ObjAntiCamera: {fileID: 7557627805658173458, guid: 44e496352a19c4b4b9edd70022f16fd5,
     type: 3}
-  powerDelay: 15
+  powerDelay: 5

@@ -19,7 +19,8 @@ public enum MaterialObj
     HeavyStone,
     ShinoRock,
     CursedObject,
-    GlassOFCrystal
+    GlassOFCrystal,
+    Noisy
 }
 
 public enum EtatMusee

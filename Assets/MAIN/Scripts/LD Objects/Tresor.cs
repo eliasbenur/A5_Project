@@ -8,7 +8,7 @@ public class Tresor : Obj
     public MaterialObj materialObj;
     public float poid = 0;
     public EnumObjPlayer canTake= EnumObjPlayer.All;
-    public int rangeRock = 5;
+    public int malusShinyRock = 5;
     // 0 if no Malus
     public float NoiseMalus;
     public override void ActiveEvent()
@@ -20,7 +20,6 @@ public class Tresor : Obj
             playerControl.interactableObject = null;
             ObjectRefs.Instance.playerInventory.transform.GetChild(2).GetChild(playerControl.inventory.Count).GetComponent<Image>().sprite = GetComponent<SpriteRenderer>().sprite;
             playerControl.inventory.Add(this);
-            ObjectRefs.Instance.playerNoise.noiseRadius += NoiseMalus;
             GameManager.Instance.objectiveDone = true;
             gameObject.SetActive(false);
             transform.SetParent(playerControl.transform);
@@ -42,9 +41,22 @@ public class Tresor : Obj
                 case MaterialObj.GlassOFCrystal:
                     GlassOFCrystal();
                     break;
+                case MaterialObj.Noisy:
+                    Noisy();
+                    break;
             }
         }
     }
+
+    void Noisy()
+    {
+        if (!playerControl.noisyMalus)
+        {
+            ObjectRefs.Instance.playerNoise.noiseRadius += NoiseMalus;
+            playerControl.noisyMalus = true;
+        }
+    }
+
     void Soap()
     {
         if (playerControl != null)
@@ -57,11 +69,15 @@ public class Tresor : Obj
     }
     void ShinoRock()
     {
-        foreach (GuardIAController_v2 g in ObjectRefs.Instance.GAIC)
+        if (!playerControl.shinyRockMalus)
         {
-            FOV_vBT f = g.gameObject.GetComponent<FOV_vBT>();
-            if (f != null)
-                f.viewRadius += rangeRock;       
+            foreach (GuardIAController_v2 g in ObjectRefs.Instance.GAIC)
+            {
+                FOV_vBT f = g.gameObject.GetComponent<FOV_vBT>();
+                if (f != null)
+                    f.viewRadius += malusShinyRock;
+            }
+            playerControl.shinyRockMalus = true;
         }
     }
     void CursedObject()
@@ -71,7 +87,9 @@ public class Tresor : Obj
     }
     void GlassOFCrystal()
     {
-        if (playerControl != null)
-            playerControl.multiplicaterGlassOfCrystal = 1.5f;
+        /*if (playerControl != null)
+            playerControl.
+                = 1.5f;
+                */
     }
 }
