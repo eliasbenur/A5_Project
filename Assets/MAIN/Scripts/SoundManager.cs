@@ -5,8 +5,8 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 
-    public AudioClip movementSnd, guardesAttention, itemTaken, winSnd;
-    AudioSource movementSnd_src, guardesAttention_src, itemTaken_src, winSnd_src;
+    public AudioClip movementSnd, guardesAttention, itemTaken, winSnd, normalMusic, chaseMusic, searchMusic;
+    AudioSource movementSnd_src, guardesAttention_src, itemTaken_src, winSnd_src, normalMusic_src;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +25,10 @@ public class SoundManager : MonoBehaviour
         winSnd_src = gameObject.AddComponent<AudioSource>();
         winSnd_src.clip = winSnd;
         winSnd_src.volume = 0.3f;
+
+        normalMusic_src = gameObject.AddComponent<AudioSource>();
+        normalMusic_src.clip = normalMusic;
+        normalMusic_src.volume = 0.5f;
     }
 
     // Update is called once per frame
@@ -59,5 +63,26 @@ public class SoundManager : MonoBehaviour
 
         winSnd_src.Play();
 
+    }
+
+    public void playNormalMusic()
+    {
+        normalMusic_src.Stop();
+        normalMusic_src.clip = normalMusic;
+        normalMusic_src.Play();
+    }
+
+    public void playChaseMusic()
+    {
+        normalMusic_src.Stop();
+        normalMusic_src.clip = chaseMusic;
+        normalMusic_src.Play();
+    }
+
+    public void playSearchMusic()
+    {
+        normalMusic_src.Stop();
+        normalMusic_src.clip = searchMusic;
+        normalMusic_src.Play();
     }
 }
