@@ -196,21 +196,51 @@ public class PlayerControl : MonoBehaviour
             }
             if (glassOfCrystalMalysActivated)
             {
-                if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= stat.powerDelay)
+                if (cursedObjectMalusActivated)
                 {
-                    powerDelay_tmp -= stat.powerDelay;
-                    canDash = false;
-                    StartCoroutine(Dash(moveVector));
+                    if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= (stat.powerDelay + cursedObjectMalus))
+                    {
+                        powerDelay_tmp -= stat.powerDelay + cursedObjectMalus;
+
+                        canDash = false;
+                        StartCoroutine(Dash(moveVector));
+                    }
                 }
+                else
+                {
+                    if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= stat.powerDelay)
+                    {
+                        powerDelay_tmp -= stat.powerDelay;
+
+                        canDash = false;
+                        StartCoroutine(Dash(moveVector));
+                    }
+                }
+
             }
             else
             {
-                if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= stat.powerDelay / 2)
+                if (cursedObjectMalusActivated)
                 {
-                    powerDelay_tmp -= stat.powerDelay / 2;
-                    canDash = false;
-                    StartCoroutine(Dash(moveVector));
+                    if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= (stat.powerDelay + cursedObjectMalus)/ 2)
+                    {
+                        powerDelay_tmp -= (stat.powerDelay + cursedObjectMalus) / 2;
+
+                        canDash = false;
+                        StartCoroutine(Dash(moveVector));
+                    }
                 }
+                else
+                {
+                    if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= stat.powerDelay / 2)
+                    {
+                        powerDelay_tmp -= stat.powerDelay / 2;
+
+                        canDash = false;
+                        StartCoroutine(Dash(moveVector));
+                    }
+                }
+
             }
 
             if (canDash)
