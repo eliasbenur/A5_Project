@@ -58,22 +58,36 @@ public class PlayerNoise : MonoBehaviour
         {
             transform.position = toFollow.position + new Vector3(0,-0.3f,0);
         }
-        circlecoll.radius = noiseRadius;
+        circlecoll.radius = noiseRadius * player.moveVector.sqrMagnitude;
         var main = particleSystem.main;
+        //float tempSpeed = player.moveVector.sqrMagnitude * noiseRadius * 2;
         main.startSpeed = noiseRadius * 2;
+        /*if (tempSpeed < (noiseRadius * 2) / 2)
+        {
+            main.startSpeed = noiseRadius * 2 / 2;
+        }
+        else
+        {
+            main.startSpeed = player.moveVector.sqrMagnitude * noiseRadius * 2;
+        }*/
 
         if (delayNoiseWave_tmp > 0)
         {
             if (player.moveVector.sqrMagnitude > 0)
             {
-                delayNoiseWave_tmp -= Time.fixedDeltaTime  * (player.moveVector.sqrMagnitude/1);
+                delayNoiseWave_tmp -= Time.fixedDeltaTime  /* (player.moveVector.sqrMagnitude/1)*/;
+            }
+            else
+            {
+                delayNoiseWave_tmp = 0;
             }
 
         }
-        else
+        else if (player.moveVector.sqrMagnitude > 0 && !particleSystem.isPlaying)
         {
             delayNoiseWave_tmp = delayNoiseWave;
             particleSystem.Play();
+            //ObjectRefs.Instance.soungManager.movementSnd_src.volume = player.moveVector.sqrMagnitude * 1;
             ObjectRefs.Instance.soungManager.PlaymovementSnd();
             NoiseUpdate();
         }
