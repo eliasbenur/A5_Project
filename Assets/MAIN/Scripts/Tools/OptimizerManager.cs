@@ -12,7 +12,7 @@ public class OptimizerManager : MonoBehaviour
     {
         toFollow = ObjectRefs.Instance.player.transform;
         Bounds CameraBound = Outils.OrthographicBounds(Camera.main);
-        GetComponent<BoxCollider2D>().size = CameraBound.size + new Vector3(20,20,0);
+        GetComponent<BoxCollider2D>().size = CameraBound.size + new Vector3(30,30,0);
 
     }
 
