@@ -118,6 +118,25 @@ public class PlayerControl : MonoBehaviour
         powerSlider = ObjectRefs.Instance.powerSlider;
         powerDelay_tmp = stat.powerDelay;
 
+        switch (stat.power)
+        {
+            case Power.Hunter:
+                stat.powerDelay = 5;
+                break;
+            case Power.Cheater:
+                stat.powerDelay = 5;
+                break;
+            case Power.Ninja:
+                stat.powerDelay = 10;
+                break;
+            case Power.Cook:
+                stat.powerDelay = 5;
+                break;
+            case Power.DejaVu:
+                stat.powerDelay = 5;
+                break;
+        }
+
     }
 
     public void SetpowerNb(int value_)
@@ -155,6 +174,8 @@ public class PlayerControl : MonoBehaviour
             {
                 moveVector.x = player.GetAxis("Horizontal");
                 moveVector.y = player.GetAxis("Vertical");
+                if (moveVector.magnitude < 0.4f)
+                    moveVector = Vector2.zero;
                 if (moveVector.sqrMagnitude > 1)
                 {
                     moveVector.Normalize();
@@ -173,13 +194,25 @@ public class PlayerControl : MonoBehaviour
             {
                 moveVector.Normalize();
             }
-
-            if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= stat.powerDelay / 2)
+            if (glassOfCrystalMalysActivated)
             {
-                powerDelay_tmp -= stat.powerDelay / 2;
-                canDash = false;
-                StartCoroutine(Dash(moveVector));
+                if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= stat.powerDelay)
+                {
+                    powerDelay_tmp -= stat.powerDelay;
+                    canDash = false;
+                    StartCoroutine(Dash(moveVector));
+                }
             }
+            else
+            {
+                if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= stat.powerDelay / 2)
+                {
+                    powerDelay_tmp -= stat.powerDelay / 2;
+                    canDash = false;
+                    StartCoroutine(Dash(moveVector));
+                }
+            }
+
             if (canDash)
             {
                 if (player.GetButtonDown("Interact") && canInteract)
@@ -476,10 +509,6 @@ public class PlayerControl : MonoBehaviour
                 }
                 break;
             case Power.DejaVu:
-                if (glassOfCrystalMalysActivated)
-                {
-                    powerDelay_tmp = 0;
-                }
                 break;
             default:
                 if (!powerActive && !powerunavailable)

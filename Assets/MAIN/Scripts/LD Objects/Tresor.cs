@@ -9,6 +9,7 @@ public class Tresor : Obj
     public float poid = 0;
     public EnumObjPlayer canTake= EnumObjPlayer.All;
     public int malusShinyRock = 5;
+    public float malusCursedObject = 5;
     // 0 if no Malus
     public float NoiseMalus;
     public override void ActiveEvent()
@@ -83,13 +84,34 @@ public class Tresor : Obj
     void CursedObject()
     {
         if (playerControl != null)
-            playerControl.malusCursedObject = 0.7f;
+        {
+            if (!playerControl.cursedObjectMalusActivated)
+            {
+                playerControl.cursedObjectMalusActivated = true;
+                playerControl.cursedObjectMalus = malusCursedObject;
+            }
+        }
     }
     void GlassOFCrystal()
     {
-        /*if (playerControl != null)
-            playerControl.
-                = 1.5f;
-                */
+        if (playerControl != null)
+        {
+            if (!playerControl.glassOfCrystalMalysActivated)
+            {
+                playerControl.glassOfCrystalMalysActivated = true;
+                switch (playerControl.stat.power)
+                {
+                    case Power.Hunter:
+                        playerControl.glassOfCrystalMalus = 3;
+                        break;
+                    case Power.Cheater:
+                        playerControl.glassOfCrystalMalus = 3;
+                        break;
+                    case Power.Ninja:
+                        playerControl.glassOfCrystalMalus = 5;
+                        break;
+                }
+            }
+        }
     }
 }

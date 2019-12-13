@@ -17,7 +17,7 @@ MonoBehaviour:
   dashSpeed: 20
   timeDash: 0.2
   BruitRadius: 0
-  power: 4
+  power: 3
   nbKey: 3
   nbKey_tmp: 3
   nbAntiCam: 3
