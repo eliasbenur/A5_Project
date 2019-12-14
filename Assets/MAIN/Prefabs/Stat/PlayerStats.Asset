@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28f6183bae3e13e4aa32eb1f9eb6680b, type: 3}
-  m_Name: TestStart
+  m_Name: PlayerStats
   m_EditorClassIdentifier: 
   speed: 7
   force: 5
   dashSpeed: 20
   timeDash: 0.2
   BruitRadius: 0
-  power: 3
+  power: 7
   nbKey: 3
   nbKey_tmp: 3
   nbAntiCam: 3

@@ -30,6 +30,7 @@ public class ObjectRefs : MonoBehaviour
     [Header("UI")]
     public Slider powerSlider;
     public GameObject playerInventory;
+    public GameObject fullMap;
 
 
     private void Awake()

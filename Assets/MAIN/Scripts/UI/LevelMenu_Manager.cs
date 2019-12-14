@@ -34,8 +34,6 @@ public class LevelMenu_Manager : MonoBehaviour
     {
         objectivesData = ObjectRefs.Instance.objectivesData;
         player = ReInput.players.GetPlayer(0);
-
-        SetUpObjectives();
     }
 
     // Update is called once per frame
@@ -81,20 +79,6 @@ public class LevelMenu_Manager : MonoBehaviour
                 activeDefaultButton.Select();
             }
 
-        }
-    }
-
-    public void SetUpObjectives()
-    {
-        for (int i = 0; i < objectivesPanel.transform.childCount; i++)
-        {
-            try
-            {
-                objectivesPanel.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
-                    objectivesData.obj[i].sprite;
-                if (objectivesData.obj[i].stolen) objectivesPanel.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
-            }
-            catch { }
         }
     }
 

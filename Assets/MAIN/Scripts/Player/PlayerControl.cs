@@ -4,72 +4,89 @@ using UnityEngine;
 using Rewired;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using MyBox;
 
 [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class PlayerControl : MonoBehaviour
 {
+    //Rewired
     Player player;
-    [Range(1, 4)]
-    public int intPlayer = 1;
-    Rigidbody2D rb;
+
+    [Separator("Player")]
     public Stat stat;
-    //public float speedMod = 1;
-    public float sprintMod;
-    public float noiseMod;
-    public bool canMove;
-    public bool canInteract;
-    public bool canDash = true;
-    public bool activated = true;
-    public GameObject fullMap;
-    public LevelMenu_Manager menuManager;
+    List<Tresor> inventory = new List<Tresor>();
+    //States
+    bool canMove = true;
+    bool canInteract;
+    Obj interactableObject;
+    bool canDash = true;
+    bool playerEnabled = true;
+    //Movement
+    Vector2 moveVector;
+
+    [Separator("Movement")]
+    public float powerUp_SpeedMod;
+    private float currentSpeedMod = 1;
+
+    [Separator("Dash")]
     public AnimationCurve dashCurve;
-    public Obj interactableObject;
-    public Vector2 moveVector;
-    public Text text_PowerNb;
-    [HideInInspector]
-    public int nbAntiCam = 0;
-    public float DistanceMinWallApresDash = 0.5f;
+    public float distanceMinWallApresDash = 0.5f;
     float distanceDash = 1;
     public LayerMask layerDash;
-    public Sprite cameraManSprite, KeyManSprite;
+
+    [Separator("Hunter")]
     public GameObject traceDePas;//Pierro
     public List<GameObject> traceDePasActiv;
 
-    public float sprint;
 
-    public List<Tresor> inventory = new List<Tresor>();
-
-    public bool noisyMalus;
-    public bool shinyRockMalus;
-    public float cursedObjectMalus;
-    public bool cursedObjectMalusActivated;
-    public float glassOfCrystalMalus;
-    public bool glassOfCrystalMalysActivated;
+    // Objects Malus
+    private bool noisyMalus;
+    private bool shinyRockMalus;
+    private float cursedObjectMalus;
+    private bool cursedObjectMalusActivated;
+    private float glassOfCrystalMalus;
+    private bool glassOfCrystalMalysActivated;
 
     //Power Vars
     Slider powerSlider;
     bool powerActive = false;
     bool powerunavailable = false;
-    public float powerDelay_tmp;
-    [HideInInspector] public float malusCursedObject=0;
-    [HideInInspector] public float multiplicaterGlassOfCrystal = 1;
+    float powerDelay_tmp;
 
-    //inertie
-    public bool inertie=false;
-    public Vector3 vectorInertie;
+    [Separator("Inertie")]
     public float valeurInertie = 0.01f;
     public float inertieDim = 0.999f;
+    private bool inertie = false;
+    Vector3 vectorInertie;
 
-    //PowersUps
+
+    [Separator("Power Ups")]
     public bool securityZone1 = false;
     public bool securityZone2 = false;
+
+    [Separator("Cook")]
     public GameObject donutPrefab;
 
-    NavMeshAgent agent;
 
-    //Speed modifiers 
-    public float currentSpeedMod;
-    public float SpeedMod;
+
+
+    public bool NoisyMalus { get => noisyMalus; set => noisyMalus = value; }
+    public bool ShinyRockMalus { get => shinyRockMalus; set => shinyRockMalus = value; }
+    public float CursedObjectMalus { get => cursedObjectMalus; set => cursedObjectMalus = value; }
+    public bool CursedObjectMalusActivated { get => cursedObjectMalusActivated; set => cursedObjectMalusActivated = value; }
+    public float GlassOfCrystalMalus { get => glassOfCrystalMalus; set => glassOfCrystalMalus = value; }
+    public bool GlassOfCrystalMalysActivated { get => glassOfCrystalMalysActivated; set => glassOfCrystalMalysActivated = value; }
+    public bool Inertie { get => inertie; set => inertie = value; }
+    public float CurrentSpeedMod { get => currentSpeedMod; set => currentSpeedMod = value; }
+
+    public List<Tresor> Get_inventory() { return inventory; }
+
+    public bool Get_playerEnabled() { return playerEnabled; }
+    public void Set_playerEnabled(bool val_) { playerEnabled = val_; }
+
+    public void Set_interactableObject(Obj val_) { interactableObject = val_; }
+
+    public Vector2 Get_moveVector() { return moveVector; }
 
     public bool isPowerActive()
     {
@@ -85,34 +102,9 @@ public class PlayerControl : MonoBehaviour
     {
         StartCoroutine(CalculeDistanceDash());
         player = ReInput.players.GetPlayer(0);
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
         if (stat == null)
         {
             stat = new Stat(0, 0, Power.None);
-        }
-        if (GetComponent<NavMeshAgent>() != null)
-        {
-            agent = GetComponent<NavMeshAgent>();
-            agent.updateRotation = false;
-            agent.updateUpAxis = false;
-        }
-        if(stat.power== Power.CameraOff)
-        {
-            nbAntiCam = stat.nbAntiCam;
-        }
-
-        SetpowerNb(stat.nbKey);
-
-        switch (stat.power)
-        {
-            case Power.AllKey:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = KeyManSprite;
-                break;
-            case Power.CameraOff:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = cameraManSprite;
-                text_PowerNb.transform.parent.gameObject.SetActive(false);
-                break;
         }
 
         powerSlider = ObjectRefs.Instance.powerSlider;
@@ -139,37 +131,24 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-    public void SetpowerNb(int value_)
+    /*Player Sprite Flip */
+    public void SpriteFlip()
     {
-        stat.nbKey_tmp = value_;
-        text_PowerNb.text = "x " + stat.nbKey_tmp;
-    }
-
-    public int GetpowerNb()
-    {
-        return stat.nbKey_tmp;
+        if (moveVector.x > 0)
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if (moveVector.x < 0)
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+        }
     }
 
     private void Update()
     {
-        if (activated)
+        if (playerEnabled)
         {
-            menuManager.canShowObjective = true;
-
-            if (player.GetButtonDown("Sprint"))
-            {
-                ObjectRefs.Instance.playerNoise.noiseRadius = noiseMod;
-                ParticleSystem.MainModule newMain = transform.GetChild(1).GetComponent<PlayerNoise>().particleSystemPrefab.GetComponent<ParticleSystem>().main;
-                newMain.duration = noiseMod;
-
-            }
-            if (player.GetButtonUp("Sprint"))
-            {
-                ObjectRefs.Instance.playerNoise.noiseRadius = 1.5f;
-                ParticleSystem.MainModule newMain = transform.GetChild(1).GetComponent<PlayerNoise>().particleSystemPrefab.GetComponent<ParticleSystem>().main;
-                newMain.startLifetime = 1;
-            }
-
+            // Player input
             if (canMove)
             {
                 moveVector.x = player.GetAxis("Horizontal");
@@ -180,70 +159,44 @@ public class PlayerControl : MonoBehaviour
                 {
                     moveVector.Normalize();
                 }
-                //Flip Sprite
-                if (moveVector.x > 0)
-                {
-                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
-                }
-                else if(moveVector.x < 0)
-                {
-                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
-                }
+
             }
             else
             {
-                moveVector.Normalize();
+                moveVector = Vector2.zero;
             }
-            if (glassOfCrystalMalysActivated)
+
+            // --- DASH -- 
+            //Cursed Object Malus
+            float objectMalus = 0;
+            if (CursedObjectMalusActivated)
             {
-                if (cursedObjectMalusActivated)
+                objectMalus = CursedObjectMalus;
+            }
+            //Dash
+            if (GlassOfCrystalMalysActivated)
+            {
+                if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= (stat.powerDelay + objectMalus))
                 {
-                    if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= (stat.powerDelay + cursedObjectMalus))
-                    {
-                        powerDelay_tmp -= stat.powerDelay + cursedObjectMalus;
+                    powerDelay_tmp -= stat.powerDelay + objectMalus;
 
-                        canDash = false;
-                        StartCoroutine(Dash(moveVector));
-                    }
-                }
-                else
-                {
-                    if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= stat.powerDelay)
-                    {
-                        powerDelay_tmp -= stat.powerDelay;
-
-                        canDash = false;
-                        StartCoroutine(Dash(moveVector));
-                    }
+                    canDash = false;
+                    StartCoroutine(Dash(moveVector));
                 }
 
             }
             else
             {
-                if (cursedObjectMalusActivated)
+                if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= (stat.powerDelay + objectMalus) / 2)
                 {
-                    if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= (stat.powerDelay + cursedObjectMalus)/ 2)
-                    {
-                        powerDelay_tmp -= (stat.powerDelay + cursedObjectMalus) / 2;
+                    powerDelay_tmp -= (stat.powerDelay + objectMalus) / 2;
 
-                        canDash = false;
-                        StartCoroutine(Dash(moveVector));
-                    }
+                    canDash = false;
+                    StartCoroutine(Dash(moveVector));
                 }
-                else
-                {
-                    if (player.GetButtonDown("Dash") && canDash && stat.power == Power.DejaVu && powerDelay_tmp >= stat.powerDelay / 2)
-                    {
-                        powerDelay_tmp -= stat.powerDelay / 2;
-
-                        canDash = false;
-                        StartCoroutine(Dash(moveVector));
-                    }
-                }
-
             }
 
-            if (canDash)
+            if (canDash) // Is not dashing already
             {
                 if (player.GetButtonDown("Interact") && canInteract)
                 {
@@ -254,9 +207,10 @@ public class PlayerControl : MonoBehaviour
                     Capacity();
                 }
             }
-            if (player.GetButtonDown("ShowMap") && fullMap != null)
+            // ---- FULL MAP ---
+            if (player.GetButtonDown("ShowMap") && ObjectRefs.Instance.fullMap != null)
             {
-                if (fullMap.activeSelf == true)
+                if (ObjectRefs.Instance.fullMap.activeSelf == true)
                 {
                     ActiveMap(false);
                 }
@@ -265,23 +219,22 @@ public class PlayerControl : MonoBehaviour
                     ActiveMap(true);
                 }
             }
-            if (player.GetButtonDown("Back") && fullMap != null && fullMap.activeSelf == true)
+            if (player.GetButtonDown("Back") && ObjectRefs.Instance.fullMap != null && ObjectRefs.Instance.fullMap.activeSelf == true)
             {
                 ActiveMap(false);
             }
-        }
-        else
-        {
-            menuManager.canShowObjective = false;
+
+            PowerUpdate();
+            SpriteFlip();
         }
 
-        PowerUpdate();
+
     }
 
     public void ActiveMap(bool status)
     {
-        fullMap.SetActive(status);
-        fullMap.GetComponent<MapControl>().Start();
+        ObjectRefs.Instance.fullMap.SetActive(status);
+        ObjectRefs.Instance.fullMap.GetComponent<MapControl>().Start();
         if (status)
             Time.timeScale = 0f;
         else
@@ -306,7 +259,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (powerDelay_tmp < stat.powerDelay + cursedObjectMalus)
+            if (powerDelay_tmp < stat.powerDelay + CursedObjectMalus)
             {
                 powerDelay_tmp += Time.deltaTime;
             }
@@ -317,9 +270,9 @@ public class PlayerControl : MonoBehaviour
         }
         if (powerActive)
         {
-            if (glassOfCrystalMalysActivated)
+            if (GlassOfCrystalMalysActivated)
             {
-                powerSlider.value = powerDelay_tmp / (stat.powerDelay - glassOfCrystalMalus);
+                powerSlider.value = powerDelay_tmp / (stat.powerDelay - GlassOfCrystalMalus);
             }
             else
             {
@@ -329,7 +282,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            powerSlider.value = powerDelay_tmp / (stat.powerDelay + cursedObjectMalus);
+            powerSlider.value = powerDelay_tmp / (stat.powerDelay + CursedObjectMalus);
         }
 
     }
@@ -343,11 +296,11 @@ public class PlayerControl : MonoBehaviour
                 {
                     ObjectRefs.Instance.playerNoise.noiseRadius -= inventory[0].NoiseMalus;
                 }
-                currentSpeedMod = SpeedMod;
+                CurrentSpeedMod -= powerUp_SpeedMod;
                 break;
             case Power.Ninja:
                 ObjectRefs.Instance.playerNoise.noiseRadius -= ObjectRefs.Instance.playerNoise.getBaseNoiseRadius();
-                currentSpeedMod = SpeedMod;
+                CurrentSpeedMod -= powerUp_SpeedMod;
                 break;
             case Power.Hunter:
                 NinjaAct();
@@ -364,11 +317,11 @@ public class PlayerControl : MonoBehaviour
                 {
                     ObjectRefs.Instance.playerNoise.noiseRadius += inventory[0].NoiseMalus;
                 }
-                currentSpeedMod = 1;
+                CurrentSpeedMod += powerUp_SpeedMod;
                 break;
             case Power.Ninja:
                 ObjectRefs.Instance.playerNoise.noiseRadius += ObjectRefs.Instance.playerNoise.getBaseNoiseRadius();
-                currentSpeedMod = 1;
+                CurrentSpeedMod += powerUp_SpeedMod;
                 break;
             case Power.Hunter:
                 CleanTraceDePasActiv();
@@ -378,8 +331,9 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (canDash)
+        if (canDash) // Is not already dashing
         {
+            //Movement Raycast 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, moveVector, 0.5f, layerDash);
 
             if (hit.collider != null && hit.distance < 0.5f)
@@ -387,24 +341,15 @@ public class PlayerControl : MonoBehaviour
             
                 if (moveVector != Vector2.zero)
                 {
-                    transform.position += (Vector3)moveVector * (stat.speed * currentSpeedMod * Time.fixedDeltaTime);
+                    transform.position += (Vector3)moveVector * (stat.speed * CurrentSpeedMod * Time.fixedDeltaTime);
                 }
             }
             else
             {
-                if (moveVector != Vector2.zero&&!inertie)
+                if (moveVector != Vector2.zero&&!Inertie)
                 {
-                    //agent.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
-                    //rb.velocity = new Vector2(moveVector.x * stat.speed, moveVector.y * stat.speed);
-                    if (player.GetButton("Sprint"))
-                    {
-                        transform.position += (Vector3)moveVector * (stat.speed * currentSpeedMod * Time.fixedDeltaTime * sprintMod);
-                    }
-                    else
-                    {
-                        transform.position += (Vector3)moveVector * (stat.speed * currentSpeedMod * Time.fixedDeltaTime);
-                    }
-                    
+                    transform.position += (Vector3)moveVector * (stat.speed * CurrentSpeedMod * Time.fixedDeltaTime);
+
                 }
                 else
                 {
@@ -424,13 +369,9 @@ public class PlayerControl : MonoBehaviour
                             
                         }
                         Debug.DrawLine(transform.position, transform.position + vectorInertie, Color.red);
-                        transform.position += vectorInertie * (stat.speed * currentSpeedMod * Time.fixedDeltaTime);
+                        transform.position += vectorInertie * (stat.speed * CurrentSpeedMod * Time.fixedDeltaTime);
                     }
 
-
-
-                    //agent.velocity -= agent.velocity * 0.25f;
-                    //rb.velocity -= rb.velocity * 0.25f;
                 }
             }
         }
@@ -523,13 +464,6 @@ public class PlayerControl : MonoBehaviour
     {
         switch (stat.power)
         {
-            case Power.CameraOff:
-                if (nbAntiCam > 0)
-                {
-                    nbAntiCam--;
-                    Instantiate(stat.ObjAntiCamera, this.transform.position, Quaternion.identity);
-                }
-                break;
             case Power.Cook:
                 if (powerDelay_tmp >= stat.powerDelay)
                 {
@@ -545,14 +479,14 @@ public class PlayerControl : MonoBehaviour
                 {
                     powerActive = true;
                     float glass_tmp = stat.powerDelay;
-                    if (glassOfCrystalMalysActivated)
+                    if (GlassOfCrystalMalysActivated)
                     {
-                        glass_tmp -= glassOfCrystalMalus;
+                        glass_tmp -= GlassOfCrystalMalus;
                     }
                     float cursed_tmp = stat.powerDelay;
-                    if (cursedObjectMalusActivated)
+                    if (CursedObjectMalusActivated)
                     {
-                        cursed_tmp += cursedObjectMalus;
+                        cursed_tmp += CursedObjectMalus;
                     }
                     
                     powerDelay_tmp = (powerDelay_tmp * glass_tmp) / (cursed_tmp);
@@ -563,14 +497,14 @@ public class PlayerControl : MonoBehaviour
                 {
                     powerActive = false;
                     float glass_tmp = stat.powerDelay;
-                    if (glassOfCrystalMalysActivated)
+                    if (GlassOfCrystalMalysActivated)
                     {
-                        glass_tmp -= glassOfCrystalMalus;
+                        glass_tmp -= GlassOfCrystalMalus;
                     }
                     float cursed_tmp = stat.powerDelay;
-                    if (cursedObjectMalusActivated)
+                    if (CursedObjectMalusActivated)
                     {
-                        cursed_tmp += cursedObjectMalus;
+                        cursed_tmp += CursedObjectMalus;
                     }
 
                     powerDelay_tmp = (powerDelay_tmp * glass_tmp) / (cursed_tmp);
@@ -595,7 +529,7 @@ public class PlayerControl : MonoBehaviour
             //Debug.Log(hit.distance);
             //Debug.Log(hit.collider);
             //Debug.Log(((Vector3)hit.point - transform.position).magnitude);
-            while (((Vector3)hit.point-transform.position).magnitude>DistanceMinWallApresDash)
+            while (((Vector3)hit.point-transform.position).magnitude>distanceMinWallApresDash)
             {
                // Debug.Log(((Vector3)hit.point - transform.position).magnitude);
                 curveTime += Time.deltaTime;
@@ -629,7 +563,7 @@ public class PlayerControl : MonoBehaviour
             v += Vector3.up * stat.dashSpeed * curveAmount * Time.deltaTime;
             yield return null;
         }
-        distanceDash = v.magnitude;
+        distanceDash = v.magnitude; // ???
 
     }
 

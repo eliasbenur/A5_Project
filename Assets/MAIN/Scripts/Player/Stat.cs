@@ -13,14 +13,6 @@ public class Stat : ScriptableObject
     public float timeDash;
     public float BruitRadius = 1;
     public Power power = Power.None;
-    [HideInInspector]
-    public int nbKey =3;
-    [HideInInspector]
-    public int nbKey_tmp;
-    [HideInInspector]
-    public int nbAntiCam = 3;
-    [HideInInspector]
-    public GameObject ObjAntiCamera;
     public float powerDelay;
 
     public Stat (int Speed, int Force, Power Pow)
@@ -52,19 +44,6 @@ public class Stat : ScriptableObject
             EditorGUI.BeginChangeCheck();
             Power power = stat.power;
             EditorGUILayout.Space();
-            switch (stat.power)
-            {
-                case Power.None:
-                    break;
-                case Power.AllKey:
-                    stat.nbKey = EditorGUILayout.IntField("Key:", stat.nbKey);
-                    break;
-                case Power.CameraOff:
-                    stat.nbAntiCam = EditorGUILayout.IntField("AntiCam:", stat.nbAntiCam);
-                    var objAnt = stat.ObjAntiCamera;
-                    stat.ObjAntiCamera = (GameObject)EditorGUILayout.ObjectField(objAnt, typeof(GameObject));
-                    break;
-            }
             
             
             if (EditorGUI.EndChangeCheck())

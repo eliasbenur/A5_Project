@@ -28,7 +28,7 @@ public class MetalDetector : MonoBehaviour
             if ((voleur.stat.power == Power.Cheater && !voleur.isPowerActive()) || (voleur.stat.power != Power.Cheater))
             {
                 bool metal = false;
-                foreach (Tresor tre in voleur.inventory)
+                foreach (Tresor tre in voleur.Get_inventory())
                 {
                     if (tre.materialObj == MaterialObj.Metal) metal = true;
                 }

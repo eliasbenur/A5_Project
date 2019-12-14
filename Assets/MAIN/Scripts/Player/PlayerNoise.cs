@@ -58,7 +58,7 @@ public class PlayerNoise : MonoBehaviour
         {
             transform.position = toFollow.position + new Vector3(0,-0.3f,0);
         }
-        circlecoll.radius = noiseRadius * player.moveVector.sqrMagnitude;
+        circlecoll.radius = noiseRadius * player.Get_moveVector().sqrMagnitude;
         var main = particleSystem.main;
         //float tempSpeed = player.moveVector.sqrMagnitude * noiseRadius * 2;
         main.startSpeed = noiseRadius * 2;
@@ -73,7 +73,7 @@ public class PlayerNoise : MonoBehaviour
 
         if (delayNoiseWave_tmp > 0)
         {
-            if (player.moveVector.sqrMagnitude > 0)
+            if (player.Get_moveVector().sqrMagnitude > 0)
             {
                 delayNoiseWave_tmp -= Time.fixedDeltaTime  /* (player.moveVector.sqrMagnitude/1)*/;
             }
@@ -83,7 +83,7 @@ public class PlayerNoise : MonoBehaviour
             }
 
         }
-        else if (player.moveVector.sqrMagnitude > 0 && !particleSystem.isPlaying)
+        else if (player.Get_moveVector().sqrMagnitude > 0 && !particleSystem.isPlaying)
         {
             delayNoiseWave_tmp = delayNoiseWave;
             particleSystem.Play();

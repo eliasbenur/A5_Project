@@ -16,7 +16,6 @@ public class ObjAntiCamera : Obj
     public override void ActiveEvent()
     {
         base.ActiveEvent();
-        playerControl.nbAntiCam++;
         foreach (CameraRotate cam in came)
         {
             cam.gameObject.GetComponent<Collider2D>().enabled = true;

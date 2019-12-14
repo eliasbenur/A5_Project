@@ -64,7 +64,7 @@ public class Door : Obj
         done = false;
         canSelect = false;
 
-        playerControl.activated = false;
+        playerControl.Set_playerEnabled(false);
         FillSequence();
         timerText.text = timer_miniGame.ToString();
         canvas_lockedkey.transform.GetChild(2).gameObject.SetActive(true);
@@ -96,7 +96,6 @@ public class Door : Obj
                     }
                     else
                     {
-                        playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
                         ObjectRefs.Instance.inputContainer[count].color = Color.red;
                         break;
                     }
@@ -108,14 +107,13 @@ public class Door : Obj
         }
         if (success == true)
         {
-            playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
             gameObject.GetComponent<Door>().OpenDoor();
             Destroy(gameObject.GetComponent<LockedDoor>());
             gameObject.GetComponent<Door>().closeKey = false;
         }
         done = true;
         canvas_lockedkey.transform.GetChild(2).gameObject.SetActive(false);
-        playerControl.activated = true;
+        playerControl.Set_playerEnabled(true);
         yield return null;
     }
 
@@ -127,10 +125,10 @@ public class Door : Obj
         {
             if(playerControl.stat.power == Power.AllKey)
             {
-                if (ObjectRefs.Instance.player.GetComponent<PlayerControl>().stat.nbKey_tmp > 0) {
-                    ObjectRefs.Instance.player.GetComponent<PlayerControl>().activated = true;
+                //if (ObjectRefs.Instance.player.GetComponent<PlayerControl>().stat.nbKey_tmp > 0) {
+                    ObjectRefs.Instance.player.GetComponent<PlayerControl>().Set_playerEnabled(true);
                     Pick(ObjectRefs.Instance.player.GetComponent<PlayerControl>());
-                } 
+                //} 
             }
         }
         else

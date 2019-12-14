@@ -7,12 +7,16 @@ public class OptimizerManager : MonoBehaviour
 {
     Transform toFollow;
     public List<GameObject> guardList;
+
+    public GameObject miniMap;
     // Start is called before the first frame update
     void Start()
     {
         toFollow = ObjectRefs.Instance.player.transform;
         Bounds CameraBound = Outils.OrthographicBounds(Camera.main);
         GetComponent<BoxCollider2D>().size = CameraBound.size + new Vector3(30,30,0);
+
+        miniMap.SetActive(true);
 
     }
 

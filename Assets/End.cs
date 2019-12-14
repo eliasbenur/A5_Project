@@ -37,9 +37,9 @@ public class End : MonoBehaviour
             {
                 for (int x = 0; x < objectivesData.obj.Count; x++)
                 {
-                    for (int y = 0; y < collision.GetComponent<PlayerControl>().inventory.Count; ++y)
+                    for (int y = 0; y < collision.GetComponent<PlayerControl>().Get_inventory().Count; ++y)
                     {
-                        if (objectivesData.obj[x].name == collision.GetComponent<PlayerControl>().inventory[y].name)
+                        if (objectivesData.obj[x].name == collision.GetComponent<PlayerControl>().Get_inventory()[y].name)
                         {
                             objectivesData.obj[x].stolen = true;
                             ObjectRefs.Instance.soungManager.PlaywinSnd();

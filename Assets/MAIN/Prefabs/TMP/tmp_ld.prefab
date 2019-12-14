@@ -569,21 +569,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4594580559542189906}
     m_Modifications:
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Name
-      value: Guard1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638050, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -639,15 +624,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
-      value: 0
+      propertyPath: m_Name
+      value: Guard1
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.actionEnabled.Array.data[1]
-      value: 0
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638061, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 4352
       objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638062, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
@@ -719,10 +714,15 @@ PrefabInstance:
       propertyPath: behaviourType
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638061, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: obstacleMask.m_Bits
-      value: 4352
+      propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: fsm.states.Array.data[2].actionData.actionEnabled.Array.data[1]
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -739,21 +739,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4594580559542189906}
     m_Modifications:
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Name
-      value: Guard4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638050, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -809,15 +794,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
-      value: 0
+      propertyPath: m_Name
+      value: Guard4
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.actionEnabled.Array.data[1]
-      value: 0
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638061, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 4352
       objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638062, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
@@ -889,10 +884,15 @@ PrefabInstance:
       propertyPath: behaviourType
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638061, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: obstacleMask.m_Bits
-      value: 4352
+      propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: fsm.states.Array.data[2].actionData.actionEnabled.Array.data[1]
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -909,21 +909,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4594580559542189906}
     m_Modifications:
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Name
-      value: Guard3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638050, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -979,15 +964,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
-      value: 0
+      propertyPath: m_Name
+      value: Guard3
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.actionEnabled.Array.data[1]
-      value: 0
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638061, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 4352
       objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638062, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
@@ -1059,10 +1054,15 @@ PrefabInstance:
       propertyPath: behaviourType
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638061, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: obstacleMask.m_Bits
-      value: 4352
+      propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: fsm.states.Array.data[2].actionData.actionEnabled.Array.data[1]
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -1079,21 +1079,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4594580559542189906}
     m_Modifications:
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Name
-      value: Guard2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638050, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1149,15 +1134,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
-      value: 0
+      propertyPath: m_Name
+      value: Guard2
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.actionEnabled.Array.data[1]
-      value: 0
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638061, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 4352
       objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638062, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
@@ -1229,10 +1224,15 @@ PrefabInstance:
       propertyPath: behaviourType
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638061, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: obstacleMask.m_Bits
-      value: 4352
+      propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: fsm.states.Array.data[2].actionData.actionEnabled.Array.data[1]
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}
@@ -1249,21 +1249,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4594580559542189906}
     m_Modifications:
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Name
-      value: Guard5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638050, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1319,15 +1304,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
-      value: 0
+      propertyPath: m_Name
+      value: Guard5
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.actionEnabled.Array.data[1]
-      value: 0
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638052, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638061, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 4352
       objectReference: {fileID: 0}
     - target: {fileID: 6343589690461638062, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
@@ -1399,10 +1394,15 @@ PrefabInstance:
       propertyPath: behaviourType
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6343589690461638061, guid: 21222d7357718b94fb4450bd0a776bf3,
+    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
         type: 3}
-      propertyPath: obstacleMask.m_Bits
-      value: 4352
+      propertyPath: fsm.states.Array.data[2].actionData.fsmFloatParams.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343589690461638063, guid: 21222d7357718b94fb4450bd0a776bf3,
+        type: 3}
+      propertyPath: fsm.states.Array.data[2].actionData.actionEnabled.Array.data[1]
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21222d7357718b94fb4450bd0a776bf3, type: 3}

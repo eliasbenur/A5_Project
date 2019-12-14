@@ -15,7 +15,7 @@ public class Doorv2 : Obj
     public float decalage = 0.7f;
     Vector3 posiPorteLeft, posiPorteRight;
 
-    [Separator("Bool")]
+    [Separator("Closed Door")]
     public bool closeKey = false;
     Player player;
     [ConditionalField(nameof(closeKey))] public float timer_miniGame;
@@ -75,7 +75,7 @@ public class Doorv2 : Obj
         canSelect = false;
         bool inputFailed = false;
 
-        playerControl.activated = false;
+        playerControl.Set_playerEnabled(false);
         FillSequence();
         timerText.text = timer_miniGame.ToString();
         canvas_lockedkey.SetActive(true);
@@ -122,19 +122,17 @@ public class Doorv2 : Obj
         yield return new WaitForSeconds(0.5f);
         if (success == true)
         {
-            playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
             gameObject.GetComponent<Doorv2>().OpenDoor();
             Destroy(gameObject.GetComponent<LockedDoor>());
             gameObject.GetComponent<Doorv2>().closeKey = false;
         }
         else
         {
-            playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
             ObjectRefs.Instance.inputContainer[count].color = Color.red;
         }
         canSelect = false;
         canvas_lockedkey.SetActive(false);
-        playerControl.activated = true;
+        playerControl.Set_playerEnabled(true);
         yield return null;
     }
 
@@ -144,13 +142,10 @@ public class Doorv2 : Obj
 
         if (closeKey)
         {
-            //if(playerControl.stat.power == Power.AllKey)
             if(playerControl.securityZone1)
             {
-                //if (playerControl.stat.nbKey_tmp > 0) {
-                    playerControl.activated = true;
-                    Pick(playerControl);
-                //} 
+                playerControl.Set_playerEnabled(true);
+                Pick(playerControl);
             }
         }
         else

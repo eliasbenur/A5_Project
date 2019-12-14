@@ -53,7 +53,7 @@ public class LockedDoor : MonoBehaviour
         done = false;
         canSelect = false;
 
-        playerControl.activated = false;
+        playerControl.Set_playerEnabled(false);
         FillSequence();
         timerText.text = timer.ToString();
         canvas.transform.GetChild(2).gameObject.SetActive(true);
@@ -85,7 +85,6 @@ public class LockedDoor : MonoBehaviour
                     }
                     else
                     {
-                        playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
                         ObjectRefs.Instance.inputContainer[count].color = Color.red;
                         break;
                     }
@@ -97,14 +96,13 @@ public class LockedDoor : MonoBehaviour
         }
         if (success == true)
         {
-            playerControl.SetpowerNb(playerControl.GetpowerNb() - 1);
             gameObject.GetComponent<Door>().OpenDoor();
             Destroy(gameObject.GetComponent<LockedDoor>());
             gameObject.GetComponent<Door>().closeKey = false;
         }
         done = true;
         canvas.transform.GetChild(2).gameObject.SetActive(false);
-        playerControl.activated = true;
+        playerControl.Set_playerEnabled(true);
         yield return null;
     }
 }

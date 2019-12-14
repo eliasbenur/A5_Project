@@ -7,7 +7,6 @@ public class Tresor : Obj
 {
     public MaterialObj materialObj;
     public float poid = 0;
-    public EnumObjPlayer canTake= EnumObjPlayer.All;
     public int malusShinyRock = 5;
     public float malusCursedObject = 5;
     // 0 if no Malus
@@ -15,12 +14,11 @@ public class Tresor : Obj
     public override void ActiveEvent()
     {
         base.ActiveEvent();
-        if (playerControl.inventory.Count < 3 &&
-            (canTake==EnumObjPlayer.All||canTake.ToString()== "Player"+playerControl.intPlayer))
+        if (playerControl.Get_inventory().Count < 3)
         {
-            playerControl.interactableObject = null;
-            ObjectRefs.Instance.playerInventory.transform.GetChild(2).GetChild(playerControl.inventory.Count).GetComponent<Image>().sprite = GetComponent<SpriteRenderer>().sprite;
-            playerControl.inventory.Add(this);
+            playerControl.Set_interactableObject(null);
+            ObjectRefs.Instance.playerInventory.transform.GetChild(2).GetChild(playerControl.Get_inventory().Count).GetComponent<Image>().sprite = GetComponent<SpriteRenderer>().sprite;
+            playerControl.Get_inventory().Add(this);
             GameManager.Instance.objectiveDone = true;
             gameObject.SetActive(false);
             transform.SetParent(playerControl.transform);
@@ -51,26 +49,26 @@ public class Tresor : Obj
 
     void Noisy()
     {
-        if (!playerControl.noisyMalus)
+        if (!playerControl.NoisyMalus)
         {
             ObjectRefs.Instance.playerNoise.noiseRadius += NoiseMalus;
-            playerControl.noisyMalus = true;
+            playerControl.NoisyMalus = true;
         }
     }
 
     void Soap()
     {
         if (playerControl != null)
-            playerControl.inertie = true;
+            playerControl.Inertie = true;
     }
     void HeavyStone()
     {
         if(playerControl!= null)
-            playerControl.currentSpeedMod = 0.7f;
+            playerControl.CurrentSpeedMod = 0.7f;
     }
     void ShinoRock()
     {
-        if (!playerControl.shinyRockMalus)
+        if (!playerControl.ShinyRockMalus)
         {
             foreach (GuardIAController_v2 g in ObjectRefs.Instance.GAIC)
             {
@@ -78,17 +76,17 @@ public class Tresor : Obj
                 if (f != null)
                     f.viewRadius += malusShinyRock;
             }
-            playerControl.shinyRockMalus = true;
+            playerControl.ShinyRockMalus = true;
         }
     }
     void CursedObject()
     {
         if (playerControl != null)
         {
-            if (!playerControl.cursedObjectMalusActivated)
+            if (!playerControl.CursedObjectMalusActivated)
             {
-                playerControl.cursedObjectMalusActivated = true;
-                playerControl.cursedObjectMalus = malusCursedObject;
+                playerControl.CursedObjectMalusActivated = true;
+                playerControl.CursedObjectMalus = malusCursedObject;
             }
         }
     }
@@ -96,19 +94,19 @@ public class Tresor : Obj
     {
         if (playerControl != null)
         {
-            if (!playerControl.glassOfCrystalMalysActivated)
+            if (!playerControl.GlassOfCrystalMalysActivated)
             {
-                playerControl.glassOfCrystalMalysActivated = true;
+                playerControl.GlassOfCrystalMalysActivated = true;
                 switch (playerControl.stat.power)
                 {
                     case Power.Hunter:
-                        playerControl.glassOfCrystalMalus = 3;
+                        playerControl.GlassOfCrystalMalus = 3;
                         break;
                     case Power.Cheater:
-                        playerControl.glassOfCrystalMalus = 3;
+                        playerControl.GlassOfCrystalMalus = 3;
                         break;
                     case Power.Ninja:
-                        playerControl.glassOfCrystalMalus = 5;
+                        playerControl.GlassOfCrystalMalus = 5;
                         break;
                 }
             }
