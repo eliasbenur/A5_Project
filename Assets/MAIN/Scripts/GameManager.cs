@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using BayatGames.SaveGameFree;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
+        ObjectRefs.Instance.objectivesData = SaveGame.Load<ObjectRemaning>("ObjectRemaining");
+
         //Desactive treasure already stolen
         foreach (stringAndBool sb in ObjectRefs.Instance.objectivesData.obj)
         {

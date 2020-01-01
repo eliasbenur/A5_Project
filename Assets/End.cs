@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BayatGames.SaveGameFree;
 
 public class End : MonoBehaviour
 {
@@ -47,7 +48,11 @@ public class End : MonoBehaviour
                     }
 
                 }
-                EditorUtility.SetDirty(objectivesData);
+                //EditorUtility.SetDirty(objectivesData);
+
+                //Save System
+                SaveGame.Save<ObjectRemaning>("ObjectRemaining", objectivesData);
+
                 ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();
             }
         }

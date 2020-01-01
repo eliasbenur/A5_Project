@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using BayatGames.SaveGameFree;
 
 public class GetDataObj : MonoBehaviour
 {
@@ -21,7 +22,8 @@ public class GetDataObj : MonoBehaviour
         {
             objRemaning?.obj.Add(new stringAndBool(tres.name, false, tres.gameObject.GetComponent<SpriteRenderer>().sprite));
         }
-        EditorUtility.SetDirty(objRemaning);
+        //EditorUtility.SetDirty(objRemaning);
+        SaveGame.Save<ObjectRemaning>("ObjectRemaining", objRemaning);
 
     }
 }
