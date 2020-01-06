@@ -53,7 +53,7 @@ public class Tresor : Obj
         if (playerControl.Get_inventory().Count < 3)
         {
             playerControl.Set_interactableObject(null);
-            ObjectRefs.Instance.playerInventory.transform.GetChild(2).GetChild(playerControl.Get_inventory().Count).GetComponent<Image>().sprite = GetComponent<SpriteRenderer>().sprite;
+            ObjectRefs.Instance.playerInventory.transform.GetChild(1).GetChild(playerControl.Get_inventory().Count).GetComponent<Image>().sprite = GetComponent<SpriteRenderer>().sprite;
             playerControl.Get_inventory().Add(this);
             GameManager.Instance.objectiveDone = true;
             gameObject.SetActive(false);

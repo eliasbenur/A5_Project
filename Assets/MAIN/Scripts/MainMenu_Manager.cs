@@ -71,11 +71,9 @@ public class MainMenu_Manager : MonoBehaviour
 
     public void ResetSave()
     {
-        objRemaning?.obj.Clear();
-        var t = FindObjectsOfType<Tresor>();
-        foreach (Tresor tres in t)
+        for (int x = 0; x < objRemaning.obj.Count; x++)
         {
-            objRemaning?.obj.Add(new stringAndBool(tres.name, false, tres.gameObject.GetComponent<SpriteRenderer>().sprite));
+            objRemaning.obj[x].stolen = true;
         }
         SaveGame.Save<ObjectRemaning>("ObjectRemaining", objRemaning);
     }

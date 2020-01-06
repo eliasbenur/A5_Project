@@ -23,9 +23,9 @@ public class InGameObjectiveListMg : MonoBehaviour
 
                     panelObjImg.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
                         objectRemaning.obj[i].sprite;
-                    panelObjText.transform.GetChild(i).GetComponent<Text>().text =
+                    panelObjImg.transform.GetChild(i).GetChild(1).GetComponent<Text>().text =
                         objectRemaning.obj[i].name;
-                    if (objectRemaning.obj[i].stolen) panelObjImg.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
+                    if (objectRemaning.obj[i].stolen) panelObjImg.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
                 }
                 catch { }
             }
@@ -45,15 +45,15 @@ public class InGameObjectiveListMg : MonoBehaviour
                 {
                     panelObjImg.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
                         objectRemaning.obj[index + i].sprite;
-                    panelObjText.transform.GetChild(i).GetComponent<Text>().text =
+                    panelObjImg.transform.GetChild(i).GetChild(1).GetComponent<Text>().text =
                         objectRemaning.obj[index + i].name;
                     if (objectRemaning.obj[index + i].stolen)
                     {
-                        panelObjImg.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
+                        panelObjImg.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
                     }
                     else
                     {
-                        panelObjImg.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
+                        panelObjImg.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(false);
                     }
                 }
             }
@@ -70,12 +70,12 @@ public class InGameObjectiveListMg : MonoBehaviour
                 {
                     panelObjImg.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
                             objectRemaning.obj[index + i].sprite;
-                    panelObjText.transform.GetChild(i).GetComponent<Text>().text =
+                    panelObjImg.transform.GetChild(i).GetChild(1).GetComponent<Text>().text =
                         objectRemaning.obj[index + i].name;
-                    if (objectRemaning.obj[index + i].stolen) panelObjImg.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
+                    if (objectRemaning.obj[index + i].stolen) panelObjImg.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
                     else
                     {
-                        panelObjImg.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
+                        panelObjImg.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(false);
                     }
                 }
             }
