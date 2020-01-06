@@ -550,11 +550,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7794615959770058840}
     m_Modifications:
-    - target: {fileID: 8525424659011956225, guid: c285696f12a199c48be1e789bba80d96,
-        type: 3}
-      propertyPath: m_Name
-      value: Particle System
-      objectReference: {fileID: 0}
     - target: {fileID: 7894389625587146329, guid: c285696f12a199c48be1e789bba80d96,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -608,6 +603,16 @@ PrefabInstance:
     - target: {fileID: 7894389625587146329, guid: c285696f12a199c48be1e789bba80d96,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525424659011956225, guid: c285696f12a199c48be1e789bba80d96,
+        type: 3}
+      propertyPath: m_Name
+      value: Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525424659011956225, guid: c285696f12a199c48be1e789bba80d96,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
