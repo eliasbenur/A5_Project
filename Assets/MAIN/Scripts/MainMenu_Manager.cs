@@ -1,4 +1,5 @@
-﻿using Rewired;
+﻿using BayatGames.SaveGameFree;
+using Rewired;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,17 @@ public class MainMenu_Manager : MonoBehaviour
 {
     public string NameScenePlay = "Play";
     public GameObject creditsPanel;
+    public GameObject optionPanel;
     public GameObject basePanel;
 
     public Button default_Button;
     public Button default_CreditsButton;
+    public Button default_OptionButton;
     public Button default_BaseButton;
 
     Player player;
+
+    public ObjectRemaning objRemaning;
 
     private void Start()
     {
@@ -44,6 +49,35 @@ public class MainMenu_Manager : MonoBehaviour
             default_Button.Select();
         }
 
+    }
+
+    public void OptionsButton()
+    {
+        if (optionPanel.activeSelf)
+        {
+            optionPanel.SetActive(false);
+            basePanel.SetActive(true);
+            default_Button = default_BaseButton;
+            default_Button.Select();
+        }
+        else
+        {
+            optionPanel.SetActive(true);
+            basePanel.SetActive(false);
+            default_Button = default_CreditsButton;
+            default_Button.Select();
+        }
+    }
+
+    public void ResetSave()
+    {
+        objRemaning?.obj.Clear();
+        var t = FindObjectsOfType<Tresor>();
+        foreach (Tresor tres in t)
+        {
+            objRemaning?.obj.Add(new stringAndBool(tres.name, false, tres.gameObject.GetComponent<SpriteRenderer>().sprite));
+        }
+        SaveGame.Save<ObjectRemaning>("ObjectRemaining", objRemaning);
     }
 
     public void QuitButton()
