@@ -64,7 +64,7 @@ public class MainMenu_Manager : MonoBehaviour
         {
             optionPanel.SetActive(true);
             basePanel.SetActive(false);
-            default_Button = default_CreditsButton;
+            default_Button = default_OptionButton;
             default_Button.Select();
         }
     }
@@ -73,7 +73,7 @@ public class MainMenu_Manager : MonoBehaviour
     {
         for (int x = 0; x < objRemaning.obj.Count; x++)
         {
-            objRemaning.obj[x].stolen = true;
+            objRemaning.obj[x].stolen = false;
         }
         SaveGame.Save<ObjectRemaning>("ObjectRemaining", objRemaning);
     }
