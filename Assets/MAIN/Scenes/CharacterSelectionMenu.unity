@@ -190,7 +190,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hability BLABLABLA
+  m_Text: HYPER VISION
 --- !u!222 &55242845
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -801,8 +801,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -488.80005, y: 301.8}
-  m_SizeDelta: {x: 333.2, y: 147.7}
+  m_AnchoredPosition: {x: -457, y: 294}
+  m_SizeDelta: {x: 375.5, y: 147.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &592598205
 MonoBehaviour:
@@ -826,7 +826,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -837,7 +837,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'New TextNew TextNew TextNew '
+  m_Text: 'He can cancel the effects of the items he''s carrying '
 --- !u!222 &592598206
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -916,7 +916,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: HUNTER
+  m_Text: Mark SMAN
 --- !u!222 &640611076
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1035,7 +1035,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hability BLABLABLA
+  m_Text: SILENCE
 --- !u!222 &677832746
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1193,7 +1193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NINJA
+  m_Text: Nin JA
 --- !u!222 &689130294
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1594,7 +1594,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'New TextNew TextNew TextNew '
+  m_Text: He can move very fastly
 --- !u!222 &928002947
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1673,7 +1673,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'New TextNew TextNew TextNew '
+  m_Text: He can see where the guards pass
 --- !u!222 &954735758
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2323,8 +2323,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -473.40005, y: 72.499985}
-  m_SizeDelta: {x: 333.2, y: 147.7}
+  m_AnchoredPosition: {x: -471, y: 72.499985}
+  m_SizeDelta: {x: 337.9, y: 147.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1383138427
 MonoBehaviour:
@@ -2348,7 +2348,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -2359,7 +2359,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'New TextNew TextNew TextNew '
+  m_Text: He can put a doughnut on the floor which lures the guards
 --- !u!222 &1383138428
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2514,7 +2514,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CHEATER
+  m_Text: Kom ANDER
 --- !u!222 &1432838245
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3061,7 +3061,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: COOK
+  m_Text: Doug NUT
 --- !u!222 &1823568825
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3140,7 +3140,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hability BLABLABLA
+  m_Text: DASH
 --- !u!222 &1833518000
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3219,7 +3219,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'New TextNew TextNew TextNew '
+  m_Text: He can walk without making any sound
 --- !u!222 &1939712760
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3374,7 +3374,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hability BLABLABLA
+  m_Text: CHEAT
 --- !u!222 &2090651083
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3453,7 +3453,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hability BLABLABLA
+  m_Text: COOK
 --- !u!222 &2110791181
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3532,7 +3532,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: DEJAVU
+  m_Text: Rue USH BE
 --- !u!222 &2121563418
 CanvasRenderer:
   m_ObjectHideFlags: 0

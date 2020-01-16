@@ -57,6 +57,7 @@ public class PlayerControl : MonoBehaviour
     public float valeurInertie = 0.01f;
     public float inertieDim = 0.999f;
     private bool inertie = false;
+    private bool inertie_cheat = false;
     Vector3 vectorInertie;
 
 
@@ -294,9 +295,19 @@ public class PlayerControl : MonoBehaviour
             case Power.Cheater:
                 if (inventory.Count > 0)
                 {
-                    ObjectRefs.Instance.playerNoise.noiseRadius -= inventory[0].NoiseMalus;
+                    for (int y = 0; y < Get_inventory().Count; ++y)
+                    {
+                        ObjectRefs.Instance.playerNoise.noiseRadius -= inventory[y].NoiseMalus;
+                    }
+
                 }
                 CurrentSpeedMod -= powerUp_SpeedMod;
+                if (inertie)
+                {
+                    inertie_cheat = true;
+                    inertie = false;
+                }
+                ShinoRock_Disable();
                 break;
             case Power.Ninja:
                 ObjectRefs.Instance.playerNoise.noiseRadius -= ObjectRefs.Instance.playerNoise.getBaseNoiseRadius();
@@ -315,9 +326,19 @@ public class PlayerControl : MonoBehaviour
             case Power.Cheater:
                 if (inventory.Count > 0)
                 {
-                    ObjectRefs.Instance.playerNoise.noiseRadius += inventory[0].NoiseMalus;
+                    for (int y = 0; y < Get_inventory().Count; ++y)
+                    {
+                        ObjectRefs.Instance.playerNoise.noiseRadius += inventory[y].NoiseMalus;
+                    }
                 }
                 CurrentSpeedMod += powerUp_SpeedMod;
+                if (inertie_cheat)
+                {
+                    inertie = true;
+                    inertie_cheat = false;
+                }
+
+                ShinoRock_Active();
                 break;
             case Power.Ninja:
                 ObjectRefs.Instance.playerNoise.noiseRadius += ObjectRefs.Instance.playerNoise.getBaseNoiseRadius();
@@ -449,6 +470,43 @@ public class PlayerControl : MonoBehaviour
             }
 
             canInteract = false;
+        }
+    }
+
+    void ShinoRock_Active()
+    {
+        if (ShinyRockMalus)
+        {
+            foreach (GuardIAController_v2 g in ObjectRefs.Instance.GAIC)
+            {
+                FOV_vBT f = g.gameObject.GetComponent<FOV_vBT>();
+                if (f != null)
+                {
+                    for (int y = 0; y < Get_inventory().Count; ++y)
+                    {
+                        f.viewRadius += inventory[y].malusShinyRock;
+                    }
+                }
+            }
+        }
+    }
+
+    void ShinoRock_Disable()
+    {
+        if (ShinyRockMalus)
+        {
+            foreach (GuardIAController_v2 g in ObjectRefs.Instance.GAIC)
+            {
+                FOV_vBT f = g.gameObject.GetComponent<FOV_vBT>();
+                if (f != null)
+                {
+                    for (int y = 0; y < Get_inventory().Count; ++y)
+                    {
+                        f.viewRadius -= inventory[y].malusShinyRock;
+                    }
+                }
+                    
+            }
         }
     }
 
