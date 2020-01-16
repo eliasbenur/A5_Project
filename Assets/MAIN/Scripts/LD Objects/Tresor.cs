@@ -13,38 +13,42 @@ public class Tresor : Obj
     public float NoiseMalus;
     public ParticleSystem particle;
     public Material[] material;
+    public Sprite[] sprite;
 
     private void Awake()
     {
         ParticleSystem.MainModule newParticle = particle.main;
         ParticleSystemRenderer renderer = particle.GetComponent<ParticleSystemRenderer>();
+        int picker = 0;
         switch (materialObj)
         {
             case MaterialObj.CursedObject:
-                renderer.material = material[0];
+                picker = 0;
                 newParticle.startColor = new Color(200, 0, 255);
                 break;
             case MaterialObj.GlassOFCrystal:
-                renderer.material = material[1];
+                picker = 1;
                 newParticle.startColor = new Color(0, 255, 20);
                 break;
             case MaterialObj.HeavyStone:
-                renderer.material = material[2];
+                picker = 2;
                 newParticle.startColor = new Color(255, 0, 0);
                 break;
             case MaterialObj.ShinoRock:
-                renderer.material = material[3];
+                picker = 3;
                 newParticle.startColor = new Color(255, 100, 240);
                 break;
             case MaterialObj.Soap:
-                renderer.material = material[4];
+                picker = 4;
                 newParticle.startColor = new Color(110, 255, 255);
                 break;
             case MaterialObj.Noisy:
-                renderer.material = material[5];
+                picker = 5;
                 newParticle.startColor = new Color(250, 255, 0);
                 break;
         }
+        GetComponent<SpriteRenderer>().sprite = sprite[picker];
+        renderer.material = material[picker];
     }
 
     public override void ActiveEvent()
