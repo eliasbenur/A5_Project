@@ -68,6 +68,12 @@ public class PlayerControl : MonoBehaviour
     [Separator("Cook")]
     public GameObject donutPrefab;
 
+    [Separator("Animations")]
+    public List<RuntimeAnimatorController> animatorControllers;
+    private Animator animator;
+
+
+
 
 
 
@@ -108,6 +114,27 @@ public class PlayerControl : MonoBehaviour
             stat = new Stat(0, 0, Power.None);
         }
 
+        animator = gameObject.transform.GetChild(0).GetComponent<Animator>();
+
+        switch (stat.power)
+        {
+            case Power.Cheater:
+                animator.runtimeAnimatorController = animatorControllers[0];
+                break;
+            case Power.Hunter:
+                animator.runtimeAnimatorController = animatorControllers[1];
+                break;
+            case Power.Cook:
+                animator.runtimeAnimatorController = animatorControllers[2];
+                break;
+            case Power.Ninja:
+                animator.runtimeAnimatorController = animatorControllers[3];
+                break;
+            case Power.DejaVu:
+                animator.runtimeAnimatorController = animatorControllers[4];
+                break;
+        }
+
         powerSlider = ObjectRefs.Instance.powerSlider;
         powerDelay_tmp = stat.powerDelay;
 
@@ -137,11 +164,11 @@ public class PlayerControl : MonoBehaviour
     {
         if (moveVector.x > 0)
         {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
         }
         else if (moveVector.x < 0)
         {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
         }
     }
 
@@ -166,6 +193,17 @@ public class PlayerControl : MonoBehaviour
             {
                 moveVector = Vector2.zero;
             }
+
+            //Running Animations
+            if (moveVector.magnitude > 0)
+            {
+                animator.SetBool("Moving", true);
+            }
+            else
+            {
+                animator.SetBool("Moving", false);
+            }
+
 
             // --- DASH -- 
             //Cursed Object Malus
