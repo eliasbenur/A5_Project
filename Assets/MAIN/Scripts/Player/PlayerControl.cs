@@ -274,10 +274,10 @@ public class PlayerControl : MonoBehaviour
     {
         ObjectRefs.Instance.fullMap.SetActive(status);
         ObjectRefs.Instance.fullMap.GetComponent<MapControl>().Start();
-        if (status)
+        /*if (status)
             Time.timeScale = 0f;
         else
-            Time.timeScale = 1f;
+            Time.timeScale = 1f;*/
     }
 
     public void PowerUpdate()

@@ -18,6 +18,7 @@ public class MapControl : MonoBehaviour
 
     public BoxCollider2D Bounds;
     public Camera fullMapCamera;
+    public Camera minimapCamera;
     public GameObject player_GameObject;
 
     public Vector2 move_Vector;
@@ -44,8 +45,8 @@ public class MapControl : MonoBehaviour
 
     void Update()
     {
-        move_Vector.x = player.GetAxis("Horizontal");
-        move_Vector.y = player.GetAxis("Vertical");
+        //move_Vector.x = player.GetAxis("Horizontal");
+        //move_Vector.y = player.GetAxis("Vertical");
         zoom_Vector = -player.GetAxis("Zoom");
         if (move_Vector.sqrMagnitude > 1)
         {
@@ -99,7 +100,7 @@ public class MapControl : MonoBehaviour
 
     public void UpdateCameraLevel()
     {
-        Vector2 cameraPoint = fullMapCamera.transform.position;
+        Vector2 cameraPoint = minimapCamera.transform.position;
         float vertExtent = fullMapCamera.orthographicSize;
         float horzExtent = vertExtent * Screen.width / Screen.height;
 
