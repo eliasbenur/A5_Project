@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
         normalMusic_src = gameObject.AddComponent<AudioSource>();
         normalMusic_src.clip = normalMusic;
         normalMusic_src.volume = 0.5f;
+        normalMusic_src.Play();
     }
 
     // Update is called once per frame

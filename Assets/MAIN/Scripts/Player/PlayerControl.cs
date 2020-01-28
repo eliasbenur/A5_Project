@@ -72,6 +72,9 @@ public class PlayerControl : MonoBehaviour
     public List<RuntimeAnimatorController> animatorControllers;
     private Animator animator;
 
+    [Separator("Guards")]
+    public OptimizerManager optimizer;
+
 
 
 
@@ -352,6 +355,7 @@ public class PlayerControl : MonoBehaviour
                 CurrentSpeedMod -= powerUp_SpeedMod;
                 break;
             case Power.Hunter:
+                //StartCoroutine("NinjaAct");
                 NinjaAct();
                 break;
         }
@@ -663,37 +667,40 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-    void NinjaAct()//Pierro
+    //IEnumerator NinjaAct()//Pierro
+    void NinjaAct()
     {
-        foreach (GuardIAController_v2 g in ObjectRefs.Instance.GAIC)
+        foreach (GameObject g in optimizer.guardList)
         {
-            for (int i = 0; i < g.patrollPoints_List.Count; i++)
+            for (int i = 0; i < g.GetComponent<GuardIAController_v2>().patrollPoints_List.Count; i++)
             {
-                if (i != g.patrollPoints_List.Count - 1)
+                if (i != g.GetComponent<GuardIAController_v2>().patrollPoints_List.Count - 1)
                 {
-                    Vector3 v = g.patrollPoints_List[i].transform.position - g.patrollPoints_List[i + 1].transform.position;
+                    Vector3 v = g.GetComponent<GuardIAController_v2>().patrollPoints_List[i].transform.position - g.GetComponent<GuardIAController_v2>().patrollPoints_List[i + 1].transform.position;
                     float dist = v.magnitude;
                     v.Normalize();
-                    for (int j = 0; j < dist; j += 2)
+                    for (float j = 0; j < dist; j += 0.25f)
                     {
-                        GameObject go = Instantiate(traceDePas, g.patrollPoints_List[i + 1].transform.position + v * j, Quaternion.identity);
+                        GameObject go = Instantiate(traceDePas, g.GetComponent<GuardIAController_v2>().patrollPoints_List[i + 1].transform.position + v * j, Quaternion.identity);
                         traceDePasActiv.Add(go);
                     }
                 }
                 else
                 {
-                    Vector3 v = g.patrollPoints_List[i].transform.position - g.patrollPoints_List[0].transform.position;
+                    Vector3 v = g.GetComponent<GuardIAController_v2>().patrollPoints_List[i].transform.position - g.GetComponent<GuardIAController_v2>().patrollPoints_List[0].transform.position;
                     float dist = v.magnitude;
                     v.Normalize();
-                    for (int j = 0; j < dist; j += 2)
+                    for (float j = 0; j < dist; j += 0.25f)
                     {
-                        GameObject go = Instantiate(traceDePas, g.patrollPoints_List[0].transform.position + v * j, Quaternion.identity);
+                        GameObject go = Instantiate(traceDePas, g.GetComponent<GuardIAController_v2>().patrollPoints_List[0].transform.position + v * j, Quaternion.identity);
                         traceDePasActiv.Add(go);
                     }
                 }
+                //yield return null;
             }
+            //yield return null;
         }
-
+        //yield return null;
     }
     void CleanTraceDePasActiv()
     {

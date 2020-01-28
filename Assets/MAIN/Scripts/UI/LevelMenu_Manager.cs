@@ -15,6 +15,10 @@ public class LevelMenu_Manager : MonoBehaviour
     public GameObject objectivesPanel;
     Animator objetivesPanelAnimaton;
     ObjectRemaning objectivesData;
+    List<GuardIAController_v2> guardList;
+    public SoundManager soundManager;
+    int musicLevel = 0;
+    int newMusicLevel;
 
     Player player;
 
@@ -39,6 +43,19 @@ public class LevelMenu_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        guardList = ObjectRefs.Instance.GAIC;
+        newMusicLevel = 0;
+        for (int i = 0; i < guardList.Count; i++)
+        {
+            if (guardList[i].checkingtheZone && newMusicLevel < 1)
+                newMusicLevel = 1;
+            if (guardList[i].chasingPlayer && newMusicLevel < 2)
+                newMusicLevel = 2;
+        }
+
+        if (newMusicLevel != musicLevel)
+            UpdateMusic();
+
         if (player.GetButtonDown("Pause"))
         {
             if (pause_Panel.activeSelf)
@@ -80,6 +97,17 @@ public class LevelMenu_Manager : MonoBehaviour
             }
 
         }
+    }
+
+    public void UpdateMusic()
+    {
+        musicLevel = newMusicLevel;
+        if (musicLevel == 0)
+            soundManager.playNormalMusic();
+        if (musicLevel == 1)
+            soundManager.playSearchMusic();
+        if (musicLevel == 2)
+            soundManager.playChaseMusic();
     }
 
     public void Active_PausePanel()

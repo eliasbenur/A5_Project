@@ -36,7 +36,7 @@ public class GuardIAController_v2 : MonoBehaviour
 
     // IA States
     public bool checkingtheZone = false;
-    bool chasingPlayer = false;
+    public bool chasingPlayer = false;
     bool turningInPlace = false;
     bool inAlertMode = false;
 
