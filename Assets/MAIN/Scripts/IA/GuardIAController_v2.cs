@@ -313,7 +313,12 @@ public class GuardIAController_v2 : MonoBehaviour
 
     public void gotoDonut()
     {
-        newDestination = new Vector2(fow.donutList[0].position.x + Mathf.Cos(Vector2.Angle(transform.position, fow.donutList[0].position)), fow.donutList[0].position.y + Mathf.Sin(Vector2.Angle(transform.position, fow.donutList[0].position)));
+        if (newDestination == Vector2.zero)
+        {
+            newDestination = fow.donutList[0].position - transform.position;
+            stationaryDirection = newDestination;
+            newDestination = newDestination - newDestination.normalized + transform.position.ToVector2();
+        }
         agent.SetDestination(newDestination);
     }
 
@@ -321,8 +326,10 @@ public class GuardIAController_v2 : MonoBehaviour
     {
         if (eatingDonutDelay_tmp < 0)
         {
+            newDestination = Vector2.zero;
             Destroy(donutRef);
             eatingDonut = false;
+            stationaryDirection = new Vector2(1, 0);
         }
         float delta = Time.deltaTime;
         eatingDonutDelay_tmp -= delta;
