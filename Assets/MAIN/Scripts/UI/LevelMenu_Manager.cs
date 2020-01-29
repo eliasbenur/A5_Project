@@ -27,7 +27,6 @@ public class LevelMenu_Manager : MonoBehaviour
     public Button defaultPauseButton;
     public Button defaultLoseButton;
     public Button defaultWinButton;
-    public Button defaultItemListButton;
     Button activeDefaultButton;
 
 
@@ -75,8 +74,6 @@ public class LevelMenu_Manager : MonoBehaviour
             {
 
                 objectivesPanel.SetActive(true);
-                activeDefaultButton = defaultItemListButton;
-                activeDefaultButton.Select();
                 Time.timeScale = 0;
             }
         }
