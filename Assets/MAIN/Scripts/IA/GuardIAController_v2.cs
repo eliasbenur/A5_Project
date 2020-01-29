@@ -73,6 +73,8 @@ public class GuardIAController_v2 : MonoBehaviour
     //
     public bool spawnedIA;
 
+    Vector2 newDestination;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -311,7 +313,8 @@ public class GuardIAController_v2 : MonoBehaviour
 
     public void gotoDonut()
     {
-        agent.SetDestination(fow.donutList[0].position);
+        newDestination = new Vector2(fow.donutList[0].position.x + Mathf.Cos(Vector2.Angle(transform.position, fow.donutList[0].position)), fow.donutList[0].position.y + Mathf.Sin(Vector2.Angle(transform.position, fow.donutList[0].position)));
+        agent.SetDestination(newDestination);
     }
 
     public void EatingDonut()
@@ -321,12 +324,14 @@ public class GuardIAController_v2 : MonoBehaviour
             Destroy(donutRef);
             eatingDonut = false;
         }
-        eatingDonutDelay_tmp -= Time.deltaTime;
+        float delta = Time.deltaTime;
+        eatingDonutDelay_tmp -= delta;
+        donutRef.transform.GetChild(0).position = new Vector2(donutRef.transform.GetChild(0).position.x + (eatingDonutDelay / 27 * delta), donutRef.transform.GetChild(0).position.y);
     }
 
     public bool isDonutReached()
     {
-        if (eatingDonut || Vector3.Distance(fow.donutList[0].position, transform.position) < distancePointsCheck)
+        if (eatingDonut || Vector3.Distance(newDestination, transform.position) < distancePointsCheck)
         {
             if (!eatingDonut)
             {

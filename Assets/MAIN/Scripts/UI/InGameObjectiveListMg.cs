@@ -2,80 +2,133 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InGameObjectiveListMg : MonoBehaviour
 {
-    public GameObject panelObjImg, panelObjText, canSwitchLeft, canSwitchRight;
     public ObjectRemaning objectRemaning;
+    public GameObject ItemListPanel, panelList, canSwitchLeft, canSwitchRight;
     int index = 0;
+
     Player player;
     void Start()
     {
         player = ReInput.players.GetPlayer(0);
-        if (panelObjImg != null && objectRemaning != null)
+        if (panelList != null && objectRemaning != null)
         {
-            int j = 0;
-            for (int i = 0; i < panelObjImg.transform.childCount; i++)
+            for (int i = 0; i < panelList.transform.childCount; i++)
             {
-                try
+                if (i < objectRemaning.obj.Count)
                 {
-
-                    panelObjImg.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
-                        objectRemaning.obj[i].sprite;
-                    panelObjImg.transform.GetChild(i).GetChild(1).GetComponent<Text>().text =
-                        objectRemaning.obj[i].name;
-                    if (objectRemaning.obj[i].stolen) panelObjImg.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
+                    panelList.transform.GetChild(i).transform.GetChild(2).GetComponent<Image>().sprite = objectRemaning.obj[i].sprite;
+                    panelList.transform.GetChild(i).transform.GetChild(0).GetComponent<Text>().text = objectRemaning.obj[i].name;
+                    panelList.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text = objectRemaning.obj[i].name;
+                    if (!objectRemaning.obj[i].stolen) panelList.transform.GetChild(i).GetChild(3).gameObject.SetActive(false);
                 }
-                catch { }
+                else
+                {
+                    panelList.transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+
+            if (panelList.transform.childCount < 10)
+            {
+                canSwitchRight.SetActive(false);
             }
             canSwitchLeft.SetActive(false);
         }
     }
+
+    public void ItemListButton()
+    {
+
+        if (ItemListPanel.activeSelf)
+        {
+            ItemListPanel.SetActive(false);
+
+        }
+        else
+        {
+            ItemListPanel.SetActive(true);
+        }
+    }
     private void Update()
     {
+        float hor_axis = player.GetAxis("Horizontal");
+        float ver_axis = player.GetAxis("Vertical");
+
+
+        //Carrosel
         if (player.GetButtonDown("SwitchObjL"))
         {
-            if (index > 0)
+            if (index > 9)
             {
-                index--;
+                index -= 10;
                 if (index == 0) canSwitchLeft.SetActive(false);
-                if (objectRemaning.obj.Count > 5) canSwitchRight.SetActive(true);
-                for (int i = 0; i < panelObjImg.transform.childCount; i++)
+                canSwitchRight.SetActive(true);
+                for (int i = 0; i < panelList.transform.childCount; i++)
                 {
-                    panelObjImg.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
-                        objectRemaning.obj[index + i].sprite;
-                    panelObjImg.transform.GetChild(i).GetChild(1).GetComponent<Text>().text =
-                        objectRemaning.obj[index + i].name;
-                    if (objectRemaning.obj[index + i].stolen)
+                    if (i + index < objectRemaning.obj.Count)
                     {
-                        panelObjImg.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
+                        panelList.transform.GetChild(i).transform.GetChild(2).GetComponent<Image>().sprite = objectRemaning.obj[i + index].sprite;
+                        panelList.transform.GetChild(i).transform.GetChild(0).GetComponent<Text>().text = objectRemaning.obj[i + index].name;
+                        panelList.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text = objectRemaning.obj[i + index].name;
+                        if (!objectRemaning.obj[i + index].stolen)
+                        {
+                            panelList.transform.GetChild(i).GetChild(3).gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            panelList.transform.GetChild(i).GetChild(3).gameObject.SetActive(true);
+                        }
+
+
+                        panelList.transform.GetChild(i).gameObject.SetActive(true);
                     }
                     else
                     {
-                        panelObjImg.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(false);
+                        panelList.transform.GetChild(i).gameObject.SetActive(false);
                     }
                 }
             }
         }
-        //if (Input.GetKeyDown("e"))
+
         if (player.GetButtonDown("SwitchObjR"))
         {
-            if (index < objectRemaning.obj.Count - 5)
+            if (objectRemaning.obj.Count > index + 10)
             {
-                index++;
-                if (index == objectRemaning.obj.Count - 5) canSwitchRight.SetActive(false);
-                if (objectRemaning.obj.Count > 5) canSwitchLeft.SetActive(true);
-                for (int i = 0; i < panelObjImg.transform.childCount; i++)
+                index += 10;
+                if (objectRemaning.obj.Count > index + 10)
                 {
-                    panelObjImg.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite =
-                            objectRemaning.obj[index + i].sprite;
-                    panelObjImg.transform.GetChild(i).GetChild(1).GetComponent<Text>().text =
-                        objectRemaning.obj[index + i].name;
-                    if (objectRemaning.obj[index + i].stolen) panelObjImg.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
+                    canSwitchRight.SetActive(true);
+                }
+                else
+                {
+                    canSwitchRight.SetActive(false);
+                }
+                canSwitchLeft.SetActive(true);
+                for (int i = 0; i < panelList.transform.childCount; i++)
+                {
+                    if (i + index < objectRemaning.obj.Count)
+                    {
+                        panelList.transform.GetChild(i).transform.GetChild(2).GetComponent<Image>().sprite = objectRemaning.obj[i + index].sprite;
+                        panelList.transform.GetChild(i).transform.GetChild(0).GetComponent<Text>().text = objectRemaning.obj[i + index].name;
+                        panelList.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text = objectRemaning.obj[i + index].name;
+                        if (!objectRemaning.obj[i + index].stolen)
+                        {
+                            panelList.transform.GetChild(i).GetChild(3).gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            panelList.transform.GetChild(i).GetChild(3).gameObject.SetActive(true);
+                        }
+
+                        panelList.transform.GetChild(i).gameObject.SetActive(true);
+                    }
                     else
                     {
-                        panelObjImg.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(false);
+                        panelList.transform.GetChild(i).gameObject.SetActive(false);
                     }
                 }
             }
