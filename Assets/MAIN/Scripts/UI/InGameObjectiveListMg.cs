@@ -12,8 +12,6 @@ public class InGameObjectiveListMg : MonoBehaviour
     int index = 0;
 
     Player player;
-
-    public Button ListItemDefaultButton;
     void Start()
     {
         player = ReInput.players.GetPlayer(0);
@@ -49,23 +47,16 @@ public class InGameObjectiveListMg : MonoBehaviour
         {
             ItemListPanel.SetActive(false);
 
-            ListItemDefaultButton.Select();
         }
         else
         {
             ItemListPanel.SetActive(true);
-
-            ListItemDefaultButton.Select();
         }
     }
     private void Update()
     {
         float hor_axis = player.GetAxis("Horizontal");
         float ver_axis = player.GetAxis("Vertical");
-        if ((hor_axis != 0 || ver_axis != 0) && EventSystem.current.currentSelectedGameObject == null)
-        {
-            ListItemDefaultButton.Select();
-        }
 
 
         //Carrosel
