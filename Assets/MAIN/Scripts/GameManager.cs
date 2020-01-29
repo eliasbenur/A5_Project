@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
         {
             if (sb.stolen)
             {
-                //Destroy(GameObject.Find(sb.name));
-                GameObject.Find(sb.name).SetActive(false);
+                GameObject treaure_tmp = GameObject.Find(sb.name);
+                if(treaure_tmp!=null) treaure_tmp.SetActive(false);
             }
         }
     }

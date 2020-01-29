@@ -64,10 +64,14 @@ public class ObjectRefs : MonoBehaviour
     void Start()
     {
         patrollZones_List = new List<GameObject>();
-        foreach (Transform child in patrollZones.transform)
+        if (patrollZones != null)
         {
-            patrollZones_List.Add(child.gameObject);
+            foreach (Transform child in patrollZones.transform)
+            {
+                patrollZones_List.Add(child.gameObject);
+            }
         }
+
     }
 
     public List<GameObject> GetPatrollZoneList()
