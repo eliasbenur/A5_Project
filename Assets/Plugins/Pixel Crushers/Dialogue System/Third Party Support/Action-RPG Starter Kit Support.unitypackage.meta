@@ -1,5 +1,11 @@
 fileFormatVersion: 2
-guid: 9b52451efbd751f48ac368998c153aaf
+guid: b81586c5bf3938042babe319ccb6b693
+labels:
+- Action
+- Rpg
+- Action-rpg
+- Starter
+- Kit
 DefaultImporter:
   externalObjects: {}
   userData: 

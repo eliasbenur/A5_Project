@@ -113,9 +113,9 @@ public class LevelMenu_Manager : MonoBehaviour
     public void Active_PausePanel()
     {
         pause_Panel.SetActive(true);
-        Time.timeScale = 0;
         activeDefaultButton = defaultPauseButton;
         activeDefaultButton.Select();
+        Time.timeScale = 0;
     }
 
     public void Distactive_PausePanel()

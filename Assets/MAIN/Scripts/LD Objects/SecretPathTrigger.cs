@@ -25,13 +25,14 @@ public class SecretPathTrigger : MonoBehaviour
     {
         if (((1 << collision.gameObject.layer) & playerMask) != 0)
         {
+            /*
             Tiles.GetComponent<Tilemap>().color = new Color(1, 1, 1, 1);
             Tilemap[] tilesMaps_tmp = TileMap.GetComponentsInChildren<Tilemap>();
             for (int x = 0; x < tilesMaps_tmp.Length; ++x)
             {
                 tilesMaps_tmp[x].color = new Color(1,1,1, 0.4f);
             }
-
+            */
 
         }
     }
@@ -46,6 +47,9 @@ public class SecretPathTrigger : MonoBehaviour
             {
                 tilesMaps_tmp[x].color = new Color(1, 1, 1, 1);
             }
+
+            Physics2D.IgnoreLayerCollision(8, 9, false);
+            Physics2D.IgnoreLayerCollision(9, 17, true);
         }
     }
 }

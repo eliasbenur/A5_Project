@@ -160,6 +160,10 @@ public class PlayerControl : MonoBehaviour
                 break;
         }
 
+
+        //SecretPaths
+        Physics2D.IgnoreLayerCollision(9, 17, true);
+
     }
 
     /*Player Sprite Flip */
@@ -167,11 +171,11 @@ public class PlayerControl : MonoBehaviour
     {
         if (moveVector.x > 0)
         {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
         }
         else if (moveVector.x < 0)
         {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 
