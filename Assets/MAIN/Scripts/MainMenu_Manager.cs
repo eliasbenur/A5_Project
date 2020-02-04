@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using BayatGames.SaveGameFree;
 
 public class MainMenu_Manager : MonoBehaviour
 {
@@ -30,7 +31,22 @@ public class MainMenu_Manager : MonoBehaviour
     }
     public void PlayButton()
     {
-        SceneManager.LoadScene(NameScenePlay);
+        if (SaveGame.Exists("FTUE"))
+        {
+            FTUE ftue_tmp = SaveGame.Load<FTUE>("FTUE");
+            if (!ftue_tmp.FTUE_1_done || !ftue_tmp.FTUE_2_done || !ftue_tmp.FTUE_3_done)
+            {
+                SceneManager.LoadScene("MAIN");
+            }
+            else
+            {
+                SceneManager.LoadScene(NameScenePlay);
+            }
+        }
+        else
+        {
+            SceneManager.LoadScene("MAIN");
+        }
     }
 
     public void CreaditsButton()

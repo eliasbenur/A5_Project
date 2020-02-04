@@ -9,6 +9,7 @@ public class End : MonoBehaviour
 {
     public LayerMask playerMask;
     ObjectRemaning objectivesData;
+    public bool FTUE;
 
     // Start is called before the first frame update
     void Start()
@@ -36,24 +37,77 @@ public class End : MonoBehaviour
             //If Objective Completed
             if (GameManager.Instance.objectiveDone)
             {
-                for (int x = 0; x < objectivesData.obj.Count; x++)
+                if (FTUE)
                 {
-                    for (int y = 0; y < collision.GetComponent<PlayerControl>().Get_inventory().Count; ++y)
+                    if (collision.GetComponent<PlayerControl>().Get_inventory().Count >=3)
                     {
-                        if (objectivesData.obj[x].name == collision.GetComponent<PlayerControl>().Get_inventory()[y].name)
+
+                        // Save FTUE
+                        if (SaveGame.Exists("FTUE"))
                         {
-                            objectivesData.obj[x].stolen = true;
-                            ObjectRefs.Instance.soungManager.PlaywinSnd();
+                            bool ftueFound = false;
+                            FTUE ftue_tmp = SaveGame.Load<FTUE>("FTUE");
+                            if (!ftue_tmp.FTUE_1_done)
+                            {
+                                ftue_tmp.FTUE_1_done = true;
+                                ftueFound = true;
+                            }
+                            if (!ftue_tmp.FTUE_2_done && !ftueFound)
+                            {
+                                ftue_tmp.FTUE_2_done = true;
+                                ftueFound = true;
+                            }
+                            if (!ftue_tmp.FTUE_3_done && !ftueFound)
+                            {
+                                ftue_tmp.FTUE_3_done = true;
+                                ftueFound = true;
+                            }
+                            SaveGame.Save<FTUE>("FTUE", ftue_tmp);
                         }
+
+                        for (int x = 0; x < objectivesData.obj.Count; x++)
+                        {
+                            for (int y = 0; y < collision.GetComponent<PlayerControl>().Get_inventory().Count; ++y)
+                            {
+                                if (objectivesData.obj[x].name == collision.GetComponent<PlayerControl>().Get_inventory()[y].name)
+                                {
+                                    objectivesData.obj[x].stolen = true;
+                                    ObjectRefs.Instance.soungManager.PlaywinSnd();
+                                }
+                            }
+
+                        }
+                        //EditorUtility.SetDirty(objectivesData);
+
+                        //Save System
+                        SaveGame.Save<ObjectRemaning>("ObjectRemaining", objectivesData);
+
+                        //ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();
+                        SceneManager.LoadScene("MAIN");
                     }
-
                 }
-                //EditorUtility.SetDirty(objectivesData);
+                else
+                {
+                    for (int x = 0; x < objectivesData.obj.Count; x++)
+                    {
+                        for (int y = 0; y < collision.GetComponent<PlayerControl>().Get_inventory().Count; ++y)
+                        {
+                            if (objectivesData.obj[x].name == collision.GetComponent<PlayerControl>().Get_inventory()[y].name)
+                            {
+                                objectivesData.obj[x].stolen = true;
+                                ObjectRefs.Instance.soungManager.PlaywinSnd();
+                            }
+                        }
 
-                //Save System
-                SaveGame.Save<ObjectRemaning>("ObjectRemaining", objectivesData);
+                    }
+                    //EditorUtility.SetDirty(objectivesData);
 
-                ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();
+                    //Save System
+                    SaveGame.Save<ObjectRemaning>("ObjectRemaining", objectivesData);
+
+                    ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();
+                }
+
             }
         }
     }
