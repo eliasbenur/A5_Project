@@ -92,6 +92,12 @@ public class MainMenu_Manager : MonoBehaviour
             objRemaning.obj[x].stolen = false;
         }
         SaveGame.Save<ObjectRemaning>("ObjectRemaining", objRemaning);
+
+        FTUE ftue_tmp = SaveGame.Load<FTUE>("FTUE");
+        ftue_tmp.FTUE_1_done = false;
+        ftue_tmp.FTUE_2_done = false;
+        ftue_tmp.FTUE_3_done = false;
+        SaveGame.Save<FTUE>("FTUE", ftue_tmp);
     }
 
     public void QuitButton()
