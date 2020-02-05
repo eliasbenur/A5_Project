@@ -63,7 +63,7 @@ public class RoomFOW : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && !playerIn && !isOpen)
+        if (collision.tag == "Player" && !playerIn && isOpen)
         {
             playerIn = true;
             foreach (SpriteRenderer rend in guards)
