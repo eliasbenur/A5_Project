@@ -79,7 +79,7 @@ public class MapControl : MonoBehaviour
             if (zoom_Vector == 0)
                 returnZero = true;
         }
-        UpdateCameraLevel();
+        //UpdateCameraLevel();
 
         /*if (player.GetButtonDown("ZoomOut") && fullMapCamera.GetComponent<Camera>().orthographicSize < maxDist)
         {
@@ -100,7 +100,7 @@ public class MapControl : MonoBehaviour
 
     public void UpdateCameraLevel()
     {
-        Vector2 cameraPoint = minimapCamera.transform.position;
+        Vector2 cameraPoint = fullMapCamera.transform.position;
         float vertExtent = fullMapCamera.orthographicSize;
         float horzExtent = vertExtent * Screen.width / Screen.height;
 
