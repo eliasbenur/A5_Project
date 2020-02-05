@@ -9,6 +9,7 @@ public class FTUE_Manager : MonoBehaviour
 
     public GameObject FTUE1_Prefab, FTUE2_Prefab, FTUE3_Prefab;
     public End EndScript;
+    public Stat stat;
 
     public void Awake()
     {
@@ -21,6 +22,7 @@ public class FTUE_Manager : MonoBehaviour
                 Instantiate(FTUE1_Prefab, Vector3.zero, Quaternion.identity);
                 Debug.Log("FTUE1 Started");
                 EndScript.FTUE = true;
+                stat.power = Power.Cook;
                 ftueStarted = true;
             }
 
@@ -29,6 +31,7 @@ public class FTUE_Manager : MonoBehaviour
                 Instantiate(FTUE2_Prefab, Vector3.zero, Quaternion.identity);
                 Debug.Log("FTUE2 Started");
                 EndScript.FTUE = true;
+                stat.power = Power.Cheater;
                 ftueStarted = true;
             }
 
@@ -36,6 +39,7 @@ public class FTUE_Manager : MonoBehaviour
             {
                 Instantiate(FTUE3_Prefab, Vector3.zero, Quaternion.identity);
                 Debug.Log("FTUE3 Started");
+                stat.power = Power.Hunter;
                 EndScript.FTUE = true;
                 ftueStarted = true;
             }

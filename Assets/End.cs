@@ -46,23 +46,24 @@ public class End : MonoBehaviour
                         if (SaveGame.Exists("FTUE"))
                         {
                             bool ftueFound = false;
-                            FTUE ftue_tmp = SaveGame.Load<FTUE>("FTUE");
-                            if (!ftue_tmp.FTUE_1_done)
+                            FTUE ftue_tmp_ = SaveGame.Load<FTUE>("FTUE");
+                            if (!ftue_tmp_.FTUE_1_done)
                             {
-                                ftue_tmp.FTUE_1_done = true;
+                                ftue_tmp_.FTUE_1_done = true;
                                 ftueFound = true;
                             }
-                            if (!ftue_tmp.FTUE_2_done && !ftueFound)
+                            if (!ftue_tmp_.FTUE_2_done && !ftueFound)
                             {
-                                ftue_tmp.FTUE_2_done = true;
+                                ftue_tmp_.FTUE_2_done = true;
                                 ftueFound = true;
                             }
-                            if (!ftue_tmp.FTUE_3_done && !ftueFound)
+                            if (!ftue_tmp_.FTUE_3_done && !ftueFound)
                             {
-                                ftue_tmp.FTUE_3_done = true;
+                                ftue_tmp_.FTUE_3_done = true;
                                 ftueFound = true;
                             }
-                            SaveGame.Save<FTUE>("FTUE", ftue_tmp);
+
+                            SaveGame.Save<FTUE>("FTUE", ftue_tmp_);
                         }
 
                         for (int x = 0; x < objectivesData.obj.Count; x++)
@@ -82,8 +83,17 @@ public class End : MonoBehaviour
                         //Save System
                         SaveGame.Save<ObjectRemaning>("ObjectRemaining", objectivesData);
 
+                        FTUE ftue_tmp = SaveGame.Load<FTUE>("FTUE");
                         //ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();
-                        SceneManager.LoadScene("MAIN");
+                        if (ftue_tmp.FTUE_3_done)
+                        {
+                            ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_WinPanel();
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene("MAIN");
+                        }
+                        
                     }
                 }
                 else

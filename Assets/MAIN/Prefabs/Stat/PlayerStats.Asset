@@ -17,5 +17,5 @@ MonoBehaviour:
   dashSpeed: 20
   timeDash: 0.2
   BruitRadius: 0
-  power: 3
+  power: 4
   powerDelay: 5
