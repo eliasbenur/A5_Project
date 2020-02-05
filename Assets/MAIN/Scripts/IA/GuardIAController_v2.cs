@@ -105,6 +105,9 @@ public class GuardIAController_v2 : MonoBehaviour
         {
             Debug.Log("PlayerChased!");
             ObjectRefs.Instance.menuCanvas.GetComponent<LevelMenu_Manager>().Active_LosePanel();
+            //
+            Physics2D.IgnoreLayerCollision(8, 9, false);
+            Physics2D.IgnoreLayerCollision(9, 17, true);
         }
 
         if (spawnedIA)
